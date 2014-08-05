@@ -1,0 +1,37 @@
+<!--
+
+    Copyright (c) 2012-2014, Yunnan Yuan Xin technology Co., Ltd.
+
+    All rights reserved.
+
+-->
+
+<!--
+    Description: Bean 验证配置。
+    Version: 1.0.0.0, Aug 1, 2014
+    Author: Liang Ding
+-->
+<constraint-mappings 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jboss.org/xml/ns/javax/validation/mapping
+                    http://jboss.org/xml/ns/javax/validation/mapping/validation-mapping-1.0.xsd"
+    xmlns="http://jboss.org/xml/ns/javax/validation/mapping">
+	
+    <!--
+    <default-package>com.epicsaas.app.crm</default-package>
+    <bean class="Xxxx" ignore-annotations="true">
+        <field name="name">
+            <constraint annotation="org.hibernate.validator.constraints.NotBlank">
+                <message>不能为空！！</message>
+            </constraint>
+        </field>
+        <field name="orgCode">
+            <constraint annotation="javax.validation.constraints.Pattern">
+                <message>必须以O=开头</message>
+                <element name="regexp">O.*</element>
+            </constraint>
+        </field>
+    </bean> 
+    -->
+ 
+</constraint-mappings>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Description: NetBeans IDE 使用的配置，使用其他 IDE 的开发可以忽略。
+    Version: 1.0.0.0, {createDate}
+    Author: Neo
+-->
+
+<actions>
+    <action>
+        <actionName>CUSTOM-front-component</actionName>
+        <displayName>front-component</displayName>
+        <goals>
+            <goal>front:component</goal>
+        </goals>
+    </action>
+</actions>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2012-2014, Yunnan Yuan Xin technology Co., Ltd.
+
+    All rights reserved.
+
+-->
+
+<!--
+    Description: SSB 服务根配置。
+    Version: 1.0.0.0, Aug 1, 2014
+    Author: Liang Ding
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:ssb="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+ 
+    <!-- 应用信息，用于计算依赖关系 -->
+    <ssb:application name="app-crm-web"   id="applicationId"/>
+ 
+    <!-- 使用multicast广播注册中心暴露服务地址 -->
+    <!-- <ssb:registry address="multicast://224.5.6.7:1234?unicast=false" /> --> 
+   
+    <!-- 使用Zookeeper注册中心 -->
+    <ssb:registry address="${zookeeper.address}"   id="registryId"  />
+ 
+    <!-- 用dubbo协议在20880端口暴露服务 --> 
+    <ssb:protocol name="dubbo" port="-1" accesslog="ssbServiceAccess.log"/>
+    
+</beans>

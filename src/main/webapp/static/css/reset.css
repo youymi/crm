@@ -1,0 +1,164 @@
+/*
+ * Copyright (c) 2014, Yunnan Yuan Xin technology Co., Ltd.
+ *
+ * All rights reserved.
+ */
+
+/**
+* base style
+*
+* @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
+* @version 2.1.1.1, May 19, 2014
+*/
+
+
+/* start reset */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font-size: 12px;
+    background-color: #FFF;
+    color: #656C78;
+}
+body,input,button,select,textarea,h1,h2,h3,h4,h5,h6 {
+	font-family: Arial, Microsoft YaHei, Helvetica, sans-serif;
+}
+
+::-moz-selection {
+    text-shadow: none;
+    background: #4183FF;
+}
+
+::selection { 
+    text-shadow: none;
+    background: #4183FF;
+}
+
+ul,
+ol {
+    margin:0;
+    padding:0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dd,
+p {
+    margin: 1;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+    display: block;
+}
+
+audio,
+canvas,
+video {
+    display: inline-block;
+}
+
+audio:not([controls]) {
+    display: none;
+}
+
+a {
+    outline: 0;
+    text-decoration: none;
+    color: #4183C4;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+sub,
+sup {
+    position: relative;
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+}
+
+button,
+input,
+select,
+textarea {
+    margin: 0;
+    font-size: 100%;
+    vertical-align: middle;
+    outline: none;
+}
+
+button,
+input {
+    line-height: normal;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;
+}
+
+input[type="search"] {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-appearance: textfield;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+}
+
+li {
+	list-style: none
+}
+/* end reset */

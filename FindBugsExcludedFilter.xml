@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FindBugsFilter>
+    <!--The following methods are not a bug, confirmed by PAAS team-->
+    <!--  
+    <Match>
+        <Class name="${groupId}.${appName}"/>
+        <Bug pattern="REC_CATCH_EXCEPTION"/>
+    </Match>
+    -->
+       
+</FindBugsFilter>

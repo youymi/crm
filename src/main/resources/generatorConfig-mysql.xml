@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2012-2014, Yunnan Yuan Xin technology Co., Ltd.
+
+    All rights reserved.
+
+-->
+
+<!--
+    Description:  MyBatis mysql generated configuration。 
+    Version: 1.0.0.0, Aug 1, 2014
+    Author: Liang Ding
+-->
+
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<properties  resource="env.properties"/>
+	
+    <context id="eflowTables" targetRuntime="MyBatis3">
+        <plugin type="com.epicsaas.framework.mybatis.MySQLPaginationPlugin"></plugin>
+		
+        <plugin type="com.epicsaas.framework.mybatis.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$" />
+            <property name="replaceString" value="Criteria" />
+        </plugin>
+        
+        <plugin type="com.epicsaas.framework.mybatis.SerializablePlugin" />
+
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="suppressAllComments" value="false" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}" password="${jdbc.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.epicsaas.app.crm.entity.gen" targetProject="src/main/java/">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.epicsaas.app.crm.dao.gen.mysql" targetProject="src/main/resources/">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.epicsaas.app.crm.dao.gen" targetProject="src/main/java/">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>  
+		
+		<!--
+		<table tableName="t_tableName" domainObjectName="EntityName">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />
+		</table>
+		-->
+		<!-- 客户公司信息表 -->
+        <table tableName="t_crm_company" domainObjectName="Company">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />
+		</table>
+		<!-- 客户公司联系人 -->
+		<table tableName="t_crm_connecter" domainObjectName="Connecter">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />
+		   <columnOverride column="company_id" property="companyId" javaType="String" />
+		</table>
+		
+		
+        <!-- 销售人员与客户公司合同表 -->
+		<table tableName="t_crm_contract" domainObjectName="Contract">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />
+		   <columnOverride column="company_id" property="companyId" javaType="String" />
+		   <columnOverride column="user_id" property="userId" javaType="String" />
+		</table>
+		<!-- 客户公司合同附件表 -->
+		<table tableName="t_crm_contract_ext" domainObjectName="ContractExt">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />
+		   <columnOverride column="contract_id" property="companyId" javaType="String" />
+		</table>
+		
+		
+		
+		
+		<!--销售人员与 客户公司活动表 -->
+		<table tableName="t_crm_activity" domainObjectName="Activity">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />
+		   <columnOverride column="company_id" property="companyId" javaType="String" />
+		   <columnOverride column="user_ID" property="userId" javaType="String" />
+		</table>
+		<!-- 销售人员关注的客户公司表关联表 -->
+		<table tableName="t_crm_attention" domainObjectName="Attention">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />
+		   <columnOverride column="company_id" property="companyId" javaType="String" />
+		   <columnOverride column="user_ID" property="userId" javaType="String" />
+		</table>
+		<!-- 待联系表（类似待办） -->
+		<table tableName="t_crm_contact" domainObjectName="Contact">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />
+		   <columnOverride column="company_id" property="companyId" javaType="String" />
+		   <columnOverride column="user_ID" property="userId" javaType="String" />
+		</table>		
+        
+    </context> 
+</generatorConfiguration>

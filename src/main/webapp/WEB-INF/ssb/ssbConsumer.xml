@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2012-2014, Yunnan Yuan Xin technology Co., Ltd.
+
+    All rights reserved.
+
+-->
+
+<!--
+    Description: SSB 接口调用配置。
+    Version: 1.0.0.0, Aug 1, 2014
+    Author: Liang Ding
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:ssb="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+    <!-- 启动时SSB依赖检查 -->
+    <ssb:consumer check="false" />
+    <!-- 远程服务代理实例，可以和本地 bean 一样使用，需要使用请打开注解-->
+    <!-- Session服务 -->
+    <ssb:reference id="sessionService"    interface="com.epicsaas.service.biz.session.service.ISessionService"/>
+	
+	<!-- Session服务工具类 -->
+	<bean id="sessionUtil"   class="com.epicsaas.service.biz.session.util.SessionUtil"/>
+	
+    <!-- 流程应用服务  -->
+	<!-- <ssb:reference id="flowAppService"  interface="com.epicsaas.service.biz.appflow.service.IFlowAppService" />-->
+	
+	<!-- 流程定义服务 -->
+    <!-- <ssb:reference id="flowDefineService"  interface="com.epicsaas.service.biz.eflow.service.IFlowDefineService" />-->
+    
+    <!-- 流程服务  -->
+    <!-- <ssb:reference id="flowService"  interface="com.epicsaas.service.biz.eflow.service.IFlowService" />-->
+    
+ 	<!-- 我发起的 -->
+ 	<!-- <ssb:reference id="launchService" interface="com.epicsaas.service.biz.routine.service.ILaunchService"/>-->
+ 	
+ 	<!-- 已办 -->
+ 	 <!-- <ssb:reference id="doneService" interface="com.epicsaas.service.biz.routine.service.ITodoneService"/>-->
+ 	 
+ 	<!-- 待办 -->
+	<!-- <ssb:reference id="todoService" interface="com.epicsaas.service.biz.routine.service.ITodoService"/>-->
+	
+ 	<!-- 关注 -->
+	<!-- <ssb:reference id="trackService" interface="com.epicsaas.service.biz.routine.service.ITrackService"/>-->
+	
+    <!-- 组织机构树服务 -->
+	<!-- <ssb:reference id="orgService" interface="com.epicsaas.service.biz.userbase.service.IOrgService" />-->
+	
+    <!-- 用户服务 -->
+	<!-- <ssb:reference id="userService" interface="com.epicsaas.service.biz.userbase.service.IUserService" /> -->
+	
+    <!-- 角色服务 -->
+	<!-- <ssb:reference id="groupService" interface="com.epicsaas.service.biz.userbase.service.IGroupService" />-->
+	
+ 	<!-- 用户查询服务 -->
+	<!-- <ssb:reference id="userQueryService"  interface="com.epicsaas.service.biz.userbase.service.query.IUserQueryService"/>-->
+	
+	<!-- 角色查询服务 -->
+	<!-- <ssb:reference id="groupQueryService" interface="com.epicsaas.service.biz.userbase.service.query.IGroupQueryService"/>-->
+	
+	<!-- 组织机构树查询服务 -->
+	<!-- <ssb:reference id="orgQueryService"   interface="com.epicsaas.service.biz.userbase.service.query.IOrgQueryService"/>-->
+</beans>

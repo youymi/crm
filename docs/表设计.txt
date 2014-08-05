@@ -1,0 +1,79 @@
+crm 表设计
+
+
+
+
+1  客户公司信息   t_crm_company
+ID	   主键
+code   客户编号
+type   客户类型 0潜在客户 1联系客户 2跟进客户 3合作客户 4VIP客户 5暂停客户
+name   客户名称
+region 区域
+trade  行业
+phone  电话
+fax    传真
+address 地址
+URL     网址
+business 主营业务
+staff_count 职工数
+
+2 客户公司联系人信息 t_crm_connecter
+ID	     主键
+company_id 所属公司ID
+name     姓名
+position 职位
+phone    电话
+email    邮箱
+remark   说明
+level    级别
+
+3 与客户公司的合同信息 t_crm_contract
+ID 主键
+company_id 所属公司ID
+code 编号
+name 名称
+money 金额
+sign_date 签订日期
+user_id 销售（签订人）
+collect—_date 收款时间
+detail 备注
+
+
+
+4 与客户公司的活动信息 t_crm_activity
+id 主键
+company_id 所属公司ID
+date 时间
+content 跟进内容
+user_id 填写人
+user_name 填写人姓名
+
+
+
+5 crm使用人员信息表
+公司组织机构 UserDTO
+
+6 t_crm_contact   crm使用人员待联系客户公司信息
+ID 主键  主键
+user_id 用户ID（crm使用人）
+company_id 联系公司
+contact_date  需要联系时间
+content  联系内容
+
+
+7 用户关注客户表 t_crm_attention 
+id	主键
+user_ID 用户ID
+company_id 公司
+connect_lastDate 最后联系时间
+
+
+8 权限表（暂不设计）
+
+
+
+
+
+
+
+
