@@ -2,9 +2,9 @@
 <!--
 
     Description: A generated data access implementation of entity Activity.
-                 Generated at 2014-08-02 12:24:34, do NOT modify!
+                 Generated at 2014-08-06 10:21:41, do NOT modify!
     Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
-    Version: 1.0.0.0, Aug 02, 2014
+    Version: 1.0.0.0, Aug 06, 2014
 
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >

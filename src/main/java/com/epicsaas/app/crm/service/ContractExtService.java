@@ -7,6 +7,8 @@ package com.epicsaas.app.crm.service;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.epicsaas.app.crm.appobject.ContractExtAO;
 import com.epicsaas.app.crm.dao.gen.ContractExtGeneratedMapper;
 import com.epicsaas.app.crm.entity.gen.ContractExtCriteria;
@@ -15,7 +17,7 @@ import com.epicsaas.common.service.base.AbstractBaseAOService;
 import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 
-
+@Service
 public class ContractExtService extends AbstractBaseAOService<ContractExtAO, ContractExtCriteria> implements IContractExtService {
 
     private static Logger LOG = LoggerFactory.getLogger(ContractExtService.class);

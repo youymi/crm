@@ -7,6 +7,8 @@ package com.epicsaas.app.crm.service;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.epicsaas.app.crm.appobject.ActivityAO;
 import com.epicsaas.app.crm.dao.gen.ActivityGeneratedMapper;
 import com.epicsaas.app.crm.entity.gen.ActivityCriteria;
@@ -16,6 +18,7 @@ import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 
 
+@Service
 public class ActivityService extends AbstractBaseAOService<ActivityAO, ActivityCriteria> implements IActivityService {
 
     private static Logger LOG = LoggerFactory.getLogger(ActivityService.class);

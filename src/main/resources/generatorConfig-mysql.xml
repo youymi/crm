@@ -111,7 +111,19 @@
 		   <columnOverride column="ID" property="id" javaType="String" />
 		   <columnOverride column="company_id" property="companyId" javaType="String" />
 		   <columnOverride column="user_ID" property="userId" javaType="String" />
-		</table>		
+		</table>	
+		
+		<table tableName="t_crm_datadictionary" domainObjectName="DataDictionary">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />		  
+		</table>
+		
+		<table tableName="t_crm_customer_assign" domainObjectName="CustomerAssgin">
+		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+		   <columnOverride column="ID" property="id" javaType="String" />	
+		   <columnOverride column="customer_id" property="customerId" javaType="String" />
+		   <columnOverride column="user_id" property="userId" javaType="String" />	  
+		</table>
         
     </context> 
 </generatorConfiguration>
