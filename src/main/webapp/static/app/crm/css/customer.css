@@ -1,0 +1,54 @@
+.customer-info {
+	background-image: url(../images/custom_message.png);
+	background-repeat: no-repeat;
+	line-height: 40px;
+	padding-left: 32px;
+}
+
+.customer-info1 {
+	background-image: url(../images/custom_message_01.png);
+	background-repeat: no-repeat;
+	line-height: 30px;
+	padding-left: 32px;
+	background-color: #e2efda;
+}
+
+.contact-info {
+	background-image: url(../images/custom_message_02.png);
+	background-repeat: no-repeat;
+	line-height: 30px;
+	padding-left: 32px;
+	background-color: #e2efda;
+}
+
+.customer-main {
+	margin: 10px 10px;
+}
+
+.customer-btn {
+ 	cursor: pointer;
+	margin: 0 10px;
+	background-color: #bdca85;
+	
+}
+
+.customer-form {
+	margin: 20px 0;
+	padding-left: 70px;
+}
+.formcell {
+	margin-top: 10px;
+}
+.customer-form  .formcell-title {
+	width: 10%;
+}
+.customer-form  .formcell-cell {
+	width: 30%;
+}
+.customer-form  .formcell-cell1 {
+	width: 80%;
+}
+
+.customer-form  .formcell-cell input , .formcell-cell1 input{
+	width: 80%;
+}

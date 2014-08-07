@@ -19,12 +19,20 @@ public enum MVCViewName {
 	// @#############
 	APP_CRM_PC_IE10_HELLO_INDEX("/app/crm/pc/ie10/hello/index"),
 	APP_CRM_PC_IE68_HELLO_INDEX("/app/crm/pc/ie6-8/hello/index"),
+	APP_CRM_PC_IE9_COMMON_BASEPAGE("/app/crm/pc/ie9/common/basePage"),
+	APP_CRM_PC_IE9_COMMON_FOOTER("/app/crm/pc/ie9/common/footer"),
+	APP_CRM_PC_IE9_COMMON_HEADER("/app/crm/pc/ie9/common/header"),
+	APP_CRM_PC_IE9_COMMON_UTIL_COMPONENTMACRO("/app/crm/pc/ie9/common/util/componentMacro"),
+	APP_CRM_PC_IE9_COMMON_UTIL_STATICMACRO("/app/crm/pc/ie9/common/util/staticMacro"),
+	APP_CRM_PC_IE9_CUSTOMER_FORM("/app/crm/pc/ie9/customer/form"),
+	APP_CRM_PC_IE9_CUSTOMER_LIST("/app/crm/pc/ie9/customer/list"),
 	APP_CRM_PC_IE9_HELLO_INDEX("/app/crm/pc/ie9/hello/index"),
-	APP_CRM_PC_IE9_SETTING_INDEX("/app/crm/pc/ie9/setting/index"),
-	APP_CRM_PC_IE9_MAIN_INDEX("/app/crm/pc/ie9/main/index"),
 	APP_CRM_PC_IE9_MAIN_FORM("/app/crm/pc/ie9/main/form"),
+	APP_CRM_PC_IE9_MAIN_INDEX("/app/crm/pc/ie9/main/index"),
+	APP_CRM_PC_IE9_SETTING_INDEX("/app/crm/pc/ie9/setting/index"),
 	APP_CRM_PC_IE9_WIDGET_INDEX("/app/crm/pc/ie9/widget/index"),
-	APP_CRM_PC_OTHER_HELLO_INDEX("/app/crm/pc/other/hello/index");
+	APP_CRM_PC_OTHER_HELLO_INDEX("/app/crm/pc/other/hello/index"),
+	ERROR_500("/error/500");
 // @#############
     
     

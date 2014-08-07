@@ -1,0 +1,43 @@
+.p-relative {
+	position: relative;
+}
+
+.p-absolute {
+	position: absolute;
+}
+
+.clear-both {
+	clear: both;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.required {
+	color: red;
+}
+
+.w5{
+	width: 5%;
+}
+
+.w10 {
+	width: 10%;
+}
+
+.w15 {
+	width: 15%;
+}
+
+.w20 {
+	width: 20%;
+}
+
+.w30 {
+	width: 30%;
+}
