@@ -26,5 +26,16 @@
     <!--
     <bean id="testService" class="com.epicsaas.app.crm.service.TestService" />
     -->
+    	<!-- 公司信息 -->
+	<bean id="companyService" class="com.epicsaas.app.crm.service.CompanyService" />
+	<!-- 公司联系人信息 -->
+	<bean id="contactService" class="com.epicsaas.app.crm.service.ContactService" />
+	<!-- 合同 -->
+	<bean id="contractService" class="com.epicsaas.app.crm.service.ContractService" />
+
+	<!-- 关注 -->
+	<bean id="attentionService" class="com.epicsaas.app.crm.service.AttentionService" />
+	<!-- 活动 -->
+	<bean id="activityService" class="com.epicsaas.app.crm.service.ActivityService" />
 
 </beans>
