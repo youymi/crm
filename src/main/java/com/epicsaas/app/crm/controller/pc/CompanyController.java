@@ -104,17 +104,14 @@ public class CompanyController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/saveOrUpdate", method = { RequestMethod.GET, RequestMethod.POST })
-    public String saveOrUpdate(@Valid CompanyAO companyAO,  Model model,HttpServletRequest request, HttpServletResponse response, HttpSession session){
-    	
-        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
-        LOG.info("SessionId %s", request.getSession().getId());
+    @RequestMapping(value = "/saveCustomer", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Object saveOrUpdate(CompanyAO companyAO, HttpServletRequest request, HttpServletResponse response, HttpSession session){
         
         ServiceResult<CompanyAO>  ret= companyService.saveOrUpdateRetAO(companyAO);
-        if(ret.isSucceed() && null != ret.getData()){
-            model.addAttribute("company", ret.getData());
-        }
-        return MVCViewName.APP_CRM_PC_IE9_MAIN_FORM.toString();
+       
+      
+        return ret;
     }
     
 	/**

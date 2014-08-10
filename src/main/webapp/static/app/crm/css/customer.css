@@ -21,6 +21,14 @@
 	background-color: #e2efda;
 }
 
+.contract-info {
+	background-image: url(../images/custom_message_03.png);
+	background-repeat: no-repeat;
+	line-height: 30px;
+	padding-left: 32px;
+	background-color: #e2efda;
+}
+
 .customer-main {
 	margin: 10px 10px;
 }
@@ -51,4 +59,28 @@
 
 .customer-form  .formcell-cell input , .formcell-cell1 input{
 	width: 80%;
+}
+
+.modify-icon {
+	background-image: url(../images/pencil.png);
+	background-repeat: no-repeat;
+ 	padding-left: 22px;
+  	cursor: pointer;
+}
+
+.editable {
+	border: solid 1px transparent;
+	border-bottom: dotted 1px #ddd;
+	 
+}
+.readonly {
+	border: solid 1px transparent;
+}
+.hide {
+	display: none;
+}
+.btn-save{
+	cursor: pointer;
+padding: 2px;
+background-color: #bdca85;
 }
