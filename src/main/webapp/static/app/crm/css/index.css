@@ -1,0 +1,83 @@
+
+body{
+    background-color: #F6F7F7;
+}
+
+.saaswrapper {
+    width: 1205px;
+}
+
+.content {
+	height: 100%;
+}
+
+/**
+ * 搜索
+ */
+.content .search{
+	margin: 0px auto; 
+}
+
+.content .search .summary{
+	margin-left: 10px;
+	height:60px;
+}
+
+/**
+*主面板
+*/
+.content .dash-container{
+	margin: 0px auto; 
+}
+
+.inner{
+	width: 33.33%;
+    float: left;
+    padding: 0 5px;
+}
+
+.inner2{
+	width: 66.66%;
+    float: left;
+    padding: 0 2.5px;
+}
+
+.mydash {
+	background: none repeat scroll 0 0 #fff;
+	cursor: pointer;
+	float: left;
+	height: 280px;
+	margin: 10px 0 0 10px;
+	margin-top: 10px;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	width: 100%;	
+	display: block;
+	position: relative;
+	-ms-overflow-x: hidden;
+	-ms-overflow-y: hidden;
+}
+
+.mydash header,.mydash .header{
+	padding-top: 1px; 
+	background-color: #fafafa;
+	height: 40px;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.mydash .header .header-title {
+	color: #666;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 10px 0 0px 10px;
+	position: relative;
+
+}
+
+.mydash .header .header-title span{
+    border-left: 3px #f50 solid;
+    padding-left: 10px;
+}
+
+
