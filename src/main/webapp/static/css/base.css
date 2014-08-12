@@ -1079,11 +1079,15 @@ td {
 
 
 /* start framework */
-.wrapper {
+.saaswrapper {
     width: 100%;
     margin: 0 auto;
+    width: 1190px;
     padding-top: 41px;
 }
+
+
+
 /* end framework */
 
 
