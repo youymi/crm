@@ -41,7 +41,7 @@
 	</bean>
 	
     <!-- 当请求应用程序首页时，将执行/hello请求，还可以设定成redirect -->
-    <mvc:view-controller path="/" view-name="forward:/pc/hello" />
+    <mvc:view-controller path="/" view-name="forward:/pc/main" />
 
     <mvc:annotation-driven validator="validator"/>
     
