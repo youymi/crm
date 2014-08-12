@@ -24,7 +24,9 @@
 			<!--[if lt IE 9]>  
 				<script type="text/javascript" src="${staticServePath}/plugins/html5shiv.js"></script>
 			<![endif]-->
+			<!--  
 			<script type="text/javascript" src="/saasportal/static/js/header.js?0.0.1"></script>
+			-->
 			<script>
 			      webCfg = {
 				      staticServePath: "${staticServePath}",
