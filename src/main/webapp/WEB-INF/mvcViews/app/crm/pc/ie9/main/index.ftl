@@ -2,7 +2,9 @@
 <@addCSS ["/app/crm/css/index",""] />
 <@addJS [""] />
 
+<style type="text/css">
 
+</style>
 	
 <@addScript>
 <script type="text/javascript">
@@ -161,9 +163,18 @@ $(function () {
 <div class="saaswrapper">
 	<DIV class="content" >
 	
+<#include "../common/header.ftl">
+	
 		<DIV  class="search" >
 			<DIV class="summary">
-		搜索
+				<form class="form-horizontal" role="form">
+				  <div class="form-group has-success has-feedback">
+				    <div class="col-sm-6" style="margin-left:28%">
+				      <input type="text" class="form-control" id="inputSuccess3" style="float: left;width: 80%">
+				      <button class="btn" onclick="callSearch('Basic');" type="button" style="float: left;border: 0px;height: 36px;margin:-1px 0 0 -3px;"><i class="icon-search"></i>&nbsp;搜索</button>
+				    </div>
+				  </div>
+				</form>
 			</DIV>
 		</DIV>
 		
@@ -188,8 +199,36 @@ $(function () {
 						<div class="header-title"><span>我关注的客户</span></div>
 					</DIV>
 					<DIV style="margin-right: 5px; margin-left: 5px;">
-
-					</DIV>
+						<TABLE
+							class="table table-bordered table-condensed table-striped table-hover">
+							<THEAD>
+								<TR>
+									<TD>客户类型</TD>
+									<TD>客户名称</TD>
+									<TD>联系时间</TD>
+								</TR>
+							</THEAD>
+							<TBODY>
+								<TR>
+									<TD>潜在客户
+									</TD>
+									<TD align="left"><A href="#">云南远信</A></TD>
+									<TD align="left">2014-8-7</TD>
+								</TR>
+								<TR>
+									<TD>潜在客户
+									</TD>
+									<TD align="left"><A href="#">米卡</A></TD>
+									<TD align="left">2014-8-7</TD>
+								</TR>
+								<TR>
+									<TD>潜在客户
+									</TD>
+									<TD align="left"><A href="#">客户3</A></TD>
+									<TD align="left">2014-8-7</TD>
+								</TR>
+							</TBODY>
+						</TABLE>					</DIV>
 				</DIV>
 			</DIV>
 

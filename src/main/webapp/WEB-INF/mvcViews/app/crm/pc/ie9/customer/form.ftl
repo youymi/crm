@@ -1,8 +1,34 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common"] />
+<@addCSS ["/app/crm/css/index","/app/crm/css/customer","/app/crm/css/common"] />
 <@addJS ["/app/crm/js/customer"] />
-<@common title="客户管理">		 
-	<div class="customer-info">客户：</div>
+
+	
+<@addScript>
+<script type="text/javascript">
+
+</script>
+</@addScript>
+
+<@common title="客户管理">	
+
+	
+<script type="text/javascript" src="/saasportal/static/js/header.js?0.0.1"></script>
+ 
+<div class="saaswrapper">
+	<DIV class="content" >
+<#include "../common/header.ftl">	
+
+		<DIV  class="search" >
+			<DIV class="summary">
+				<div class="col-sm-6 customer-info">
+					<strong>客户：云南远信科技</strong>
+				</div>
+				<div class="col-sm-6 pull-right"><a href="#"><img src="${staticServePath}/app/crm/images/go_back.png"></a></div>
+			</DIV>
+		</DIV>
+	
+	
+	
 	<div class="customer-main">
 	
 		<div class="customer-info1">
@@ -94,4 +120,7 @@
 		
 	</div>
 	
+	</DIV>
+</div>
+
 </@common>

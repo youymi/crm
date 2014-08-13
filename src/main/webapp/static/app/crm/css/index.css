@@ -11,11 +11,25 @@ body{
 	height: 100%;
 }
 
+.navbar .nav {
+    position: relative;
+    left: 0px;
+    display: block;
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+.navbar .nav > li {
+    float: left;
+}
+
+
 /**
  * 搜索
  */
 .content .search{
 	margin: 0px auto; 
+	margin-bottom: 40px;
 }
 
 .content .search .summary{
