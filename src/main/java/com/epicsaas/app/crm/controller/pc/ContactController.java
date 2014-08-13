@@ -59,7 +59,7 @@ public class ContactController {
         //将当前运用名称传到前端
         model.addAttribute("appId", "crm");
         model.addAttribute("appName", "客户关系管理");
-        return MVCViewName.APP_CRM_PC_IE9_MAIN_INDEX.toString();
+        return MVCViewName.APP_CRM_PC_IE9_MAIN_CONTACT.toString();
     }
     
     
