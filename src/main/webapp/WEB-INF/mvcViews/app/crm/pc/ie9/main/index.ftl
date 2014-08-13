@@ -32,6 +32,12 @@ $(function () {
                 }
             }
         },
+        credits: {
+            enabled: false // remove high chart logo hyper-link
+        },
+        exporting:{ 
+            enabled:false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
+       },
         tooltip: {
             crosshairs: true,
             shared: true
@@ -99,6 +105,12 @@ $(function () {
         tooltip: {
     	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
+        credits: {
+            enabled: false // remove high chart logo hyper-link
+        },
+        exporting:{ 
+            enabled:false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
+       },
         plotOptions: {
             pie: {
                 allowPointSelect: true,
