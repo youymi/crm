@@ -196,7 +196,7 @@ $(function () {
 			<DIV class="inner">
 				<DIV class="mydash" id="">
 					<DIV class="header">
-						<div class="header-title"><span>我关注的客户</span></div>
+						<div class="header-title"><span><a href="${servePath}/pc/attention">我关注的客户 <img alt="我关注的客户" src="${staticServePath}/app/crm/images/select_02.png"></a></span></div>
 					</DIV>
 					<DIV style="margin-right: 5px; margin-left: 5px;">
 						<TABLE
@@ -261,7 +261,7 @@ $(function () {
 			<DIV class="inner">
 				<DIV class="mydash" id="">
 					<DIV class="header">
-						<div class="header-title"><span>待联系客户</span></div>
+						<div class="header-title"><span><a href="${servePath}/pc/contact">待联系客户 <img alt="我关注的客户" src="${staticServePath}/app/crm/images/select_02.png"></a></span></div>
 					</DIV>
 					<DIV style="margin-right: 5px; margin-left: 5px;">
 
