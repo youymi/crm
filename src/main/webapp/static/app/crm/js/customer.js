@@ -203,7 +203,11 @@
 		$(".j-customer-form").find("input").val("");
 		 
 	});
-
+	
+	
+	var readOnly = function($this){
+		$(this).parents("form").find("input").attr("readonly","readonly").removeClass("editable").addClass("readonly");
+	} ;
 	
 	//表单变为可编辑状态
 	$(document).on('click', '.j-modify', function() {
@@ -212,6 +216,62 @@
 		$(this).next(".j-save").removeClass("hide").show();
 		
 	});
+	
+	//新增操作
+	$(document).on('click', '.j-customer-new', function() {
+		 var companyId =  $(".j-customer-form").find(".id").val();
+		 if (companyId == null || companyId == "") {
+			 alert("请先保存客户信息");
+			 return ;			 
+		 } 
+		 
+		 $that = $(this);
+		 
+		 $.ajax({
+				url : $that.data("url"),
+				type : 'POST',
+				dataType : "text",
+				data : "companyId=" + companyId
+			}).done(function(data) {
+				$("#"+$that.data("maineleid")).append($(data));
+				 
+			}).fail(function(jqXHR, error) {
+				alert("出错了...");
+
+			});
+		 
+		 
+	});
+	
+	
+	//保存操作
+	$(document).on('click', '.j-save', function() {
+		 var companyId =  $(".j-customer-form").find(".id").val();
+		 if (companyId == null || companyId == "") {
+			 alert("请先保存客户信息");
+			 return ;			 
+		 } 
+		 
+		 $that = $(this);
+		 
+		 $.ajax({
+				url : $that.data("url"),
+				type : 'POST',
+				dataType : "json",
+				data :  $that.parents("form").serialize()
+			}).done(function(data) {
+				if (data && data.data) {
+					$that.parents("form").find(".id").val(data.data.id);
+				}
+				 
+			}).fail(function(jqXHR, error) {
+				alert("出错了...");
+
+			});
+		 
+		 
+	});
+	
 
 
 }(window.jQuery);
