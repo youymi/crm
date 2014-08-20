@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `t_crm_company`;
 CREATE TABLE IF NOT EXISTS `t_crm_company` (
   `id` bigint(20) NOT NULL DEFAULT '0',
   `code` varchar(50) DEFAULT NULL COMMENT '客户编码',
-  `type` char(1) DEFAULT '0' COMMENT '客户类型 0潜在客户 1联系客户 2跟进客户 3合作客户 4VIP客户 5暂停客户',
+  `type` varchar(50) DEFAULT NULL COMMENT '客户类型 0潜在客户 1联系客户 2跟进客户 3合作客户 4VIP客户 5暂停客户',
   `name` varchar(255) DEFAULT NULL COMMENT '客户名称',
   `region` varchar(50) DEFAULT NULL COMMENT '区域',
   `trade` varchar(20) DEFAULT NULL COMMENT '行业',
