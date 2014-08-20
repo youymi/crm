@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2012-2013, Yunnan Yuan Xin technology Co., Ltd.
- * 
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ *
  * All rights reserved.
  */
 package com.epicsaas.app.crm.service;
@@ -15,8 +15,8 @@ import com.epicsaas.common.service.base.AbstractBaseAOService;
 import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 
-
-public class AttentionService extends AbstractBaseAOService<AttentionAO, AttentionCriteria> implements IAttentionService {
+public class AttentionService extends AbstractBaseAOService<AttentionAO, AttentionCriteria> implements
+        IAttentionService {
 
     private static Logger LOG = LoggerFactory.getLogger(AttentionService.class);
 

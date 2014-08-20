@@ -1,7 +1,11 @@
+/*
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ *
+ * All rights reserved.
+ */
 package com.epicsaas.app.crm.common;
 
 import com.epicsaas.framework.web.resolver.AbstractMVCViewMatch;
-
 
 /**
  * 判断视图的名称是否存在于自动生成的枚举类中。
@@ -10,10 +14,10 @@ import com.epicsaas.framework.web.resolver.AbstractMVCViewMatch;
  * @author Liyuan Li
  *
  */
-public class MVCViewMatch  extends AbstractMVCViewMatch{
+public class MVCViewMatch extends AbstractMVCViewMatch {
 
-	@Override
-	public boolean isExistViewName(String viewName) {
+    @Override
+    public boolean isExistViewName(String viewName) {
         boolean flag = false;
         for (MVCViewName view : MVCViewName.values()) {
             if (view.toString().equals(viewName)) {
@@ -21,6 +25,6 @@ public class MVCViewMatch  extends AbstractMVCViewMatch{
             }
         }
         return flag;
-	}
+    }
 
 }

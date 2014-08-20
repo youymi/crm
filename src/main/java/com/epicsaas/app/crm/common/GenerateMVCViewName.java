@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Yunnan Yuan Xin technology Co., Ltd.
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
  *
  * All rights reserved.
  */
@@ -24,37 +24,38 @@ import java.util.ArrayList;
  * 
  */
 public class GenerateMVCViewName {
-    public static final String       freemarkerTemplateDir = "src/main/webapp/WEB-INF/mvcViews";
 
-    public static final String       suffix                = ".ftl";
-    private static ArrayList<String> filelist              = new ArrayList<String>();
+    public static final String freemarkerTemplateDir = "src/main/webapp/WEB-INF/mvcViews";
+
+    public static final String suffix = ".ftl";
+
+    private static ArrayList<String> filelist = new ArrayList<String>();
 
     /**
      * @param args
      */
     public static void main(String[] args) {
-        String classLoaderPath = Thread.currentThread().getContextClassLoader().getResource("")
-                .getFile();
+        String classLoaderPath = Thread.currentThread().getContextClassLoader().getResource("").getFile();
         String targetJavaFile = GenerateMVCViewName.class.getResource("").getFile();
         String path = classLoaderPath.replace("target/classes", freemarkerTemplateDir);
-        String javaFile = targetJavaFile.replace("target/classes", "src/main/java")
-                + File.separator + "MVCViewName.java";
-	
-	   try {
-        	//转路径空格
-			path =  URLDecoder.decode(path, "utf-8");
-		} catch (Exception e) { e.printStackTrace();}
-	
+        String javaFile = targetJavaFile.replace("target/classes", "src/main/java") + File.separator
+                + "MVCViewName.java";
+
+        try {
+            //转路径空格
+            path = URLDecoder.decode(path, "utf-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         File folder = new File(path);
 
         refreshFileList(path);
 
         StringBuffer sb = new StringBuffer();
         for (String file : filelist) {
-            String viewName = file.replace(folder.getAbsolutePath() + File.separator, "").replace(
-                    suffix, "");
-            String enumItemName = viewName.replace(File.separator, "_").replace("-", "")
-                    .toUpperCase();
+            String viewName = file.replace(folder.getAbsolutePath() + File.separator, "").replace(suffix, "");
+            String enumItemName = viewName.replace(File.separator, "_").replace("-", "").toUpperCase();
             viewName = viewName.replace(File.separator, "/");
 
             String item = enumItemName + "(\"/" + viewName + "\"),";
@@ -73,8 +74,7 @@ public class GenerateMVCViewName {
         int start = oldJavaSource.indexOf("@#############") + "@#############".length() + 1;
         int end = oldJavaSource.lastIndexOf("@#############") - 3;
 
-        String newJavaSource = oldJavaSource.substring(0, start) + sb
-                + oldJavaSource.substring(end);
+        String newJavaSource = oldJavaSource.substring(0, start) + sb + oldJavaSource.substring(end);
         // System.out.println(newJavaSource);
 
         // 更新Java代码
@@ -106,11 +106,11 @@ public class GenerateMVCViewName {
 
     public static void refreshFileList(String strPath) {
         try {
-			strPath =URLDecoder.decode(URLEncoder.encode(strPath, "utf-8"), "utf-8");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+            strPath = URLDecoder.decode(URLEncoder.encode(strPath, "utf-8"), "utf-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         File dir = new File(strPath);
         File[] files = dir.listFiles();
 

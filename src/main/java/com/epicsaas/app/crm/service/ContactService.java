@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2012-2013, Yunnan Yuan Xin technology Co., Ltd.
- * 
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ *
  * All rights reserved.
  */
 package com.epicsaas.app.crm.service;

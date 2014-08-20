@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2012-2013, Yunnan Yuan Xin technology Co., Ltd.
- * 
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ *
  * All rights reserved.
  */
 package com.epicsaas.app.crm.service;
@@ -18,7 +18,8 @@ import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 
 @Service
-public class ConnecterService extends AbstractBaseAOService<ConnecterAO, ConnecterCriteria> implements IConnecterService {
+public class ConnecterService extends AbstractBaseAOService<ConnecterAO, ConnecterCriteria> implements
+        IConnecterService {
 
     private static Logger LOG = LoggerFactory.getLogger(ConnecterService.class);
 

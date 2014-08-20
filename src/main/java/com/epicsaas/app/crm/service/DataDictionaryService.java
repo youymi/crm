@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ *
+ * All rights reserved.
+ */
 package com.epicsaas.app.crm.service;
 
 import javax.annotation.Resource;
@@ -13,18 +18,16 @@ import com.epicsaas.common.dao.base.BaseGeneratedMapper;
 import com.epicsaas.common.service.base.AbstractBaseAOService;
 
 @Service
-public class DataDictionaryService extends
-		AbstractBaseAOService<DataDictionaryAO, DataDictionaryCriteria>
-		implements IDataDictionaryService {
-	
-	private static Logger LOG = LoggerFactory.getLogger(DataDictionaryService.class);
+public class DataDictionaryService extends AbstractBaseAOService<DataDictionaryAO, DataDictionaryCriteria> implements
+        IDataDictionaryService {
+
+    private static Logger LOG = LoggerFactory.getLogger(DataDictionaryService.class);
 
     @Resource
     private DataDictionaryGeneratedMapper dataDictionaryGeneratedMapper;
 
-    
-	@Override
-	protected BaseGeneratedMapper<DataDictionaryAO, DataDictionaryCriteria> getGeneratedMapper() {
-		return dataDictionaryGeneratedMapper;
-	}
+    @Override
+    protected BaseGeneratedMapper<DataDictionaryAO, DataDictionaryCriteria> getGeneratedMapper() {
+        return dataDictionaryGeneratedMapper;
+    }
 }

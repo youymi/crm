@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2012-2013, Yunnan Yuan Xin technology Co., Ltd.
- * 
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ *
  * All rights reserved.
  */
 package com.epicsaas.app.crm.controller.pc;
@@ -27,7 +27,7 @@ public class MainController {
 
     private static Logger LOG = LoggerFactory.getLogger(HelloController.class);
 
-	/**
+    /**
      * 应用主入口地址
      * @param model
      * @param request
@@ -37,9 +37,8 @@ public class MainController {
      */
 
     @RequestMapping(value = "", method = { RequestMethod.GET, RequestMethod.POST })
-    public String hello(Model model,HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    public String hello(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
-    	
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
         //将当前运用名称传到前端
@@ -47,8 +46,8 @@ public class MainController {
         model.addAttribute("appName", "客户关系管理");
         return MVCViewName.APP_CRM_PC_IE9_MAIN_INDEX.toString();
     }
-    
-	/**
+
+    /**
      * 应用快速创建某种业务数据如今，例如：快速创建一个请假申请
      * @param model
      * @param request
@@ -57,8 +56,8 @@ public class MainController {
      * @return
      */
     @RequestMapping(value = "/create", method = { RequestMethod.GET, RequestMethod.POST })
-    public String create(Model model,HttpServletRequest request, HttpServletResponse response, HttpSession session){
-    	
+    public String create(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
         //将当前运用名称传到前端
@@ -66,8 +65,8 @@ public class MainController {
         model.addAttribute("appName", "客户关系管理");
         return MVCViewName.APP_CRM_PC_IE9_MAIN_FORM.toString();
     }
-    
-	/**
+
+    /**
      * 打开某种业务数据，例如：打开数据ID等于dataId的请假申请
      * @param dataId 业务数据ID
      * @param model
@@ -77,8 +76,9 @@ public class MainController {
      * @return
      */
     @RequestMapping(value = "/open/{dataId}", method = { RequestMethod.GET, RequestMethod.POST })
-    public String create(@PathVariable String dataId, Model model,HttpServletRequest request, HttpServletResponse response, HttpSession session){
-    	
+    public String create(@PathVariable String dataId, Model model, HttpServletRequest request,
+            HttpServletResponse response, HttpSession session) {
+
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
         //将当前运用名称传到前端
@@ -86,5 +86,5 @@ public class MainController {
         model.addAttribute("appName", "客户关系管理");
         return MVCViewName.APP_CRM_PC_IE9_MAIN_FORM.toString();
     }
-    
+
 }

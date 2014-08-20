@@ -155,7 +155,7 @@
                 </dependencies>
             </plugin> 
 
-            <!-- 多数据库支持，修改XXMapper.xml路径的插件-->
+            <!-- 多数据库支持，修改XXMapper.xml路径的插件
             <plugin>
                 <groupId>com.epicsaas</groupId>
                 <artifactId>maven-gen-plugin</artifactId>
@@ -169,6 +169,7 @@
 					</execution>
 				</executions>
             </plugin> 
+            -->
             
             <plugin>
                 <groupId>org.mybatis.generator</groupId>

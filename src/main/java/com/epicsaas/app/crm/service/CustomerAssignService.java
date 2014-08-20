@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ *
+ * All rights reserved.
+ */
 package com.epicsaas.app.crm.service;
 
 import javax.annotation.Resource;
@@ -13,19 +18,17 @@ import com.epicsaas.common.dao.base.BaseGeneratedMapper;
 import com.epicsaas.common.service.base.AbstractBaseAOService;
 
 @Service
-public class CustomerAssignService extends
-		AbstractBaseAOService<CustomerAssginAO, CustomerAssginCriteria>
-		implements ICustomAssignService {
-	
-	private static Logger LOG = LoggerFactory.getLogger(CustomerAssignService.class);
+public class CustomerAssignService extends AbstractBaseAOService<CustomerAssginAO, CustomerAssginCriteria> implements
+        ICustomAssignService {
+
+    private static Logger LOG = LoggerFactory.getLogger(CustomerAssignService.class);
 
     @Resource
     private CustomerAssginGeneratedMapper customerAssginGeneratedMapper;
 
-
-	@Override
-	protected BaseGeneratedMapper<CustomerAssginAO, CustomerAssginCriteria> getGeneratedMapper() {
-		return customerAssginGeneratedMapper;
-	}
+    @Override
+    protected BaseGeneratedMapper<CustomerAssginAO, CustomerAssginCriteria> getGeneratedMapper() {
+        return customerAssginGeneratedMapper;
+    }
 
 }
