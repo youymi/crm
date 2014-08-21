@@ -66,7 +66,7 @@
 		   <columnOverride column="ID" property="id" javaType="String" />
 		</table>
 		<!-- 客户公司联系人 -->
-		<table tableName="t_crm_connecter" domainObjectName="Connecter">
+		<table tableName="t_crm_contact" domainObjectName="Contact">
 		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
 		   <columnOverride column="ID" property="id" javaType="String" />
 		   <columnOverride column="company_id" property="companyId" javaType="String" />
@@ -105,7 +105,7 @@
 		   <columnOverride column="user_ID" property="userId" javaType="String" />
 		</table>
 		<!-- 待联系表（类似待办） -->
-		<table tableName="t_crm_contact" domainObjectName="Contact">
+		<table tableName="t_crm_tocontactor" domainObjectName="TodoContactor">
 		   <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
 		   <columnOverride column="ID" property="id" javaType="String" />
 		   <columnOverride column="company_id" property="companyId" javaType="String" />
