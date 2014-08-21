@@ -2,9 +2,9 @@
 <!--
 
     Description: A generated data access implementation of entity Company.
-                 Generated at 2014-08-06 10:21:41, do NOT modify!
+                 Generated at 2014-08-21 17:10:50, do NOT modify!
     Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
-    Version: 1.0.0.0, Aug 06, 2014
+    Version: 1.0.0.0, Aug 21, 2014
 
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
@@ -16,7 +16,7 @@
     -->
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="code" property="code" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="region" property="region" jdbcType="VARCHAR" />
     <result column="trade" property="trade" jdbcType="VARCHAR" />
@@ -157,14 +157,16 @@
     <selectKey resultType="String" keyProperty="id" order="BEFORE" >
       select uuid_short()
     </selectKey>
-    insert into t_crm_company (id, code, type, name, 
-      region, trade, phone, 
-      fax, address, url, 
-      business, staffs)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, 
-      #{region,jdbcType=VARCHAR}, #{trade,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{fax,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{business,jdbcType=VARCHAR}, #{staffs,jdbcType=INTEGER})
+    insert into t_crm_company (id, code, type, 
+      name, region, trade, 
+      phone, fax, address, 
+      url, business, staffs
+      )
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{trade,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{business,jdbcType=VARCHAR}, #{staffs,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.epicsaas.app.crm.appobject.CompanyAO" >
     <!--
@@ -217,7 +219,7 @@
         #{code,jdbcType=VARCHAR},
       </if>
       <if test="type != null" >
-        #{type,jdbcType=CHAR},
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -272,7 +274,7 @@
         code = #{record.code,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null" >
-        type = #{record.type,jdbcType=CHAR},
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -314,7 +316,7 @@
     update t_crm_company
     set id = #{record.id,jdbcType=BIGINT},
       code = #{record.code,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=CHAR},
+      type = #{record.type,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       region = #{record.region,jdbcType=VARCHAR},
       trade = #{record.trade,jdbcType=VARCHAR},
@@ -339,7 +341,7 @@
         code = #{code,jdbcType=VARCHAR},
       </if>
       <if test="type != null" >
-        type = #{type,jdbcType=CHAR},
+        type = #{type,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -378,7 +380,7 @@
     -->
     update t_crm_company
     set code = #{code,jdbcType=VARCHAR},
-      type = #{type,jdbcType=CHAR},
+      type = #{type,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       region = #{region,jdbcType=VARCHAR},
       trade = #{trade,jdbcType=VARCHAR},
