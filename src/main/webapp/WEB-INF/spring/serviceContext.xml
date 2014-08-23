@@ -38,5 +38,7 @@
 	<bean id="todoContactorService" class="com.epicsaas.app.crm.service.TodoContactorService" />
 	<!-- 活动 -->
 	<bean id="activityService" class="com.epicsaas.app.crm.service.ActivityService" />
+	<!--客户类型（字典）  -->
+	<bean id="dataDictionaryService" class="com.epicsaas.app.crm.service.DataDictionaryService"/>
 
 </beans>

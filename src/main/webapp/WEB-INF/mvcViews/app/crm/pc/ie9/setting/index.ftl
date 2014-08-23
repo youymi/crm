@@ -1,15 +1,192 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>${appName!}</title>
-<style type="text/css">
-</style>
-</head>
-
-<body>
-    <h1>我是 ${appName!} 应用的后台管理入口!  </h1>
-</body>
-</html>
+<#include "../common/basePage.ftl">
+<@addCSS ["/app/crm/css/index","/app/crm/css/style"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common"] />
+<@addJS ["/app/crm/js/customer"] />
 
 
+<@addScript>
+<SCRIPT language="JavaScript" type="text/javascript">
 
+$(function() {
+    //全选 | 反全选
+   $("#selectedAll").click(function() { 
+        $('input[name="selected_id"]').prop("checked",this.checked);
+    });
+    var $selected_id = $("input[name='selected_id']"); 
+    $selected_id.click(function(){
+        $("#selectedAll").prop("checked",$selected_id.length == $selected_id.filter(":checked").length.length ? true : false);
+    });
+
+});
+
+
+$(function() {
+    //全选 | 反全选
+   $("#selectedAll2").click(function() { 
+        $('input[name="selected_id2"]').prop("checked",this.checked);
+    });
+    var $selected_id = $("input[name='selected_id2']"); 
+    $selected_id.click(function(){
+        $("#selectedAll2").prop("checked",$selected_id.length == $selected_id.filter(":checked").length.length ? true : false);
+    });
+
+});
+
+</SCRIPT>
+</@addScript>
+
+
+
+
+<@common title="云客户">		
+<script type="text/javascript" src="/saasportal/pc/component/header/customizedjs"></script>
+ 
+<div class="saaswrapper">
+	<DIV class="content" >
+	
+<#include "../common/header.ftl">
+	<DIV class="container-fluid" style="margin-top: 12px">
+	
+	         <!-- 底部蓝色线条 -->
+			<DIV style="padding-top: 5px; margin-top: 2px; margin-bottom: 5px; border-top-color: rgb(0, 136, 204); border-top-width: 2px; border-top-style: solid;">
+			</DIV>
+			
+			
+		<div class="contract-main">
+				<div class="contract-info">
+					<span>客户类型设置</span>
+					<span><A  data-toggle="modal" href="#example"><IMG	title="添加" src="${staticServePath}/app/crm/images/add.png"		border="0"></A> </span>
+					<span><A href="" ><IMG	title="删除" src="${staticServePath}/app/crm/images/del.png"		border="0"> </A> </span>
+				</div>
+				
+						<TABLE 	class="table  table-hover">
+							<THEAD>
+								<TR>
+								 	<th><INPUT name="selectedAll"	id="selectedAll" type="checkbox"></th>
+									<TH>类型名称</TH>
+									<TH>类型说明</TH>
+									<TH>操作</TH>
+								</TR>
+							</THEAD>
+							<TBODY>
+								
+					 <#if dataDictionaryList?exists>
+									<#list dataDictionaryList  as data>
+										<TR id="row_2018">
+											<TD><INPUT name="selected_id"	type="checkbox" value="${data.id!}"></TD>
+											<TD>${data.name!}</TD>
+											<TD>${data.value!}</TD>
+											<TD>
+												<A href="" ><I class="cus-pencil"><IMG	title="分配" src="${staticServePath}/app/crm/images/pencil.png"		border="0"> </I></A> 
+											</TD>
+										</TR>
+									 </#list>
+					</#if>
+								
+							</TBODY>
+						</TABLE>	
+		</div>		
+		
+				<div id="example" class="modal">
+					<div class="modal-dialog">
+								<div class="modal-content" style="background-color: #F6F7F7">
+									<div class="modal-header">
+										<span>客户类型设置</span>
+									</div>
+									<div class="modal-body">
+										<form  onsubmit="return checkDataDictionary()" action="${servePath}/pc/setting/saveDataDictionary" method="post" accept-charset="utf-8" class="form-horizontal" role="form">	
+											 <div class="form-group">
+											    <label for="inputEmail3" class="col-sm-2 control-label">类型名称</label>
+											    <div class="col-sm-10">
+											      <input id="dname" name="name" type="text" class="form-control"  placeholder="类型名称">
+											    </div>
+											  </div>
+											  
+											  <div class="form-group">
+											    <label for="inputPassword3" class="col-sm-2 control-label">类型说明</label>
+											    <div class="col-sm-10">
+											      <textarea id="dvalue" name="value" class="form-control" placeholder="类型说明"  rows="5"></textarea>
+											    </div>
+											  </div>
+											  
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+													<button type="submit" class="btn btn-primary">保存</button>  
+												</div>
+										</form>
+									</div>
+								</div>
+							</div>
+				</div>
+<script type="text/javascript">
+	function checkDataDictionary(){
+		var name = $('#dname').val();
+		var value = $('#dvalue').val();
+		
+	    if("" == name && ""==value){
+	    				alert("类型名称和类型说明不能为空");
+	        return false;
+	    }else if("" == name){
+	    	alert("类型名称不能为空");
+	        return false;
+	    }else if("" == value){
+	    	alert("类型说明不能为空");
+	    	return false;
+	    }else{
+	    	return true;
+	    }
+	}
+
+
+</script>
+
+
+
+
+
+
+
+				<div class="contract-main">
+					<div class="contract-info">
+						<span>人员权限设置</span>
+					</div>
+
+					<TABLE class="table  table-hover">
+						<THEAD>
+							<TR>
+								<th><INPUT name="selectedAll2" id="selectedAll2"
+									type="checkbox"></th>
+								<TH>人员角色</TH>
+								<TH>可操作功能</TH>
+								<TH>角色下人员</TH>
+								<TH>操作
+								<TH>
+							</TR>
+						</THEAD>
+						<TBODY>
+
+							<#if dataDictionaryList?exists> <#list dataDictionaryList as
+							data>
+							<TR id="row_2018">
+								<TD><INPUT name="selected_id2" id="selected_id2"
+									type="checkbox" value="${data.id!}"></TD>
+								<TD>${data.name!}</TD>
+								<TD>${data.value!}</TD>
+								<TD>${data.value!}</TD>
+								<TD><A href=""><I class="cus-pencil"><IMG
+											title="分配" src="${staticServePath}/app/crm/images/pencil.png"
+											border="0"> </I></A></TD>
+							</TR>
+							</#list> </#if>
+
+						</TBODY>
+					</TABLE>
+				</div>
+
+
+			</DIV>
+
+		</DIV>
+</div>
+
+</@common>

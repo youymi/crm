@@ -18,7 +18,7 @@
                     <ul class="nav">
                           <li><a href="${servePath}/pc/main"><img src="${staticServePath}/app/crm/images/index.png"></a></li>
                           <li><a href="${servePath}/pc/customer"><img src="${staticServePath}/app/crm/images/custom.png"></a></li>
-						  <li><a href="${servePath}/pc/main"><img src="${staticServePath}/app/crm/images/set.png"></a></li>
+						  <li><a href="${servePath}/pc/setting"><img src="${staticServePath}/app/crm/images/set.png"></a></li>
 						  <li><a href="${servePath}/pc/main"><img src="${staticServePath}/app/crm/images/help.png"></a></li>
 						  <li><a href="${servePath}/pc/main"><img src="${staticServePath}/app/crm/images/close.png"></a></li>
                     </ul>                            

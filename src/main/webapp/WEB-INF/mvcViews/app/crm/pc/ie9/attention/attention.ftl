@@ -71,8 +71,7 @@ $(function() {
 		 <#if attentionList?exists>
 						<#list attentionList  as attention>
 							<TR id="row_2018">
-								<TD><INPUT name="selected_id" id="selected_id_2018"
-									type="checkbox" value="${attention.companyAO.id!}"></TD>
+								<TD><INPUT name="selected_id"	type="checkbox" value="${attention.companyAO.id!}"></TD>
 								<TD>${attention.companyAO.code!}</TD>
 								<TD>${attention.companyAO.name!}</TD>
 								<TD>${attention.companyAO.type!}</TD>
