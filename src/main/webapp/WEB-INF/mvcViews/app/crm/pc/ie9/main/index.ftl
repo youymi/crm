@@ -154,7 +154,7 @@ $(function () {
 
 <@common title="云客户">		
 
-	<script type="text/javascript" src="/saasportal/static/js/header.js?0.0.1"></script>
+	<script type="text/javascript" src="/saasportal/pc/component/header/customizedjs"></script>
 	<!-- Charts  =============================-->
 	<script type="text/javascript" src="${staticServePath}/plugins/highcharts/highcharts.js"></script>
 	<script type="text/javascript" src="${staticServePath}/plugins/highcharts/modules/exporting.js"></script>
@@ -199,36 +199,31 @@ $(function () {
 						<div class="header-title"><span><a href="${servePath}/pc/attention">我关注的客户 <img alt="我关注的客户" src="${staticServePath}/app/crm/images/select_02.png"></a></span></div>
 					</DIV>
 					<DIV style="margin-right: 5px; margin-left: 5px;">
-						<TABLE
-							class="table table-bordered table-condensed table-striped table-hover">
+						<TABLE 	class="table  table-hover">
 							<THEAD>
 								<TR>
-									<TD>客户类型</TD>
-									<TD>客户名称</TD>
-									<TD>联系时间</TD>
+								 	<th></th>
+									<TH>客户类型</TH>
+									<TH>客户名称</TH>
+									<TH>联系时间</TH>
 								</TR>
 							</THEAD>
 							<TBODY>
-								<TR>
-									<TD>潜在客户
-									</TD>
-									<TD align="left"><A href="#">云南远信</A></TD>
-									<TD align="left">2014-8-7</TD>
-								</TR>
-								<TR>
-									<TD>潜在客户
-									</TD>
-									<TD align="left"><A href="#">米卡</A></TD>
-									<TD align="left">2014-8-7</TD>
-								</TR>
-								<TR>
-									<TD>潜在客户
-									</TD>
-									<TD align="left"><A href="#">客户3</A></TD>
-									<TD align="left">2014-8-7</TD>
-								</TR>
+								
+							 <#if attentionList?exists>
+											<#list attentionList  as attention>
+												<TR>
+													 <TD><span class="hidden">${attention.companyAO.id!}</span></TD>
+														<TD>${attention.companyAO.type!}</TD>
+														<TD align="left"><A href="#">${attention.companyAO.name!}</A></TD>
+														<TD align="left">${attention.contactDate?string("yyyy-MM-dd")}</TD>
+												</TR>
+											 </#list>
+							</#if>
+								
 							</TBODY>
-						</TABLE>					</DIV>
+						</TABLE>					
+					</DIV>
 				</DIV>
 			</DIV>
 
@@ -261,46 +256,41 @@ $(function () {
 			<DIV class="inner">
 				<DIV class="mydash" id="">
 					<DIV class="header">
-						<div class="header-title"><span><a href="${servePath}/pc/contact">待联系客户 <img alt="我关注的客户" src="${staticServePath}/app/crm/images/select_02.png"></a></span></div>
+						<div class="header-title"><span><a href="${servePath}/pc/todoContactor">待联系客户 <img alt="我关注的客户" src="${staticServePath}/app/crm/images/select_02.png"></a></span></div>
 					</DIV>
 					<DIV style="margin-right: 5px; margin-left: 5px;">
 
-						<TABLE
-							class="table table-bordered table-condensed table-striped table-hover">
+						<TABLE 	class="table table-hover">
 							<THEAD>
 								<TR>
-									<TD>客户类型</TD>
-									<TD>客户名称</TD>
-									<TD>联系时间</TD>
+								 	<th></th>
+									<TH>客户类型</TH>
+									<TH>客户名称</TH>
+									<TH>联系时间</TH>
 								</TR>
 							</THEAD>
 							<TBODY>
-								<TR>
-									<TD>潜在客户
-									</TD>
-									<TD align="left"><A href="#">云南远信</A></TD>
-									<TD align="left">2014-8-7</TD>
-								</TR>
-								<TR>
-									<TD>潜在客户
-									</TD>
-									<TD align="left"><A href="#">米卡</A></TD>
-									<TD align="left">2014-8-7</TD>
-								</TR>
-								<TR>
-									<TD>潜在客户
-									</TD>
-									<TD align="left"><A href="#">客户3</A></TD>
-									<TD align="left">2014-8-7</TD>
-								</TR>
+								
+							 <#if todoContactorList?exists>
+											<#list todoContactorList  as attention>
+												<TR>
+													 <TD><span class="hidden">${attention.companyAO.id!}</span></TD>
+														<TD>${attention.companyAO.type!}</TD>
+														<TD align="left"><A href="#">${attention.companyAO.name!}</A></TD>
+														<TD align="left">${attention.contactDate?string("yyyy-MM-dd")}</TD>
+												</TR>
+											 </#list>
+							</#if>
+								
 							</TBODY>
-						</TABLE>
+						</TABLE>			
 
 					</DIV>
 				</DIV>
 			</DIV>
 			
-			
+			<!-- 块模板 -->
+			<!-- 
 			<DIV class="inner">
 				<DIV class="mydash" id="">
 					<DIV class="header">
@@ -311,10 +301,12 @@ $(function () {
 					</DIV>
 				</DIV>
 			</DIV>
-
+			 -->
 		</DIV>
 	</DIV>
 
 </div>
 
+
+<#include "../common/footer.ftl">
 </@common>

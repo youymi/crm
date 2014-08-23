@@ -2,9 +2,9 @@
 <!--
 
     Description: A generated data access implementation of entity DataDictionary.
-                 Generated at 2014-08-21 17:10:50, do NOT modify!
+                 Generated at 2014-08-23 14:16:29, do NOT modify!
     Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
-    Version: 1.0.0.0, Aug 21, 2014
+    Version: 1.0.0.0, Aug 23, 2014
 
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >

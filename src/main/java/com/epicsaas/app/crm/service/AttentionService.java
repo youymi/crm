@@ -5,7 +5,9 @@
  */
 package com.epicsaas.app.crm.service;
 
+
 import javax.annotation.Resource;
+
 
 import com.epicsaas.app.crm.appobject.AttentionAO;
 import com.epicsaas.app.crm.dao.gen.AttentionGeneratedMapper;
@@ -26,6 +28,5 @@ public class AttentionService extends AbstractBaseAOService<AttentionAO, Attenti
     @Override
     protected BaseGeneratedMapper<AttentionAO, AttentionCriteria> getGeneratedMapper() {
         return attentionGeneratedMapper;
-    }
-
+    		}
 }

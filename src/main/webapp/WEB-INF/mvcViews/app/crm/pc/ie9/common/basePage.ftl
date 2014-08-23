@@ -36,7 +36,8 @@
 			</script>
 	        
 	    </head>
-	    <body class="home" <@block name="body"/>>
+	    <body> 
+	    			<@block name="body"/>
 	        <#nested/>
 	        
 	        <@genJS/>

@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS `t_crm_attention` (
   `id` bigint(20) NOT NULL DEFAULT '0',
   `user_id` bigint(20) DEFAULT NULL,
   `company_id` bigint(20) DEFAULT NULL,
+  `contact_date` datetime DEFAULT NULL COMMENT '需要联系时间',
+  `content` varchar(255) DEFAULT NULL COMMENT '需要联系的内容',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户关注客户表';
 

@@ -1,6 +1,12 @@
+/*
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ * 
+ * All rights reserved.
+ */
 package com.epicsaas.app.crm.appobject;
 
 import java.io.Serializable;
+
 import com.epicsaas.app.crm.entity.gen.TodoContactor;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -25,7 +31,19 @@ public final class TodoContactorAO extends TodoContactor implements Serializable
      * 默认的序列化 id.
      */
     private static final long serialVersionUID = 1L;
+	  /**
+	   * 一条关注信息对应一家公司
+	   */
+private CompanyAO companyAO;
 
+public CompanyAO getCompanyAO() {
+		return companyAO;
+	}
+
+
+	public void setCompanyAO(CompanyAO companyAO) {
+		this.companyAO = companyAO;
+	}
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

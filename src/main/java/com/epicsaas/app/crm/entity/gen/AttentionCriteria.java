@@ -3,6 +3,7 @@ package com.epicsaas.app.crm.entity.gen;
 import com.epicsaas.framework.mybatis.Page;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AttentionCriteria implements Serializable {
@@ -419,6 +420,136 @@ public class AttentionCriteria implements Serializable {
 
         public Criteria andCompanyIdNotBetween(String value1, String value2) {
             addCriterion("company_id not between", value1, value2, "companyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateIsNull() {
+            addCriterion("contact_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateIsNotNull() {
+            addCriterion("contact_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateEqualTo(Date value) {
+            addCriterion("contact_date =", value, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateNotEqualTo(Date value) {
+            addCriterion("contact_date <>", value, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateGreaterThan(Date value) {
+            addCriterion("contact_date >", value, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("contact_date >=", value, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateLessThan(Date value) {
+            addCriterion("contact_date <", value, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateLessThanOrEqualTo(Date value) {
+            addCriterion("contact_date <=", value, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateIn(List<Date> values) {
+            addCriterion("contact_date in", values, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateNotIn(List<Date> values) {
+            addCriterion("contact_date not in", values, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateBetween(Date value1, Date value2) {
+            addCriterion("contact_date between", value1, value2, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactDateNotBetween(Date value1, Date value2) {
+            addCriterion("contact_date not between", value1, value2, "contactDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIsNull() {
+            addCriterion("content is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIsNotNull() {
+            addCriterion("content is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentEqualTo(String value) {
+            addCriterion("content =", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotEqualTo(String value) {
+            addCriterion("content <>", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThan(String value) {
+            addCriterion("content >", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentGreaterThanOrEqualTo(String value) {
+            addCriterion("content >=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThan(String value) {
+            addCriterion("content <", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLessThanOrEqualTo(String value) {
+            addCriterion("content <=", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotLike(String value) {
+            addCriterion("content not like", value, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentIn(List<String> values) {
+            addCriterion("content in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotIn(List<String> values) {
+            addCriterion("content not in", values, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentBetween(String value1, String value2) {
+            addCriterion("content between", value1, value2, "content");
+            return (Criteria) this;
+        }
+
+        public Criteria andContentNotBetween(String value1, String value2) {
+            addCriterion("content not between", value1, value2, "content");
             return (Criteria) this;
         }
     }
