@@ -16,21 +16,34 @@ $(function() {
     $selected_id.click(function(){
         $("#selectedAll").prop("checked",$selected_id.length == $selected_id.filter(":checked").length.length ? true : false);
     });
-
-});
-
-
-$(function() {
+    
     //全选 | 反全选
-   $("#selectedAll2").click(function() { 
-        $('input[name="selected_id2"]').prop("checked",this.checked);
-    });
-    var $selected_id = $("input[name='selected_id2']"); 
-    $selected_id.click(function(){
-        $("#selectedAll2").prop("checked",$selected_id.length == $selected_id.filter(":checked").length.length ? true : false);
-    });
+    $("#selectedAll2").click(function() { 
+         $('input[name="selected_id2"]').prop("checked",this.checked);
+   	  });
+     var $selected_id = $("input[name='selected_id2']"); 
+     $selected_id.click(function(){
+         $("#selectedAll2").prop("checked",$selected_id.length == $selected_id.filter(":checked").length.length ? true : false);
+     	});
 
 });
+
+/**
+ * 删除字典数据
+ */
+function delDictionary(){
+	var CheckCount=0;
+
+	 $('INPUT[type=checkbox][name=selected_id][checked]').each(function(){
+			if($(this).attr("checked")){
+				CheckCount++;
+				var v = $(this);
+				alert(v);
+			}
+		});
+	alert($("INPUT[type=checkbox][name=selected_id][checked]").length);
+
+}
 
 </SCRIPT>
 </@addScript>
@@ -56,7 +69,7 @@ $(function() {
 				<div class="contract-info">
 					<span>客户类型设置</span>
 					<span><A  data-toggle="modal" href="#example"><IMG	title="添加" src="${staticServePath}/app/crm/images/add.png"		border="0"></A> </span>
-					<span><A href="" ><IMG	title="删除" src="${staticServePath}/app/crm/images/del.png"		border="0"> </A> </span>
+					<span><A href="" onclick="delDictionary()" ><IMG	title="删除" src="${staticServePath}/app/crm/images/del.png"		border="0"> </A> </span>
 				</div>
 				
 						<TABLE 	class="table  table-hover">
@@ -73,7 +86,7 @@ $(function() {
 					 <#if dataDictionaryList?exists>
 									<#list dataDictionaryList  as data>
 										<TR id="row_2018">
-											<TD><INPUT name="selected_id"	type="checkbox" value="${data.id!}"></TD>
+											<TD><INPUT name="selected_id"	type="checkbox" value="${data.id!}"/></TD>
 											<TD>${data.name!}</TD>
 											<TD>${data.value!}</TD>
 											<TD>
@@ -165,19 +178,20 @@ $(function() {
 						</THEAD>
 						<TBODY>
 
-							<#if dataDictionaryList?exists> <#list dataDictionaryList as
-							data>
-							<TR id="row_2018">
-								<TD><INPUT name="selected_id2" id="selected_id2"
-									type="checkbox" value="${data.id!}"></TD>
-								<TD>${data.name!}</TD>
-								<TD>${data.value!}</TD>
-								<TD>${data.value!}</TD>
-								<TD><A href=""><I class="cus-pencil"><IMG
-											title="分配" src="${staticServePath}/app/crm/images/pencil.png"
-											border="0"> </I></A></TD>
-							</TR>
-							</#list> </#if>
+							<#if dataDictionaryList?exists>
+							 <#list dataDictionaryList as	data>
+									<TR id="row_2018">
+										<TD><INPUT name="selected_id2" id="selected_id2"
+											type="checkbox" value="${data.id!}"></TD>
+										<TD>${data.name!}</TD>
+										<TD>${data.value!}</TD>
+										<TD>${data.value!}</TD>
+										<TD><A href=""><I class="cus-pencil"><IMG
+													title="分配" src="${staticServePath}/app/crm/images/pencil.png"
+													border="0"> </I></A></TD>
+									</TR>
+							</#list> 
+							</#if>
 
 						</TBODY>
 					</TABLE>
