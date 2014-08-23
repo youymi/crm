@@ -8,10 +8,10 @@
 
 <actions>
     <action>
-        <actionName>CUSTOM-front-component</actionName>
-        <displayName>front-component</displayName>
+        <actionName>CUSTOM-GEN</actionName>
+        <displayName>GEN-component</displayName>
         <goals>
-            <goal>front:component</goal>
+            <goal>gen:gen</goal>
         </goals>
     </action>
 </actions>
