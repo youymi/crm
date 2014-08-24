@@ -88,3 +88,18 @@ background-color: #bdca85;
 .customer-view {
 	cursor: pointer;	 
 }
+
+.orgtreepop {
+	position: absolute;
+	z-index:999;
+	top: 10px;
+	left:30%;
+	width:40%;
+	background-color: #ddd;
+	padding: 10px;
+}
+
+.middle {
+	vertical-align: middle;
+	text-align: center;
+}

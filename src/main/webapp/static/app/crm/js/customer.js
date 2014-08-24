@@ -299,6 +299,34 @@
 		 
 	});
 	
+	//保存操作
+	$(document).on('click', '.j-open-orgtree', function() {
+		 
+		$that = $(this);
+		 $.ajax({
+				url : $that.data("url"),
+				type : 'get',
+				dataType : "json"
+				 
+			}).done(function(data) {
+				if (data && data.succeed) {
+					var setting = {	};
+					$(".toptree.p-relative").append($("<div class='orgtreepop'><div id='treeDemo' class='ztree'></div><div class='middle'><span class='btn btn-primary'>确定</span></div></div>"));
+					
+					$.fn.zTree.init($("#treeDemo"), setting, data.data);
+	
+					alert("保存成功！");
+				}
+				 
+			}).fail(function(jqXHR, error) {
+				alert("出错了...");
+
+			});
+		 
+		 
+	});
+	
+	
 	//删除操作
 	$(document).on('click', '.j-delete', function() {
 		

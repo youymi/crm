@@ -1,10 +1,10 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common"] />
-<@addJS ["/app/crm/js/customer"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/demo","/app/crm/css/zTreeStyle/zTreeStyle"] />
+<@addJS ["/app/crm/js/jquery-1.8.3","/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/customer"] />
 <@common title="客户管理">		 
 	 
 	<div>
-		<div class="customer-form" id="contact-main">
+		<div class="customer-form toptree p-relative" id="contact-main">
 			<table style="width:100%">
 				<tr class="p-relative formcell">
 					 
@@ -47,7 +47,7 @@
 					<td class="w15  ">${(data.type)!}</td>
 					<td class="w15  "> </td>
 					<td class="w15  "></td>
-					<td class="w15  "> 分配 | 关注</td>
+					<td class="w15  "> <span class="j-open-orgtree" data-url="${staticServePath}/orgtree">分配</span> | 关注</td>
 				 
 					</form>
 				</div>	
