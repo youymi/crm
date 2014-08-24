@@ -84,3 +84,7 @@
 padding: 2px;
 background-color: #bdca85;
 }
+
+.customer-view {
+	cursor: pointer;	 
+}

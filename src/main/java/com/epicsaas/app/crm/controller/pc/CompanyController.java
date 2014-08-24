@@ -5,29 +5,36 @@
  */
 package com.epicsaas.app.crm.controller.pc;
 
-import com.epicsaas.app.crm.appobject.CompanyAO;
-import com.epicsaas.app.crm.common.MVCViewName;
-import com.epicsaas.app.crm.entity.gen.ContactCriteria;
-import com.epicsaas.app.crm.entity.gen.ContractCriteria;
-import com.epicsaas.app.crm.service.ICompanyService;
-import com.epicsaas.app.crm.service.IContactService;
-import com.epicsaas.app.crm.service.IContractService;
-import com.epicpaas.sdk.core.api.ServiceResult;
-import com.epicpaas.sdk.core.api.logging.Logger;
-import com.epicpaas.sdk.core.api.logging.LoggerFactory;
+import java.beans.PropertyEditorSupport;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.epicpaas.sdk.core.api.ServiceResult;
+import com.epicpaas.sdk.core.api.logging.Logger;
+import com.epicpaas.sdk.core.api.logging.LoggerFactory;
+import com.epicsaas.app.crm.appobject.CompanyAO;
+import com.epicsaas.app.crm.common.MVCViewName;
+import com.epicsaas.app.crm.entity.gen.CompanyCriteria;
+import com.epicsaas.app.crm.entity.gen.ContactCriteria;
+import com.epicsaas.app.crm.entity.gen.ContractCriteria;
+import com.epicsaas.app.crm.service.ICompanyService;
+import com.epicsaas.app.crm.service.IContactService;
+import com.epicsaas.app.crm.service.IContractService;
 
 /**
  * Main控制器。
@@ -54,6 +61,28 @@ public class CompanyController {
      */
     @Resource
     private IContactService contactService;
+    
+    
+    @InitBinder 
+    public void initBinder(WebDataBinder binder) {   
+    	  binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {  
+    		  public void setAsText(String value) {  
+
+                  try {
+
+			            setValue(new SimpleDateFormat("yyyy-MM-dd").parse(value));
+			
+			          }catch (java.text.ParseException e) {
+			         	 
+			        	  setValue(null);  
+			          }
+                  
+              };
+    		
+    	  });
+
+   
+    }
 
     /**
      * 应用主入口地址
@@ -74,6 +103,27 @@ public class CompanyController {
         model.addAttribute("appName", "客户关系管理");
         return MVCViewName.APP_CRM_PC_IE9_MAIN_INDEX.toString();
     }
+    
+    @RequestMapping(value = "list", method = { RequestMethod.GET, RequestMethod.POST })
+    public String list(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+
+        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
+        LOG.info("SessionId %s", request.getSession().getId());
+        CompanyCriteria c = new CompanyCriteria();
+        c.createCriteria().andIdIsNotNull();
+        
+        ServiceResult<List<CompanyAO>>  ret =  companyService.selectByCriteria(c);
+        
+        if (ret != null && ret.getData() != null) {
+        	model.addAttribute("dataList", ret.getData());
+        }
+        
+        //将当前运用名称传到前端
+        model.addAttribute("appId", "crm");
+        model.addAttribute("appName", "客户关系管理");
+        return MVCViewName.APP_CRM_PC_IE9_CUSTOMER_LIST.toString();
+    }
+
 
     /**
      * 打开表单页面

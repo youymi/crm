@@ -1,0 +1,14 @@
+<div class="p-relative formcell">
+					<form  action="${servePath}/pc/customer/saveContact">
+					<input type="hidden" name="companyId" value="${dataId!}"  class="companyId" >
+					<div class="w5 left"><input type="checkbox" ></div>
+					<div class="w15 left"><input type="text" name="date"   class="editable datepicker" ></div>
+					<div class="w15 left"><input type="text" name="content"  class="editable"></div>
+					<div class="w15 left"><input type="text" name="userName"  class="editable"></div>
+					<div class="w20 left">
+						<span class="modify-icon j-modify hide">编辑</span>
+						<span class="btn-save j-save " data-url="${servePath}/pc/customer/saveActivity">保存</span>
+					</div>
+					<div class="clear-both"></div>
+					</form>
+</div>	

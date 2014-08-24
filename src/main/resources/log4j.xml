@@ -31,6 +31,15 @@
     <logger name="org.springframework">
         <level value="warn" />
     </logger>
+    
+    <logger name="org.apache.ibatis">
+        <level value="DEBUG" />
+    </logger>
+    
+     <logger name="java.sql">
+        <level value="DEBUG" />
+    </logger>
+    
 
     <!-- Root Logger -->
     <root>

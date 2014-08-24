@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.epicpaas.sdk.core.api.ServiceResult;
-import com.epicsaas.api.session.SessionAPI;
+//import com.epicsaas.api.session.SessionAPI;
 import com.epicsaas.api.userbase.UserBaseAPI;
 import com.epicsaas.app.crm.common.CrmConst;
 import com.epicsaas.service.biz.userbase.dto.GroupDTO;
@@ -32,11 +32,11 @@ public class CrmAuthInterceptor extends HandlerInterceptorAdapter {
      */ 
 	public boolean preHandle(HttpServletRequest request,	HttpServletResponse response, Object handler) throws Exception {
 		//判断当前用户的权限
-		UserDTO  user =	SessionAPI.getInstance().getSessionUtil().getUserFromRequest(request);
-		ServiceResult<List<GroupDTO>>  groupListRet = UserBaseAPI.getInstance().getUserQueryService().getGroupListTenant(user.getId(), CrmConst.__APP_ID);
-		if(groupListRet.isSucceed() && !CollectionUtils.isEmpty(groupListRet.getData())){
-			request.setAttribute(CrmConst.__CRM_GROUP, groupListRet.getData());
-		}
+//		UserDTO  user =	SessionAPI.getInstance().getSessionUtil().getUserFromRequest(request);
+//		ServiceResult<List<GroupDTO>>  groupListRet = UserBaseAPI.getInstance().getUserQueryService().getGroupListTenant(user.getId(), CrmConst.__APP_ID);
+//		if(groupListRet.isSucceed() && !CollectionUtils.isEmpty(groupListRet.getData())){
+//			request.setAttribute(CrmConst.__CRM_GROUP, groupListRet.getData());
+//		}
 		return true;
 	}
 	

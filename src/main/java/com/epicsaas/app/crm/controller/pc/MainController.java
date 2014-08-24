@@ -8,7 +8,7 @@ package com.epicsaas.app.crm.controller.pc;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epicsaas.api.session.SessionAPI;
+//import com.epicsaas.api.session.SessionAPI;
 import com.epicsaas.app.crm.appobject.AttentionAO;
 import com.epicsaas.app.crm.appobject.CompanyAO;
 import com.epicsaas.app.crm.appobject.TodoContactorAO;
