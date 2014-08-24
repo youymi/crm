@@ -1,6 +1,6 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common"] />
-<@addJS ["/app/crm/js/customer"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/plugins/jquery-ui"] />
+<@addJS ["/plugins/jquery-ui","/app/crm/js/customer"] />
 <@common title="客户管理">		 
 	<div class="customer-info">客户： ${(data.name)!}</div>
 	<div class="customer-main">

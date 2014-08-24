@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -133,14 +134,19 @@ public class ContractController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/delete/{dataId}", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Object delete(@PathVariable String dataId, Model model, HttpServletRequest request,
+    public Object delete( String ids, Model model, HttpServletRequest request,
             HttpServletResponse response, HttpSession session) {
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
         ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
-        ret = contractService.deleteById(dataId);
+        String idA[] = ids.split(",");
+        for (String id : idA) {
+        	if (StringUtils.isNotBlank(id)) {
+        		 ret = contractService.deleteById(id);
+        	}
+        }
         return ret;
     }
 

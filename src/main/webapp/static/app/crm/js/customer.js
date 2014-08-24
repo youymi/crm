@@ -252,6 +252,18 @@
 
 	});
 	
+	$(document).on('click', '.j-checkbox', function() {
+		//console.log($(this).prop("checked"));
+		if ($(this).prop("checked")) {
+			$("#"+$(this).data("parentid")).find(".checkbox").prop("checked",true);
+		} else {
+			$("#"+$(this).data("parentid")).find(".checkbox").prop("checked",false);
+		}
+		 
+		
+	});
+	
+	
 	
 	//保存操作
 	$(document).on('click', '.j-save', function() {
@@ -284,6 +296,66 @@
 
 			});
 		 
+		 
+	});
+	
+	//删除操作
+	$(document).on('click', '.j-delete', function() {
+		
+		var checkedEle = $("#"+$(this).data("parentid")).find(".checkbox:checked");
+		if (checkedEle.size() == 0) {
+			alert("没有选中记录");
+			return;
+		}
+		$that = $(this);
+		if (confirm("确定删除选中的记录？")) {
+		
+		var ids = "";
+		checkedEle.each(function(index, domEle){
+			var $el  = $(domEle);
+			if ($el.hasClass("j-checkbox")) {
+				return true;
+			}
+			
+			var id = $el.parents("form").find("input[name='id']").val();
+			if (id == null || id == "") {
+				alert("hi");
+				$el.parents(".formcell").remove();
+			} else {
+				//alert(id);
+				ids += ","+id;
+			}
+		});
+		
+		alert(ids);
+		 $.ajax({
+				url : $that.data("url"),
+				type : 'POST',
+				dataType : "json",
+				data : "ids=" + ids
+			}).done(function(data) {
+				if (data && data.data) {
+					
+					checkedEle.each(function(index, domEle){
+						var $el  = $(domEle);
+						if ($el.hasClass("j-checkbox")) {
+							return true;
+						}
+						
+						 
+							$el.parents(".formcell").remove();
+						 
+					});
+					 alert("删除成功！");
+				}
+				 
+			}).fail(function(jqXHR, error) {
+				alert("出错了...");
+
+			});
+		 
+		
+		}
 		 
 	});
 	

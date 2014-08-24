@@ -1,7 +1,8 @@
 <div class="p-relative formcell">
 					<form  action="${servePath}/pc/customer/saveContact">
+					<input type="hidden" name="id" class="id">
 					<input type="hidden" name="companyId" value="${dataId!}"  class="companyId" >
-					<div class="w5 left"><input type="checkbox" ></div>
+					<div class="w5 left"><input type="checkbox" class="checkbox" ></div>
 					<div class="w15 left"><input type="text" name="name"   class="editable" ></div>
 					<div class="w15 left"><input type="text" name="position"  class="editable"></div>
 					<div class="w15 left"><input type="text" name="phone"  class="editable"></div>

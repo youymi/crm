@@ -8,6 +8,7 @@ package com.epicsaas.app.crm.controller.pc;
 import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,9 @@ import com.epicsaas.app.crm.appobject.CompanyAO;
 import com.epicsaas.app.crm.appobject.ContactAO;
 import com.epicsaas.app.crm.appobject.ContractAO;
 import com.epicsaas.app.crm.common.MVCViewName;
+import com.epicsaas.app.crm.entity.gen.ActivityCriteria;
+import com.epicsaas.app.crm.entity.gen.ContactCriteria;
+import com.epicsaas.app.crm.entity.gen.ContractCriteria;
 import com.epicsaas.app.crm.service.IActivityService;
 import com.epicsaas.app.crm.service.ICompanyService;
 import com.epicsaas.app.crm.service.IContactService;
@@ -59,13 +63,25 @@ public class CustomerController {
     private ICompanyService companyService;
     
     @InitBinder 
-    public void initBinder(WebDataBinder binder, WebRequest request) {  
-    	  
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");  
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(df,  
-                        false));  
-  
-    } 
+    public void initBinder(WebDataBinder binder) {   
+    	  binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {  
+    		  public void setAsText(String value) {  
+
+                  try {
+
+			            setValue(new SimpleDateFormat("yyyy-MM-dd").parse(value));
+			
+			          }catch (java.text.ParseException e) {
+			         	 
+			        	  setValue(null);  
+			          }
+                  
+              };
+    		
+    	  });
+
+   
+    }
     
     @RequestMapping(value = "", method = { RequestMethod.GET, RequestMethod.POST })
     public String hello(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -95,6 +111,34 @@ public class CustomerController {
         	
         	model.addAttribute("data", ret.getData());
         }
+        
+        //联系人
+        ContactCriteria cc = new ContactCriteria();
+        cc.createCriteria().andCompanyIdEqualTo(id);
+        ServiceResult<List<ContactAO>>  contactRet = contactService.selectByCriteria(cc);
+        if (contactRet != null && contactRet.getData()!=null) {
+        	model.addAttribute("contactList", contactRet.getData());
+        }
+        
+        //合同
+        ContractCriteria cc2 = new ContractCriteria();
+        cc.createCriteria().andCompanyIdEqualTo(id);
+        ServiceResult<List<ContractAO>>  contractRet = contractService.selectByCriteria(cc2);
+        if (contractRet != null && contractRet.getData()!=null) {
+        	model.addAttribute("contractList", contractRet.getData());
+        }
+        
+        //活动
+        ActivityCriteria ac = new ActivityCriteria();
+        ac.createCriteria().andCompanyIdEqualTo(id);
+        ServiceResult<List<ActivityAO>>  acRet = activityService.selectByCriteria(ac);
+        if (acRet != null && acRet.getData()!=null) {
+        	model.addAttribute("activityList", acRet.getData());
+        }
+        
+        
+
+        
         model.addAttribute("appId", "crm");
         model.addAttribute("appName", "客户关系管理");
         return MVCViewName.APP_CRM_PC_IE9_CUSTOMER_CUSTOMERVIEW.toString();
