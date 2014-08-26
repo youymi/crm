@@ -4,20 +4,30 @@
 <@common title="客户管理">		 
 	 
 	<div>
+		
 		<div class="customer-form toptree p-relative" id="contact-main">
-			<table style="width:100%">
+			<div>
+			<span class="btn customer-btn j-save-customer">新增</span>
+			<span class="btn customer-btn j-clear-customerform">删除</span>
+			<span class="btn customer-btn j-save-customer">分配</span>
+			<span class="btn customer-btn j-save-customer">关注</span>
+			<span class="btn customer-btn j-clear-customerform">导出</span>
+		</div>
+			<table style="width:100%" class="table table-hover">
+				<thead>
 				<tr class="p-relative formcell">
 					 
-					<td class="w5  "><input type="checkbox" ></td>
-					<td class="w15  ">客户编号</td>
-					<td class="w15  ">客户名称</td>
-					<td class="w15  ">客户类型</td>
-					<td class="w15  ">末次联系时间</td>
-					<td class="w15  ">负责销售人员</td>
-					<td class="w15  ">操作</td>
+					<th class="w5  "><input type="checkbox" ></th>
+					<th class="w15  ">客户编号</th>
+					<th class="w15  ">客户名称</th>
+					<th class="w15  ">客户类型</th>
+					<th class="w15  ">末次联系时间</th>
+					<th class="w15  ">负责销售人员</th>
+					<th class="w15  ">操作</th>
 					 
-					</form>
+					 
 				</tr>
+				</thead>
 				
 				<#-- 
 				<div class="p-relative formcell">
