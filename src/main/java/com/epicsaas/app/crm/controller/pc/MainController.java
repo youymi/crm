@@ -6,16 +6,19 @@
 package com.epicsaas.app.crm.controller.pc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+
+
+import java.util.Map;
 
 //import com.epicsaas.api.session.SessionAPI;
 import com.epicsaas.app.crm.appobject.AttentionAO;
-import com.epicsaas.app.crm.appobject.CompanyAO;
 import com.epicsaas.app.crm.appobject.TodoContactorAO;
 import com.epicsaas.app.crm.common.CrmConst;
 import com.epicsaas.app.crm.common.MVCViewName;
 import com.epicsaas.app.crm.entity.gen.AttentionCriteria;
-import com.epicsaas.app.crm.entity.gen.CompanyCriteria;
 import com.epicsaas.app.crm.entity.gen.TodoContactorCriteria;
 import com.epicsaas.app.crm.service.IAttentionService;
 import com.epicsaas.app.crm.service.ICompanyService;
@@ -37,6 +40,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Main控制器。
@@ -155,6 +159,37 @@ public class MainController {
         model.addAttribute("appId", "crm");
         model.addAttribute("appName", "客户关系管理");
         return MVCViewName.APP_CRM_PC_IE9_MAIN_FORM.toString();
+    }
+    
+    
+    
+
+    @RequestMapping(value = "/search", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Object search( HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    	 ServiceResult<List<Object>> ret = new ServiceResult<List<Object>> ();
+        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
+        LOG.info("SessionId %s", request.getSession().getId());
+        String word = request.getParameter("word"); 
+        
+        List<Object> data = new ArrayList<Object>();
+        Map<String, Object> map1 = new HashMap<String, Object>(); 
+        map1.put("word", word + "a1"); 
+        map1.put("view", 10); 
+        Map<String, Object> map2 = new HashMap<String, Object>(); 
+        map2.put("word", word + "a2"); 
+        map2.put("view", 15); 
+        Map<String, Object> map3 = new HashMap<String, Object>(); 
+        map3.put("word", word + "a3"); 
+        map3.put("view", 2); 
+
+        data.add(map1);
+        data.add(map2);
+        data.add(map3);
+        
+        ret.setData(data);
+        
+     return ret;
     }
 
 }
