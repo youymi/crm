@@ -5,6 +5,8 @@
  */
 package com.epicsaas.app.crm.controller.pc;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,17 +15,25 @@ import java.util.List;
 
 import java.util.Map;
 
+
+
+
+
+
 //import com.epicsaas.api.session.SessionAPI;
 import com.epicsaas.app.crm.appobject.AttentionAO;
+import com.epicsaas.app.crm.appobject.CompanyAO;
 import com.epicsaas.app.crm.appobject.TodoContactorAO;
 import com.epicsaas.app.crm.common.CrmConst;
 import com.epicsaas.app.crm.common.MVCViewName;
 import com.epicsaas.app.crm.entity.gen.AttentionCriteria;
+import com.epicsaas.app.crm.entity.gen.CompanyCriteria;
 import com.epicsaas.app.crm.entity.gen.TodoContactorCriteria;
 import com.epicsaas.app.crm.service.IAttentionService;
 import com.epicsaas.app.crm.service.ICompanyService;
 import com.epicsaas.app.crm.service.ITodoContactorService;
 import com.epicsaas.framework.mybatis.Page;
+import com.epicsaas.framework.util.BeanConvertUtils;
 import com.epicsaas.service.biz.userbase.dto.UserDTO;
 import com.epicpaas.sdk.core.api.ServiceResult;
 import com.epicpaas.sdk.core.api.logging.Logger;
@@ -172,23 +182,43 @@ public class MainController {
         LOG.info("SessionId %s", request.getSession().getId());
         String word = request.getParameter("word"); 
         
+//        List<Object> data = new ArrayList<Object>();
+//        Map<String, Object> map1 = new HashMap<String, Object>(); 
+//        map1.put("name", word + "a1"); 
+//        map1.put("id", 0); 
+//        Map<String, Object> map2 = new HashMap<String, Object>(); 
+//        map2.put("name", word + "a2"); 
+//        map2.put("id", 0); 
+//        Map<String, Object> map3 = new HashMap<String, Object>(); 
+//        map3.put("name", word + "a3"); 
+//        map3.put("id", 0); 
+//
+//        data.add(map1);
+//        data.add(map2);
+//        data.add(map3);
+        Page page = new Page();
+        page.setBegin(0);
+        page.setLength(10);
+        
+        CompanyCriteria companyCriteria = new CompanyCriteria();
+        companyCriteria.createCriteria().andNameLike("%".concat(word).concat("%"));
+        companyCriteria.setPage(page);
         List<Object> data = new ArrayList<Object>();
-        Map<String, Object> map1 = new HashMap<String, Object>(); 
-        map1.put("word", word + "a1"); 
-        map1.put("view", 10); 
-        Map<String, Object> map2 = new HashMap<String, Object>(); 
-        map2.put("word", word + "a2"); 
-        map2.put("view", 15); 
-        Map<String, Object> map3 = new HashMap<String, Object>(); 
-        map3.put("word", word + "a3"); 
-        map3.put("view", 2); 
-
-        data.add(map1);
-        data.add(map2);
-        data.add(map3);
         
-        ret.setData(data);
+        ServiceResult<List<CompanyAO>> companyListRet = companyService.selectByCriteria(companyCriteria);
+		     if(companyListRet.isSucceed() && !CollectionUtils.isEmpty(companyListRet.getData())){
+		    	 for(CompanyAO  companyAO :companyListRet.getData()){
+		    		 	try {
+		    		 		Map	map =	BeanConvertUtils.convertBean(companyAO);
+		    		 		data.add(map);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+		    	 		}
+		     		}
         
+     ret.setData(data);
+     ret.setMsg("搜索成功"); 
      return ret;
     }
 
