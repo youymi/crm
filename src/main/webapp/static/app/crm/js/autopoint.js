@@ -10,13 +10,15 @@
 	$.fn.autopoint = function(options) {
 		defaults = {
 			url : options.url,
+			openurl : options.openurl,
 			keyLeft : 37,// 向左方向键
 			keyUp : 38,// 向上方向键
 			keyRight : 39,// 向右方向键
 			keyDown : 40,// 向下方向键
 			keyEnter : 13,// 回车键
 			listHoverCSS : 'jhover',// 提示框列表鼠标悬浮的样式
-			tpl : '<div class="list"><div class="word">{word}</div><div class="view">约{view}条记录</div></div>',
+			//tpl : '<div class="list"><div class="word">{word}</div><div class="view">约{view}条记录</div></div>',
+			tpl : '<div class="list"><div class="word">{name}</div><div class="hidden">{id}</div></div>',
 			topoffset : options.topoffset || 5
 		};
 		var options = $.extend(defaults, options);
@@ -162,9 +164,11 @@
 								unHoverAll();
 								$(this).addClass(options.listHoverCSS);
 							}).unbind('click').click(function() {
-								parent.val(getPointWord($(this)));
-								dropDiv.empty().hide();
-								parent.focus();
+								//alert(options.openurl+getPointHideWord($(this)));
+								 window.open(options.openurl+getPointHideWord($(this)),"_self");
+//								parent.val(getPointWord($(this)));
+//								dropDiv.empty().hide();
+//								parent.focus();
 							});
 						});
 					}
@@ -176,8 +180,18 @@
 					}
 					/**在提示框中取得当前选中的提示关键字**/
 					getPointWord = function(p) {
+						//alert(p.find('div.hidden').text());
+						//var v = p.find('div.hidden');
 						return p.find('div:first').text()
 					}
+					
+					/**在提示框中取得当前选中的提示关键字**/
+					getPointHideWord = function(p) {
+						//alert(p.find('div.hidden').text());
+						//var v = p.find('div.hidden');
+						return p.find('div:hidden').text()
+					}
+					
 					/**刷新提示框,并设定样式**/
 					refreshDropDiv = function(parent, json) {
 						var left = parent.offset().left;
