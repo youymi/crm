@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -212,6 +213,32 @@ public class CompanyController {
 
         //删除公司信息
         ret = companyService.deleteById(dataId);
+        return ret;
+    }
+    
+    /**
+     * 删除公司信息 （系统管理员才有权限操作）
+     * @param dataId 业务数据ID
+     * @param model
+     * @param request
+     * @param response
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Object delete(String ids, Model model, HttpServletRequest request,
+            HttpServletResponse response) {
+        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
+        LOG.info("SessionId %s", request.getSession().getId());
+        ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
+        String idA[] = ids.split(",");
+        for (String id : idA) {
+        	if (StringUtils.isNotBlank(id)) {
+        		 ret = companyService.deleteById(id);
+        	}
+        }
+       
         return ret;
     }
 

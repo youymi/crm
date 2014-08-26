@@ -344,10 +344,16 @@
 			if ($el.hasClass("j-checkbox")) {
 				return true;
 			}
+			var id = $el.data("id");
 			
-			var id = $el.parents("form").find("input[name='id']").val();
+			if (id != null && id != "") {
+				ids += ","+id;
+				return true;
+			}
+			
+			id = $el.parents("form").find("input[name='id']").val();
 			if (id == null || id == "") {
-				alert("hi");
+				//alert("hi");
 				$el.parents(".formcell").remove();
 			} else {
 				//alert(id);
