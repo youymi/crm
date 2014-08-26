@@ -2,7 +2,11 @@
 <@addCSS ["/app/crm/css/index","/app/crm/css/style"] />
 <@addJS [""] />
 
-
+<style>
+td{
+cursor:pointer
+}
+</style>
 	
 <@addScript>
 <SCRIPT language="JavaScript" type="text/javascript">
@@ -16,6 +20,17 @@ $(function() {
     $selected_id.click(function(){
         $("#selectedAll").prop("checked",$selected_id.length == $selected_id.filter(":checked").length.length ? true : false);
     });
+    
+
+
+    var openURL = "${servePath}/pc/customer/view?id=";
+
+    $('table tr td:not(:first-child,:last-child)').bind("click",function(){
+     	//alert($(this).html())
+     var id =	$(this).parent().find('INPUT[name="selected_id"]').val();
+     //alert(id);
+     window.open(openURL+id,"_self")
+     });
 
 });
 

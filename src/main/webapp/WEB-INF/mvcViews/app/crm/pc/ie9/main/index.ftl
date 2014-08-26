@@ -168,10 +168,21 @@ $(function () {
     });
 });
 
+var openURL = "${servePath}/pc/customer/view?id=";
 
 $(function(){ 
-	　　$("#searchinput").autopoint({url:'${servePath}/pc/main/search'}); 
+	　　$("#searchinput").autopoint({
+		url:'${servePath}/pc/main/search',
+		openurl:openURL
+		}); 
 	}); 
+	
+$("tr").bind("click",function(){
+	//alert($(this).html())
+var id =	$(this).children('td').eq(0).text();
+//alert(id);
+window.open(openURL+id,"_self")
+});
 	
 </script>
 </@addScript>
