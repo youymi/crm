@@ -1,9 +1,30 @@
 <#include "../common/basePage.ftl">
 <@addCSS ["/app/crm/css/index",""] />
-<@addJS [""] />
+<@addJS ["/app/crm/js/autopoint"] />
 
 <style type="text/css">
-
+.dropDiv { 
+position: absolute; 
+z-index: 10; 
+display: none; 
+cursor: hand; 
+} 
+.dropDiv .jhover { 
+background-color: #F3F3F3; 
+} 
+.dropDiv .list { 
+float:left; 
+width:100%; 
+} 
+.dropDiv .word { 
+float:left; 
+} 
+.dropDiv .view { 
+float:right; 
+color: gray; 
+text-align: right; 
+font-size: 10pt; 
+} 
 </style>
 	
 <@addScript>
@@ -146,6 +167,12 @@ $(function () {
         }]
     });
 });
+
+
+$(function(){ 
+	　　$("#searchinput").autopoint({url:'${servePath}/pc/main/search'}); 
+	}); 
+	
 </script>
 </@addScript>
 
@@ -170,7 +197,7 @@ $(function () {
 				<form class="form-horizontal" role="form">
 				  <div class="form-group has-success has-feedback">
 				    <div class="col-sm-6" style="margin-left:28%">
-				      <input type="text" class="form-control" id="inputSuccess3" style="float: left;width: 80%">
+				      <input type="text" class="form-control" id="searchinput" style="float: left;width: 80%">
 				      <button class="btn" onclick="callSearch('Basic');" type="button" style="float: left;border: 0px;height: 36px;margin:-1px 0 0 -3px;"><i class="icon-search"></i>&nbsp;搜索</button>
 				    </div>
 				  </div>
