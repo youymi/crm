@@ -7,17 +7,18 @@
 		
 		<div class="customer-form toptree p-relative" id="contact-main">
 			<div>
-			<span class="btn customer-btn j-save-customer">新增</span>
-			<span class="btn customer-btn j-clear-customerform">删除</span>
+			<span class="btn customer-btn" onclick="window.open('${servePath}/pc/customer')">新增</span>
+			<span class="btn customer-btn j-delete" data-parentid="customer-list" data-url="${servePath}/pc/company/delete" >删除</span>
 			<span class="btn customer-btn j-save-customer">分配</span>
 			<span class="btn customer-btn j-save-customer">关注</span>
 			<span class="btn customer-btn j-clear-customerform">导出</span>
 		</div>
-			<table style="width:100%" class="table table-hover">
+		<div style="margin-top:10px;" id="customer-list">
+			<table style="width:100%" class="table table-bordered table-striped">
 				<thead>
 				<tr class="p-relative formcell">
 					 
-					<th class="w5  "><input type="checkbox" ></th>
+					<th class="w5  "><input type="checkbox" class="checkbox j-checkbox" data-parentid="customer-list" ></th>
 					<th class="w15  ">客户编号</th>
 					<th class="w15  ">客户名称</th>
 					<th class="w15  ">客户类型</th>
@@ -49,9 +50,9 @@
 			
 			
 		 	<#list dataList as data>
-		 	<tr >
+		 	<tr class="formcell">
 			
-					<td class="w5  "></td>
+					<td class="w5  "> <input type="checkbox" class="checkbox" data-id="${(data.id)!}"></td>
 					<td class="w15  ">${(data.code)!}</td>
 					<td class="w15 customer-view " onclick="window.open('${servePath}/pc/customer/view?id=${(data.id)!}')">${(data.name)!}</td>
 					<td class="w15  ">${(data.type)!}</td>
@@ -63,7 +64,9 @@
 				</div>	
 		</tr>
 		</#list> 
-		<table>	
+		<table>
+		</div>
+			
 		</div>	
 		
 	</div>

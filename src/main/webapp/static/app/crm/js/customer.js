@@ -299,6 +299,13 @@
 		 
 	});
 	
+	
+	
+	$(document).on('click', '.j-cancel-orgtree', function() {
+		$(this).parents(".orgtreepop").remove();
+	});
+	
+	
 	//保存操作
 	$(document).on('click', '.j-open-orgtree', function() {
 		 
@@ -311,11 +318,11 @@
 			}).done(function(data) {
 				if (data && data.succeed) {
 					var setting = {	};
-					$(".toptree.p-relative").append($("<div class='orgtreepop'><div id='treeDemo' class='ztree'></div><div class='middle'><span class='btn btn-primary'>确定</span></div></div>"));
+					$(".toptree.p-relative").append($("<div class='orgtreepop'><div id='treeDemo' class='ztree'></div><div class='middle'><span class='btn btn-primary'>确定</span> &nbsp;<span class='btn btn-primary j-cancel-orgtree'>取消</span></div></div>"));
 					
 					$.fn.zTree.init($("#treeDemo"), setting, data.data);
 	
-					alert("保存成功！");
+					//alert("保存成功！");
 				}
 				 
 			}).fail(function(jqXHR, error) {
@@ -344,10 +351,16 @@
 			if ($el.hasClass("j-checkbox")) {
 				return true;
 			}
+			var id = $el.data("id");
 			
-			var id = $el.parents("form").find("input[name='id']").val();
+			if (id != null && id != "") {
+				ids += ","+id;
+				return true;
+			}
+			
+			id = $el.parents("form").find("input[name='id']").val();
 			if (id == null || id == "") {
-				alert("hi");
+				//alert("hi");
 				$el.parents(".formcell").remove();
 			} else {
 				//alert(id);
@@ -370,8 +383,7 @@
 							return true;
 						}
 						
-						 
-							$el.parents(".formcell").remove();
+						$el.parents(".formcell").remove();
 						 
 					});
 					 alert("删除成功！");
