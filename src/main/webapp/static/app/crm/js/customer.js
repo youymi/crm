@@ -1,5 +1,6 @@
 !function($) {
 	
+	window.currentZtreeObj = null;
 	
 	var  handleAjax = function(data) {
 		if (data.succeed) {
@@ -318,10 +319,30 @@
 			}).done(function(data) {
 				if (data && data.succeed) {
 					var setting = {	};
-					$(".toptree.p-relative").append($("<div class='orgtreepop'><div id='treeDemo' class='ztree'></div><div class='middle'><span class='btn btn-primary'>确定</span> &nbsp;<span class='btn btn-primary j-cancel-orgtree'>取消</span></div></div>"));
+					$(".toptree.p-relative").append($("<div class='orgtreepop'><div id='treeDemo' class='ztree'></div><div class='middle'><span class='btn btn-primary j-tree-confirm'>确定</span> &nbsp;<span class='btn btn-primary j-cancel-orgtree'>取消</span></div></div>"));
 					
-					$.fn.zTree.init($("#treeDemo"), setting, data.data);
-	
+					currentZtreeObj = $.fn.zTree.init($("#treeDemo"), setting, data.data);
+					$("#treeDemo").find(".j-tree-confirm").on("click", function(){
+						var nodes = currentZtreeObj.getCheckedNodes(true);
+						if (nodes.length == 0) {
+							alert("请选择节点");
+							return false;
+						}
+						var id = $that.data("id");
+						if( id != null && id != "") {
+							 $.ajax({
+									url : $that.data("posturl"),
+									type : 'post',
+									dataType : "json",
+									data : "ids="+id
+								}).done(function(data) {
+									if (data && data.succeed) {
+										alert("成功了");
+									}
+								});
+						} 
+					});
+					
 					//alert("保存成功！");
 				}
 				 
