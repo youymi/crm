@@ -58,7 +58,7 @@
 					<td class="w15  ">${(data.type)!}</td>
 					<td class="w15  "> </td>
 					<td class="w15  "></td>
-					<td class="w15  "> <span class="j-open-orgtree" data-url="${staticServePath}/orgtree">分配</span> | 关注</td>
+					<td class="w15  "> <span class="j-open-orgtree" id="${(data.id)!}" data-posturl="${servePath}/pc/company/assign" data-url="${staticServePath}/orgtree">分配</span> | 关注</td>
 				 
 					</form>
 				</div>	
