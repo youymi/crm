@@ -322,22 +322,39 @@
 					$(".toptree.p-relative").append($("<div class='orgtreepop'><div id='treeDemo' class='ztree'></div><div class='middle'><span class='btn btn-primary j-tree-confirm'>确定</span> &nbsp;<span class='btn btn-primary j-cancel-orgtree'>取消</span></div></div>"));
 					
 					currentZtreeObj = $.fn.zTree.init($("#treeDemo"), setting, data.data);
-					$("#treeDemo").find(".j-tree-confirm").on("click", function(){
-						var nodes = currentZtreeObj.getCheckedNodes(true);
+					//console.log($("#treeDemo").find(".j-tree-confirm"));
+					$(".orgtreepop").find(".j-tree-confirm").on("click", function(){
+						var nodes = currentZtreeObj.getSelectedNodes();
 						if (nodes.length == 0) {
 							alert("请选择节点");
 							return false;
 						}
+						var desIds =  "";
+						var destNames = "";
+						$.each(nodes,function(index,n){
+							console.log(n);
+							if (desIds == "") {
+								desIds += n.id;
+								destNames += n.name;
+								return false;
+							}
+							desIds += "," + n.id;
+							destNames +=  "," + n.name;
+						});
+						
+						console.log(desIds);
+						
 						var id = $that.data("id");
 						if( id != null && id != "") {
 							 $.ajax({
 									url : $that.data("posturl"),
 									type : 'post',
 									dataType : "json",
-									data : "ids="+id
+									data : "ids="+id+"&destId="+desIds+"&destName="+destNames
 								}).done(function(data) {
 									if (data && data.succeed) {
 										alert("成功了");
+										$(".j-cancel-orgtree").trigger("click");
 									}
 								});
 						} 
@@ -460,7 +477,10 @@
 	
 	$(function(){
 		initDatepicker();
-		$( ".datepicker" ).datepicker();
+		if ($( ".datepicker" ).size() > 0) {
+			$( ".datepicker" ).datepicker();
+		}
+		
 	});
 	
 	

@@ -241,5 +241,17 @@ public class CompanyController {
        
         return ret;
     }
+    
+    
+    @RequestMapping(value = "/assign", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Object assign(String ids, String destName, String destId,Model model, HttpServletRequest request,
+            HttpServletResponse response) {
+        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
+        LOG.info("SessionId %s", request.getSession().getId());
+        ServiceResult<Boolean> ret =  companyService.assign(ids, destId, destName);
+       
+        return ret;
+    }
 
 }
