@@ -1,0 +1,140 @@
+#j-menu li.selected a{
+	/*color:red;*/
+}
+
+.require {
+	color:red;
+}
+
+form{
+	/*margin-top:15px*/;
+	overflow:auto;
+}
+
+.panel-wrap {
+	padding: 15px !important;
+}
+
+.mtp10 {
+	margin:15px 0px 10px 0px;
+}
+
+.pointer {
+	cursor : pointer;
+}
+
+.fill{
+	width:100%;
+}
+.list_container{
+	margin: 0px 15px;
+	padding:0px;
+	overflow: hidden;
+}
+.appContainer{
+	text-align:center;
+	float:left;
+	margin-top:10px;
+	margin-bottom:15px;
+}
+
+.appContainer img{
+    width:114px;
+    height:114px;
+}
+
+.appContainer div{
+	padding-left:10px;
+	text-align:left;
+}
+
+.app_info {
+	margin-top: 10px;
+}
+
+.app_info input {
+	margin-right: 5px;
+}
+
+.datebar{
+	margin-left:20px;
+}
+
+.datebar input,button {
+	margin-left:20px;
+}
+
+.date_input {
+	height: 28px !important;
+}
+
+.appremove {
+	float:right; 
+	margin-right:10px;
+}
+
+#j-tenant-form.col-sm-8, #j-user-form.col-sm-8 {
+	width: 100%;
+}
+.panel-body {
+	width: 70%;
+	margin: 0px auto;
+}
+.panel-body-2 {
+	width: 100%;
+}
+.mgr_selectList .panel-body {
+	width: 100%;
+}
+.panel_body_tree {
+	margin: 0px;
+}
+#j-tenant-form .form-control {
+	
+}
+
+.mgr_selectList {
+	width: 320px;
+	float: left;
+}
+
+.mgr_selectList_btn {
+	wdtih: 60px;
+	float: left;
+	margin: 0px 40px;
+}
+.tou_bar {
+	background: #d9edf7;
+	height: 45px;
+	width: 922px !important;
+	margin:0px 0px 10px 15px !important;
+	padding-top:5px;
+	
+	/*filter:alpha(Opacity=50);
+	-moz-opacity:0.5;
+	opacity: 0.5;*/
+}
+.tou_bar_2 {
+	margin-left: 0px !important;
+	width: 100% !important;
+}
+.tou_bar_mgr {
+	margin-top: 10px !important;
+}
+.mgr_row {
+	width: 780px;
+	margin: 0 auto;
+}
+
+
+.btn-custom-wrap {
+	text-align: center;
+}
+.btn-custom {
+	width: 120px;
+	margin-left: 0px;
+	
+}
+.j-modify-logo {
+	margin-left: 0px;
+}
