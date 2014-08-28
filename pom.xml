@@ -60,12 +60,14 @@
     </distributionManagement>
 
     <repositories>
+    	<!--  
     	<repository>
 			<id>oschina</id>    	
 			<name>oschina</name>
 			<layout>default</layout>
 			<url>http://maven.oschina.net/content/groups/public/</url>
     	</repository>
+    	-->
     </repositories>
     
    		 <dependencies>
