@@ -1,9 +1,17 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/plugins/jquery-ui","/app/crm/css/index","/app/crm/css/cmxform"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/plugins/jquery-ui","/app/crm/css/index","/app/crm/css/cmxform","/app/crm/css/style"] />
 <@addJS ["/plugins/jquery-ui","/app/crm/js/jquery-validate","/app/crm/js/validate-meta","/app/crm/js/customer"] />
 <@common title="客户管理">		 
  
- <#include "../common/header.ftl">
+<div class="saaswrapper">
+	<DIV class="content" >
+	
+<#include "../common/header.ftl">
+	<DIV class="container-fluid" style="margin-top: 12px">
+	
+	         <!-- 底部蓝色线条 -->
+			<DIV style="padding-top: 5px; margin-top: 2px; margin-bottom: 5px; border-top-color: rgb(0, 136, 204); border-top-width: 2px; border-top-style: solid;">
+			</DIV>
  
 <div class="content-body">
 	<div class="customer-info">客户：</div>
@@ -105,4 +113,8 @@
 	</div>
 	
 </div>	
+
+</DIV>
+</DIV>
+</div>
 </@common>

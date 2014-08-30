@@ -1,19 +1,28 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/demo","/app/crm/css/zTreeStyle/zTreeStyle","/app/crm/css/index"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/demo","/app/crm/css/zTreeStyle/zTreeStyle","/app/crm/css/index","/app/crm/css/style"] />
 <@addJS ["/app/crm/js/jquery-1.8.3","/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/customer"] />
 <@common title="客户管理">		 
 
-<#include "../common/header.ftl">	 
-	<div class="content-body">
+
+<div class="saaswrapper">
+	<DIV class="content" >
+	
+<#include "../common/header.ftl">
+	<DIV class="container-fluid" style="margin-top: 12px">
+	
+	         <!-- 底部蓝色线条 -->
+			<DIV style="padding-top: 5px; margin-top: 2px; margin-bottom: 5px; border-top-color: rgb(0, 136, 204); border-top-width: 2px; border-top-style: solid;">
+			</DIV>
+
 		
 		<div class="customer-form toptree p-relative" id="contact-main">
-			<div>
-			<span class="btn customer-btn" onclick="window.open('${servePath}/pc/customer')">新增</span>
-			<span class="btn customer-btn j-delete" data-parentid="customer-list" data-url="${servePath}/pc/company/delete" >删除</span>
-			<span class="btn customer-btn j-open-orgtree" data-mainid="customer-list"  data-posturl="${servePath}/pc/company/assign" data-url="${staticServePath}/orgtree">分配</span>
-			<span class="btn customer-btn j-atten " data-mainid="customer-list" data-url="${servePath}/pc/attention/atten">关注</span>
-			<span class="btn customer-btn j-clear-customerform">导出</span>
-		</div>
+				<div>
+				<span class="btn customer-btn" onclick="window.open('${servePath}/pc/customer')">新增</span>
+				<span class="btn customer-btn j-delete" data-parentid="customer-list" data-url="${servePath}/pc/company/delete" >删除</span>
+				<span class="btn customer-btn j-open-orgtree" data-mainid="customer-list"  data-posturl="${servePath}/pc/company/assign" data-url="${staticServePath}/orgtree">分配</span>
+				<span class="btn customer-btn j-atten " data-mainid="customer-list" data-url="${servePath}/pc/attention/atten">关注</span>
+				<span class="btn customer-btn j-clear-customerform">导出</span>
+			</div>
 		<div style="margin-top:10px;" id="customer-list">
 			<table style="width:100%" class="table table-bordered table-striped">
 				<thead>
@@ -65,12 +74,13 @@
 				</div>	
 		</tr>
 		</#list> 
-		<table>
+		</table>
 		</div>
 			
 		</div>	
 		
-		</div>
 	</div>
-	
+	</DIV>
+
+</div>
 </@common>
