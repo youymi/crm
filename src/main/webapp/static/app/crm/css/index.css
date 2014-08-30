@@ -23,6 +23,15 @@ body{
     float: left;
 }
 
+.table{
+	font-size: 12px;
+}
+
+.table>thead>tr>th {
+  vertical-align: bottom; 
+	border-bottom: 0px solid #ddd;
+}
+
 
 /**
  * 搜索

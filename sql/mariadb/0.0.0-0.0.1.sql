@@ -61,6 +61,7 @@ CREATE TABLE `t_crm_company` (
   `staffs` int(10) DEFAULT NULL COMMENT '职工数',
   `user_id` varchar(50) DEFAULT NULL,
   `user_name` varchar(50) DEFAULT NULL COMMENT '负责销售人员',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户的公司信息';
 
@@ -77,6 +78,7 @@ CREATE TABLE `t_crm_contact` (
   `email` varchar(50) DEFAULT NULL COMMENT '客户公司联系人邮件',
   `remark` varchar(255) DEFAULT NULL COMMENT '客户公司联系人说明',
   `level` char(1) DEFAULT NULL COMMENT '客户公司联系人级别',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户公司联系人';
 
