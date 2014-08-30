@@ -307,7 +307,10 @@
 	});
 	
 	
-	//保存操作
+	
+	
+	
+	//选人 操作
 	$(document).on('click', '.j-open-orgtree', function() {
 		 
 		$that = $(this);
@@ -428,7 +431,7 @@
 			}
 		});
 		
-		alert(ids);
+		//alert(ids);
 		 $.ajax({
 				url : $that.data("url"),
 				type : 'POST',
@@ -447,6 +450,77 @@
 						 
 					});
 					 alert("删除成功！");
+				}
+				 
+			}).fail(function(jqXHR, error) {
+				alert("出错了...");
+
+			});
+		 
+		
+		}
+		 
+	});
+	
+	
+	
+	//关注
+	$(document).on('click', '.j-atten', function() {
+		
+		var checkedEle = $("#"+$(this).data("mainid")).find(".checkbox:checked");
+		if (checkedEle.size() == 0) {
+			alert("没有选中记录");
+			return;
+		}
+		$that = $(this);
+		if (confirm("确定关注选中的记录？")) {
+		
+		var ids = "";
+		checkedEle.each(function(index, domEle){
+			var $el  = $(domEle);
+			if ($el.hasClass("j-checkbox")) {
+				return true;
+			}
+			var id = $el.data("id");
+			
+			if (id != null && id != "") {
+				if (ids == ""){
+					ids = id;
+				} else {
+				ids += ","+id;
+				}
+				return true;
+			}
+			
+			id = $el.parents("form").find("input[name='id']").val();
+			if (id == null || id == "") {
+				//alert("hi");
+				$el.parents(".formcell").remove();
+			} else {
+				//alert(id);
+				ids += ","+id;
+			}
+		});
+		
+		alert(ids);
+		 $.ajax({
+				url : $that.data("url"),
+				type : 'POST',
+				dataType : "json",
+				data : "ids=" + ids
+			}).done(function(data) {
+				if (data && data.data) {
+					
+//					checkedEle.each(function(index, domEle){
+//						var $el  = $(domEle);
+//						if ($el.hasClass("j-checkbox")) {
+//							return true;
+//						}
+//						
+//						$el.parents(".formcell").remove();
+//						 
+//					});
+					 alert("成功啦！");
 				}
 				 
 			}).fail(function(jqXHR, error) {

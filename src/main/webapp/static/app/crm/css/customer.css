@@ -103,3 +103,10 @@ background-color: #bdca85;
 	vertical-align: middle;
 	text-align: center;
 }
+
+.content-body {
+	margin-top: 10px;
+	clear: both;
+	position: relative;
+top: 20px;
+}

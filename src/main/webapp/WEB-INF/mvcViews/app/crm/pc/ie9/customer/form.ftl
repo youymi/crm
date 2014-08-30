@@ -1,8 +1,11 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/plugins/jquery-ui"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/plugins/jquery-ui","/app/crm/css/index"] />
 <@addJS ["/plugins/jquery-ui","/app/crm/js/customer"] />
 <@common title="客户管理">		 
  
+ <#include "../common/header.ftl">
+ 
+<div class="content-body">
 	<div class="customer-info">客户：</div>
 	<div class="customer-main">
 	
@@ -95,4 +98,5 @@
 		
 	</div>
 	
+</div>	
 </@common>

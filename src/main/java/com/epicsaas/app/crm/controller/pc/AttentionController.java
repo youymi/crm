@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 
@@ -202,5 +203,17 @@ public class AttentionController {
 
 		return ret;
 	}
+	
+	 @RequestMapping(value = "/atten", method = { RequestMethod.GET, RequestMethod.POST })
+	    @ResponseBody
+	    public Object atten(String ids, String destName, String destId,Model model, HttpServletRequest request,
+	            HttpServletResponse response) {
+	        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
+	        LOG.info("SessionId %s", request.getSession().getId());
+	        ServiceResult<Boolean> ret =  attentionService.attens("1",ids);
+	       
+	        return ret;
+	    }
+	 
 
 }
