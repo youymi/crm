@@ -21,17 +21,23 @@ import java.util.Set;
 
 
 
+
+
+
 // import com.epicsaas.api.session.SessionAPI;
 import com.epicsaas.app.crm.appobject.AttentionAO;
 import com.epicsaas.app.crm.appobject.CompanyAO;
+import com.epicsaas.app.crm.appobject.ContractAO;
 import com.epicsaas.app.crm.appobject.TodoContactorAO;
 import com.epicsaas.app.crm.common.CrmConst;
 import com.epicsaas.app.crm.common.MVCViewName;
 import com.epicsaas.app.crm.entity.gen.AttentionCriteria;
 import com.epicsaas.app.crm.entity.gen.CompanyCriteria;
+import com.epicsaas.app.crm.entity.gen.ContractCriteria;
 import com.epicsaas.app.crm.entity.gen.TodoContactorCriteria;
 import com.epicsaas.app.crm.service.IAttentionService;
 import com.epicsaas.app.crm.service.ICompanyService;
+import com.epicsaas.app.crm.service.IContractService;
 import com.epicsaas.app.crm.service.ITodoContactorService;
 import com.epicsaas.framework.mybatis.Page;
 import com.epicsaas.framework.util.BeanConvertUtils;
@@ -72,6 +78,9 @@ public class MainController {
 
     @Resource
     private ICompanyService companyService;
+    
+    @Resource
+    private IContractService contractService;
 
     /**
      * 应用主入口地址
@@ -191,7 +200,14 @@ public class MainController {
         
         
         //销售精英榜
-        
+   ContractCriteria contractCriteria = new ContractCriteria();
+   //contractCriteria.createCriteria().andSignDateGreaterThanOrEqualTo(new Date(2014, 1, 1));
+   contractCriteria.setPage(page);
+   contractCriteria.setOrderByClause("money desc");
+   ServiceResult<List<ContractAO>> contractListRet= contractService.selectByCriteria(contractCriteria);
+	 if(contractListRet.isSucceed() && !CollectionUtils.isEmpty(contractListRet.getData())){
+		 model.addAttribute("contractList", contractListRet.getData());
+	 }
         
 
    return MVCViewName.APP_CRM_PC_IE9_MAIN_INDEX.toString();

@@ -297,13 +297,13 @@ window.open(openURL+id,"_self")
 							</THEAD>
 							<TBODY>
 								
-							 <#if attentionList?exists>
-											<#list attentionList  as attention>
+							 <#if contractList?exists>
+											<#list contractList  as data>
 												<TR>
-													 <TD><span class="hidden">${attention.companyAO.id!}</span></TD>
-														<TD>${attention.companyAO.type!}</TD>
-														<TD align="left"><A href="#">${attention.companyAO.name!}</A></TD>
-														<TD align="left">${attention.contactDate?string("yyyy-MM-dd")}</TD>
+													 <TD><span class="hidden">${data.id!}</span></TD>
+														<TD>${data.userName!}</TD>
+														<TD><A href="#">${data.money!}</A></TD>
+														<TD>${data_index+1}</TD>
 												</TR>
 											 </#list>
 							</#if>
