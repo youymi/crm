@@ -170,7 +170,13 @@
 	
 	//保存客户
 	$(document).on('click', '.j-save-customer', function() {
-
+		
+			var validator = $(".j-customer-form").validate();
+			var isOk = validator.form();
+			if (isOk == false) {
+				return ;
+			}
+			
 			$.ajax({
 				url : webCfg.servePath + '/pc/company/saveCustomer',
 				type : 'POST',
@@ -204,6 +210,19 @@
 		$(".j-customer-form").find("input").val("");
 		 
 	});
+	
+	//编辑客户类型
+	$(document).on('click', '.j-edit-customertype', function() {
+		$that = $(this);
+		$modal = $('#'+$that.data("modal"));
+		$modal.find("input[name='id']").val($that.data("id"));
+		$modal.find("input[name='name']").val($that.data("name"));
+		console.log($that.data("desc"));
+		$modal.find("textarea[name='value']").val($that.data("desc"));
+		$modal.modal();
+		 
+	});
+	
 	
 	
 	var readOnly = function($this){
@@ -322,12 +341,27 @@
 			}).done(function(data) {
 				if (data && data.succeed) {
 					var setting = {	};
+					var check = {};
+					if ($that.data("checked")) {
+						check.enable = true;
+						setting.check = check;
+					}
+					
 					$(".toptree.p-relative").append($("<div class='orgtreepop'><div id='treeDemo' class='ztree'></div><div class='middle'><span class='btn btn-primary j-tree-confirm'>确定</span> &nbsp;<span class='btn btn-primary j-cancel-orgtree'>取消</span></div></div>"));
 					
 					currentZtreeObj = $.fn.zTree.init($("#treeDemo"), setting, data.data);
 					//console.log($("#treeDemo").find(".j-tree-confirm"));
 					$(".orgtreepop").find(".j-tree-confirm").on("click", function(){
-						var nodes = currentZtreeObj.getSelectedNodes();
+						
+						if ($that.data("checked")) {
+							var nodes = currentZtreeObj.getCheckedNodes(true);
+							
+						}else {
+							var nodes = currentZtreeObj.getSelectedNodes();
+						}
+						
+						
+						
 						if (nodes.length == 0) {
 							alert("请选择节点");
 							return false;
@@ -336,10 +370,15 @@
 						var destNames = "";
 						$.each(nodes,function(index,n){
 							//console.log(n);
+							if(n.dataType=="00") {
+								//alert("非叶子节点");
+								return true;
+							}
+							
 							if (desIds == "") {
 								desIds += n.id;
 								destNames += n.name;
-								return false;
+								return true;
 							}
 							desIds += "," + n.id;
 							destNames +=  "," + n.name;
@@ -366,8 +405,8 @@
 							});
 						}
 						
-						console.log(id);
-						
+//						console.log(id);
+//						console.log(desIds);
 						 $.ajax({
 								url : $that.data("posturl"),
 								type : 'post',

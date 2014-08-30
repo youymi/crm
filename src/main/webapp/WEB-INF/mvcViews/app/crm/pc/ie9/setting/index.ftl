@@ -1,7 +1,7 @@
 <#include "../common/basePage.ftl">
 <@addCSS ["/app/crm/css/index","/app/crm/css/style"] />
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common"] />
-<@addJS ["/app/crm/js/customer"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/demo","/app/crm/css/zTreeStyle/zTreeStyle"] />
+<@addJS ["/app/crm/js/jquery-1.8.3","/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/customer"] />
 
 
 <@addScript>
@@ -65,17 +65,17 @@ function delDictionary(){
 			</DIV>
 			
 			
-		<div class="contract-main">
+		<div id="customer-type-main" class="contract-main">
 				<div class="contract-info">
 					<span>客户类型设置</span>
 					<span><A  data-toggle="modal" href="#example"><IMG	title="添加" src="${staticServePath}/app/crm/images/add.png"		border="0"></A> </span>
-					<span><A href="" onclick="delDictionary()" ><IMG	title="删除" src="${staticServePath}/app/crm/images/del.png"		border="0"> </A> </span>
+					<span><A href="" class="j-delete"  data-parentid="customer-type-main" data-url="${servePath}/pc/setting/deleteCustomerType" ><IMG	title="删除" src="${staticServePath}/app/crm/images/del.png"	 	border="0"> </A> </span>
 				</div>
 				
 						<TABLE 	class="table  table-hover">
 							<THEAD>
 								<TR>
-								 	<th><INPUT name="selectedAll"	id="selectedAll" type="checkbox"></th>
+								 	<th><INPUT name="selectedAll"	id="selectedAll" type="checkbox" class="j-checkbox"></th>
 									<TH>类型名称</TH>
 									<TH>类型说明</TH>
 									<TH>操作</TH>
@@ -85,12 +85,12 @@ function delDictionary(){
 								
 					 <#if dataDictionaryList?exists>
 									<#list dataDictionaryList  as data>
-										<TR id="row_2018">
-											<TD><INPUT name="selected_id"	type="checkbox" value="${data.id!}"/></TD>
+										<TR id="row_2018" class="formcell">
+											<TD><INPUT name="selected_id"	type="checkbox" class="checkbox"  data-id="${data.id!}" value="${data.id!}"/></TD>
 											<TD>${data.name!}</TD>
 											<TD>${data.value!}</TD>
 											<TD>
-												<A href="" ><I class="cus-pencil"><IMG	title="分配" src="${staticServePath}/app/crm/images/pencil.png"		border="0"> </I></A> 
+												<a href="#" class="j-edit-customertype" data-id="${data.id!}" data-modal="edit-customer-type" data-name="${data.name!}" data-desc="${data.value!}"><I class="cus-pencil"><IMG	title="分配" src="${staticServePath}/app/crm/images/pencil.png"		border="0"> </I></a> 
 											</TD>
 										</TR>
 									 </#list>
@@ -107,7 +107,7 @@ function delDictionary(){
 										<span>客户类型设置</span>
 									</div>
 									<div class="modal-body">
-										<form  onsubmit="return checkDataDictionary()" action="${servePath}/pc/setting/saveDataDictionary" method="post" accept-charset="utf-8" class="form-horizontal" role="form">	
+										<form  onsubmit="return checkDataDictionary(this)" action="${servePath}/pc/setting/saveDataDictionary" method="post" accept-charset="utf-8" class="form-horizontal" role="form">	
 											 <div class="form-group">
 											    <label for="inputEmail3" class="col-sm-2 control-label">类型名称</label>
 											    <div class="col-sm-10">
@@ -132,9 +132,10 @@ function delDictionary(){
 							</div>
 				</div>
 <script type="text/javascript">
-	function checkDataDictionary(){
-		var name = $('#dname').val();
-		var value = $('#dvalue').val();
+	function checkDataDictionary(form){
+	
+		var name = $(form).find('#dname').val();
+		var value =$(form).find$('#dvalue').val();
 		
 	    if("" == name && ""==value){
 	    				alert("类型名称和类型说明不能为空");
@@ -159,7 +160,7 @@ function delDictionary(){
 
 
 
-				<div class="contract-main">
+				<div  class=" contract-main  toptree p-relative " >
 					<div class="contract-info">
 						<span>人员权限设置</span>
 					</div>
@@ -186,7 +187,7 @@ function delDictionary(){
 										<TD>${data.name!}</TD>
 										<TD>${data.value!}</TD>
 										<TD>${data.value!}</TD>
-										<TD><A href=""><I class="cus-pencil"><IMG
+										<TD><A class="j-open-orgtree" data-id="${data.id!}" data-mainid="customer-list"  data-posturl="${servePath}/pc/setting/roleAssign" data-url="${staticServePath}/orgtree" data-checked="true" ><I class="cus-pencil"><IMG
 													title="分配" src="${staticServePath}/app/crm/images/pencil.png"
 													border="0"> </I></A></TD>
 									</TR>
@@ -202,5 +203,5 @@ function delDictionary(){
 
 		</DIV>
 </div>
-
+<#include "modal.ftl"/>
 </@common>

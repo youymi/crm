@@ -1,6 +1,6 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/plugins/jquery-ui","/app/crm/css/index"] />
-<@addJS ["/plugins/jquery-ui","/app/crm/js/customer"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/plugins/jquery-ui","/app/crm/css/index","/app/crm/css/cmxform"] />
+<@addJS ["/plugins/jquery-ui","/app/crm/js/jquery-validate","/app/crm/js/validate-meta","/app/crm/js/customer"] />
 <@common title="客户管理">		 
  
  <#include "../common/header.ftl">
@@ -21,7 +21,7 @@
 				<div class="p-relative formcell">
 					<div class="formcell-title left">客户编号</div>
 					<div class="formcell-cell left"><input type="text" name="code" /></div>
-					<div class="formcell-title left"><span class="required">*</span>客户类型</div>
+					<div class="formcell-title left"><span class="required-lab">*</span>客户类型</div>
 					<div class="formcell-cell left">
 						<select type="text" name="type">
 							<option value="潜在客户">潜在客户</option>
@@ -31,34 +31,40 @@
 				</div>
 				
 				<div class="p-relative formcell">
-					<div class="formcell-title left"><span class="required">*</span>客户名称</div>
-					<div class="formcell-cell1 left"><input type="text" name="name" /></div>
+					<div class="formcell-title left"><span class="required-lab">*</span>客户名称</div>
+					<div class="formcell-cell1 left"><input type="text" name="name" required /></div>
 					 
 					<div class="clear-both"></div>
 				</div>
 				
 				<div class="p-relative formcell">
-					<div class="formcell-title left"><span class="required">*</span>区域</div>
+					<div class="formcell-title left"><span class="required required-lab">*</span>区域</div>
 					<div class="formcell-cell left">
+					<input type="text" name="regin" required />
+						<#--
 						<select type="text" name="regin">
 							<option value="北京">北京</option>
 						</select>
+						-->
 					</div>
-					<div class="formcell-title left"><span class="required">*</span>行业</div>
+					<div class="formcell-title left"><span class="required required-lab">*</span>行业</div>
 					<div class="formcell-cell left">
+						<input type="text" name="trade" required/>
+						<#--
 						<select type="text" name="customerNO">
 							<option value="dd">潜在客户</option>
 						</select>
+						-->
 					</div>
 					<div class="clear-both"></div>
 				</div>
 				
 				<div class="p-relative formcell">
-					<div class="formcell-title left"><span class="required">*</span>电话</div>
+					<div class="formcell-title left"><span class="required required-lab" required>*</span>电话</div>
 					<div class="formcell-cell left"><input type="text" name="phone" /></div>
 					
-					 <div class="formcell-title left"><span class="required">*</span>传真</div>
-					<div class="formcell-cell left"><input type="text" name="fax" /></div>
+					 <div class="formcell-title left"><span class="required required-lab" required>*</span>传真</div>
+					<div class="formcell-cell left"><input type="text" name="fax" required /></div>
 					<div class="clear-both"></div>
 				</div>
 				
