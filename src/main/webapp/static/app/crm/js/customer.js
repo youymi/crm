@@ -332,7 +332,7 @@
 						var desIds =  "";
 						var destNames = "";
 						$.each(nodes,function(index,n){
-							console.log(n);
+							//console.log(n);
 							if (desIds == "") {
 								desIds += n.id;
 								destNames += n.name;
@@ -342,22 +342,44 @@
 							destNames +=  "," + n.name;
 						});
 						
-						console.log(desIds);
+						//console.log(desIds);
 						
 						var id = $that.data("id");
 						if( id != null && id != "") {
-							 $.ajax({
-									url : $that.data("posturl"),
-									type : 'post',
-									dataType : "json",
-									data : "ids="+id+"&destId="+desIds+"&destName="+destNames
-								}).done(function(data) {
-									if (data && data.succeed) {
-										alert("成功了");
-										$(".j-cancel-orgtree").trigger("click");
-									}
-								});
-						} 
+							
+						} else {
+							id = "";
+							$("#"+$that.data("mainid")).find(".checkbox:checked").each(function(){
+								if ($(this).hasClass("j-checkbox")){
+									return true;
+								}
+									
+								if(id=="") {
+									id = $(this).data("id");
+								} else {
+									id += ","+$(this).data("id");
+								}
+								
+							});
+						}
+						
+						console.log(id);
+						
+						 $.ajax({
+								url : $that.data("posturl"),
+								type : 'post',
+								dataType : "json",
+								data : "ids="+id+"&destId="+desIds+"&destName="+destNames
+							}).done(function(data) {
+								if (data && data.succeed) {
+									alert("成功了");
+									$(".j-cancel-orgtree").trigger("click");
+									location.reload();
+								}
+							});
+						
+						
+						
 					});
 					
 					//alert("保存成功！");

@@ -9,8 +9,8 @@
 			<div>
 			<span class="btn customer-btn" onclick="window.open('${servePath}/pc/customer')">新增</span>
 			<span class="btn customer-btn j-delete" data-parentid="customer-list" data-url="${servePath}/pc/company/delete" >删除</span>
-			<span class="btn customer-btn j-save-customer">分配</span>
-			<span class="btn customer-btn j-save-customer">关注</span>
+			<span class="btn customer-btn j-open-orgtree" data-mainid="customer-list"  data-posturl="${servePath}/pc/company/assign" data-url="${staticServePath}/orgtree">分配</span>
+			<span class="btn customer-btn " >关注</span>
 			<span class="btn customer-btn j-clear-customerform">导出</span>
 		</div>
 		<div style="margin-top:10px;" id="customer-list">
@@ -33,7 +33,7 @@
 				<#-- 
 				<div class="p-relative formcell">
 					<form  action="${servePath}/pc/customer/saveContact">
-					<div class="w5 left"><input type="checkbox" ></div>
+					<div class="w5 left"><input type="checkbox" class="checkbox"  data-id="" ></div>
 					<div class="w15 left"><input type="text" name="name"   class="readonly" readonly></div>
 					<div class="w15 left"><input type="text" name="position"   class="readonly" readonly></div>
 					<div class="w15 left"><input type="text" name="phone"   class="readonly" readonly></div>

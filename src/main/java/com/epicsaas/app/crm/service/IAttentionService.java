@@ -5,6 +5,7 @@
  */
 package com.epicsaas.app.crm.service;
 
+import com.epicpaas.sdk.core.api.ServiceResult;
 import com.epicsaas.common.service.base.IBaseAOService;
 import com.epicsaas.app.crm.appobject.AttentionAO;
 import com.epicsaas.app.crm.entity.gen.AttentionCriteria;
@@ -14,5 +15,5 @@ import com.epicsaas.app.crm.entity.gen.AttentionCriteria;
 * @author ghg
  */
 public interface IAttentionService extends IBaseAOService<AttentionAO, AttentionCriteria> {
-	
+	public ServiceResult<Boolean> attens(String userId, String customerIds);
 }

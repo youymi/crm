@@ -6,14 +6,21 @@
 package com.epicsaas.app.crm.service;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.lucene.util.CollectionUtil;
+import org.springframework.util.CollectionUtils;
 
 import com.epicsaas.app.crm.appobject.AttentionAO;
+import com.epicsaas.app.crm.appobject.CompanyAO;
 import com.epicsaas.app.crm.dao.gen.AttentionGeneratedMapper;
 import com.epicsaas.app.crm.entity.gen.AttentionCriteria;
 import com.epicsaas.common.dao.base.BaseGeneratedMapper;
 import com.epicsaas.common.service.base.AbstractBaseAOService;
+import com.epicpaas.sdk.core.api.ServiceResult;
 import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 
@@ -29,4 +36,31 @@ public class AttentionService extends AbstractBaseAOService<AttentionAO, Attenti
     protected BaseGeneratedMapper<AttentionAO, AttentionCriteria> getGeneratedMapper() {
         return attentionGeneratedMapper;
     		}
+
+	@Override
+	public ServiceResult<Boolean> attens(String userId, String customerIds) {
+		
+		
+		if(StringUtils.isNotBlank(customerIds)) {
+			String[] arrayId = customerIds.split(",");
+			
+			 
+			if (arrayId.length > 0) {
+				List<String> ids = CollectionUtils.arrayToList(arrayId);
+				AttentionCriteria ac = new AttentionCriteria();
+				ac.createCriteria().andUserIdEqualTo(userId).andCompanyIdIn(ids);
+				attentionGeneratedMapper.deleteByCriteria(ac);
+				
+				for (String id : arrayId) {
+					AttentionAO ao = new AttentionAO();
+					ao.setCompanyId(id);
+					ao.setUserId(userId);
+					attentionGeneratedMapper.insert(ao);
+					 
+				}
+			}
+		}
+		return new ServiceResult<Boolean>(true);
+	}
+		 
 }
