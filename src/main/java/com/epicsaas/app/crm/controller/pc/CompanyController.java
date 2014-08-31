@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.epicpaas.sdk.core.api.ServiceResult;
 import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
+import com.epicsaas.api.userbase.UserBaseAPI;
 import com.epicsaas.app.crm.appobject.CompanyAO;
 import com.epicsaas.app.crm.common.MVCViewName;
 import com.epicsaas.app.crm.entity.gen.CompanyCriteria;
@@ -36,6 +38,7 @@ import com.epicsaas.app.crm.entity.gen.ContractCriteria;
 import com.epicsaas.app.crm.service.ICompanyService;
 import com.epicsaas.app.crm.service.IContactService;
 import com.epicsaas.app.crm.service.IContractService;
+import com.epicsaas.service.biz.userbase.dto.GroupDTO;
 
 /**
  * Main控制器。
@@ -110,8 +113,20 @@ public class CompanyController {
 
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
+        
+        ServiceResult<List<GroupDTO>> gl =UserBaseAPI.getInstance().getUserQueryService().getGroupList("userId");
+        
+        
         CompanyCriteria c = new CompanyCriteria();
-        c.createCriteria().andIdIsNotNull();
+        CompanyCriteria.Criteria  cc = c.createCriteria();
+        cc.andIdIsNotNull();
+        if(gl != null && !CollectionUtils.isEmpty(gl.getData())) {
+        	List<GroupDTO> gs = gl.getData();
+        	for(GroupDTO g : gs) {
+        		LOG.error("group name: $", g.getName());
+        	}
+        	model.addAttribute("group", "hi");
+        }
         
         ServiceResult<List<CompanyAO>>  ret =  companyService.selectByCriteria(c);
         

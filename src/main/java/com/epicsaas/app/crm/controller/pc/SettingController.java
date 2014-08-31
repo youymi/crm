@@ -109,6 +109,8 @@ public class SettingController {
 			        IGroupService groupService = UserBaseAPI.getInstance().getGroupService();
 			        ServiceResult<Boolean> ret = groupService.addUser2Group(ids, destId.split(","));
 			        
+			       
+			        
 			        return ret;
 			    }
 }
