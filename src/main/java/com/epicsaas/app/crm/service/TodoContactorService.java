@@ -7,6 +7,8 @@ package com.epicsaas.app.crm.service;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.epicsaas.app.crm.appobject.TodoContactorAO;
 import com.epicsaas.app.crm.dao.gen.TodoContactorGeneratedMapper;
 import com.epicsaas.app.crm.entity.gen.TodoContactorCriteria;
@@ -15,6 +17,7 @@ import com.epicsaas.common.service.base.AbstractBaseAOService;
 import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 
+@Service
 public class TodoContactorService extends AbstractBaseAOService<TodoContactorAO, TodoContactorCriteria> implements
         ITodoContactorService {
 
