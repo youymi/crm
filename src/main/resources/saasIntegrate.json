@@ -3,7 +3,7 @@
         "客户关系管理应用主页": "/crm/pc/main"
     },
     "widgetUrl": {
-        "客户关系管理应用部件1": "/crm/pc/widget"
+        "客户关系管理": "/crm/pc/widget"
     },
     "quickUrl": {
         "客户关系管理起草": "/crm/pc/open",
@@ -17,9 +17,9 @@
         "data_type2": "/crm/pc/open2"
     },
     "iconUrl": {
-        "iconSmall": "/crm/static/icon/app_40_40.png",
-        "iconMiddle": "/crm/static/icon/app_120_120.png",
-        "iconBig": "/crm/static/icon/app_320_320.png"
+        "iconSmall": "/crm/static/icon/42_42.png",
+        "iconMiddle": "/crm/static/icon/57_57.png",
+        "iconBig": "/crm/static/icon/114_114.png"
     },
     "flowgroup": {
         "groupCode1": "群组名称",
