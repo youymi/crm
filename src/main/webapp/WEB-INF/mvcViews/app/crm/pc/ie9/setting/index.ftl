@@ -179,15 +179,15 @@ function delDictionary(){
 						</THEAD>
 						<TBODY>
 
-							<#if dataDictionaryList?exists>
-							 <#list dataDictionaryList as	data>
+							<#if groups?exists && (groups?size > 0)  >
+							 <#list groups as	data>
 									<TR id="row_2018">
 										<TD><INPUT name="selected_id2" id="selected_id2"
-											type="checkbox" value="${data.id!}"></TD>
-										<TD>${data.name!}</TD>
-										<TD>${data.value!}</TD>
-										<TD>${data.value!}</TD>
-										<TD><A class="j-open-orgtree" data-id="${data.id!}" data-mainid="customer-list"  data-posturl="${servePath}/pc/setting/roleAssign" data-url="${staticServePath}/orgtree" data-checked="true" ><I class="cus-pencil"><IMG
+											type="checkbox" value="${(data.group.id)!}"></TD>
+										<TD>${data.group.name!}</TD>
+										<TD>${(data.names)!}</TD>
+									 
+										<TD><A class="j-open-orgtree" data-id="${data.group.id!}" data-mainid="customer-list"  data-posturl="${servePath}/pc/setting/roleAssign" data-url="${staticServePath}/orgtree" data-checked="true" ><I class="cus-pencil"><IMG
 													title="分配" src="${staticServePath}/app/crm/images/pencil.png"
 													border="0"> </I></A></TD>
 									</TR>
