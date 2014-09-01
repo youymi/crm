@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.util.CollectionUtil;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.epicsaas.app.crm.appobject.AttentionAO;
@@ -23,6 +24,7 @@ import com.epicpaas.sdk.core.api.ServiceResult;
 import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 
+@Service
 public class AttentionService extends AbstractBaseAOService<AttentionAO, AttentionCriteria> implements
         IAttentionService {
 

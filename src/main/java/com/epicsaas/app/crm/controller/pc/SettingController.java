@@ -5,6 +5,7 @@
  */
 package com.epicsaas.app.crm.controller.pc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -76,6 +77,7 @@ public class SettingController {
         ServiceResult<List<GroupDTO>> gl = UserBaseAPI.getInstance().getGroupQueryService().selectByCriteria(gc);
         	if (gl  != null && !CollectionUtils.isEmpty(gl.getData())) {
         		List<GroupDTO> groupList = gl.getData();
+        		List<GroupDispAO> groups = new ArrayList<>();
         		for (GroupDTO g: groupList) {
         			GroupDispAO ga = new GroupDispAO();
         			ga.setGroup(g);
@@ -90,9 +92,10 @@ public class SettingController {
 	        				}
 	        			}
 	        			ga.setNames(names);
+	        			groups.add(ga);
         			}
         		}
-        		model.addAttribute("groups", gl.getData());
+        		model.addAttribute("groups", groups);
         	}
         
         return MVCViewName.APP_CRM_PC_IE9_SETTING_INDEX.toString();
@@ -131,9 +134,20 @@ public class SettingController {
             HttpServletResponse response) {
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
-
-        //ServiceResult<Boolean> ret =  companyService.assign(ids, destId, destName);
+        UserDTO u = sessionUtil.getUserFromRequest(request);
         IGroupService groupService = UserBaseAPI.getInstance().getGroupService();
+        //ServiceResult<Boolean> ret =  companyService.assign(ids, destId, destName);
+			ServiceResult<List<UserDTO>> users = UserBaseAPI.getInstance().getUserQueryService().getUserListByOrgIdAndGroupIds(u.getOrgId(), ids);
+			if (users != null && !CollectionUtils.isEmpty(users.getData())) {
+				List<String> userIds = new ArrayList<String>();
+				for (UserDTO user : users.getData()) {
+					userIds.add(user.getId());
+				}
+				groupService.removeUserFromGroup(ids, userIds.toArray(new String[0]));
+			}
+       
+        	
+        
         ServiceResult<Boolean> ret = groupService.addUser2Group(ids, destId.split(","));
 
         return ret;

@@ -171,7 +171,7 @@ function delDictionary(){
 								<th><INPUT name="selectedAll2" id="selectedAll2"
 									type="checkbox"></th>
 								<TH>人员角色</TH>
-								<TH>可操作功能</TH>
+								 
 								<TH>角色下人员</TH>
 								<TH>操作
 								<TH>
@@ -184,7 +184,7 @@ function delDictionary(){
 									<TR id="row_2018">
 										<TD><INPUT name="selected_id2" id="selected_id2"
 											type="checkbox" value="${(data.group.id)!}"></TD>
-										<TD>${data.group.name!}</TD>
+										<TD>${(data.group.name)!}</TD>
 										<TD>${(data.names)!}</TD>
 									 
 										<TD><A class="j-open-orgtree" data-id="${data.group.id!}" data-mainid="customer-list"  data-posturl="${servePath}/pc/setting/roleAssign" data-url="${staticServePath}/orgtree" data-checked="true" ><I class="cus-pencil"><IMG
