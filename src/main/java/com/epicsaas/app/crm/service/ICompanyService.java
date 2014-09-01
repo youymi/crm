@@ -11,5 +11,6 @@ import com.epicsaas.app.crm.appobject.CompanyAO;
 import com.epicsaas.app.crm.entity.gen.CompanyCriteria;
 
 public interface ICompanyService extends IBaseAOService<CompanyAO, CompanyCriteria> {
-	public ServiceResult<Boolean> assign(String ids, String destId,String destName);
+
+    public ServiceResult<Boolean> assign(String ids, String destId, String destName);
 }

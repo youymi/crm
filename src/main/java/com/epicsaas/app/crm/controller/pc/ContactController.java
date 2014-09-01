@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ *
+ * All rights reserved.
+ */
 package com.epicsaas.app.crm.controller.pc;
 
 import javax.annotation.Resource;
@@ -22,7 +27,6 @@ import com.epicsaas.app.crm.common.MVCViewName;
 import com.epicsaas.app.crm.service.IContactService;
 
 import freemarker.template.utility.StringUtil;
-
 
 /**
  * Main控制器。
@@ -134,18 +138,18 @@ public class ContactController {
      */
     @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Object delete(String ids, Model model, HttpServletRequest request,
-            HttpServletResponse response, HttpSession session) {
+    public Object delete(String ids, Model model, HttpServletRequest request, HttpServletResponse response,
+            HttpSession session) {
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
         ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
         String idA[] = ids.split(",");
         for (String id : idA) {
-        	if (StringUtils.isNotBlank(id)) {
-        		 ret = contactService.deleteById(id);
-        	}
+            if (StringUtils.isNotBlank(id)) {
+                ret = contactService.deleteById(id);
+            }
         }
-       
+
         return ret;
     }
 

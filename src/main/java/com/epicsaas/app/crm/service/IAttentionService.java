@@ -12,8 +12,9 @@ import com.epicsaas.app.crm.entity.gen.AttentionCriteria;
 
 /**
  * 我关注的
-* @author ghg
+ * @author ghg
  */
 public interface IAttentionService extends IBaseAOService<AttentionAO, AttentionCriteria> {
-	public ServiceResult<Boolean> attens(String userId, String customerIds);
+
+    public ServiceResult<Boolean> attens(String userId, String customerIds);
 }

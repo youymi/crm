@@ -136,16 +136,16 @@ public class ContractController {
      */
     @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
-    public Object delete( String ids, Model model, HttpServletRequest request,
-            HttpServletResponse response, HttpSession session) {
+    public Object delete(String ids, Model model, HttpServletRequest request, HttpServletResponse response,
+            HttpSession session) {
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
         ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
         String idA[] = ids.split(",");
         for (String id : idA) {
-        	if (StringUtils.isNotBlank(id)) {
-        		 ret = contractService.deleteById(id);
-        	}
+            if (StringUtils.isNotBlank(id)) {
+                ret = contractService.deleteById(id);
+            }
         }
         return ret;
     }

@@ -17,13 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
-
-
-
-
-
-
 // import com.epicsaas.api.session.SessionAPI;
 import com.epicsaas.app.crm.appobject.AttentionAO;
 import com.epicsaas.app.crm.appobject.CompanyAO;
@@ -78,7 +71,7 @@ public class MainController {
 
     @Resource
     private ICompanyService companyService;
-    
+
     @Resource
     private IContractService contractService;
 
@@ -124,7 +117,7 @@ public class MainController {
         //待联系客户
         TodoContactorCriteria todoContactorCriteria = new TodoContactorCriteria();
         todoContactorCriteria.createCriteria().andUserIdEqualTo(user.getId());
-        todoContactorCriteria.setOrderByClause("contact_date desc"); 
+        todoContactorCriteria.setOrderByClause("contact_date desc");
         todoContactorCriteria.setPage(page);
 
         ServiceResult<List<TodoContactorAO>> todoContactorListRet = todoContactorService
@@ -135,111 +128,102 @@ public class MainController {
             }
             model.addAttribute("todoContactorList", todoContactorListRet.getData());
         }
-        
 
-        
         //当前客户占比 ---客户增长趋势
         //全部客户数量
-   int count =  0;
-   		//有多少客户类型
-   Set<String> type  = new HashSet<String>();
-   Map<String,Double> mapData = new HashMap<String, Double>();
-   Map<String,List<Map<String,Integer>> > mapData2 = new HashMap<String, List<Map<String,Integer>>>();
-	 String end =	DateTimeUtils.formateDateToStr(new Date(), DateTimeUtils.FORMAT_YMD);
-   List<String> months = getMonthList(7, end);
-   
-   
-   CompanyCriteria companyCriteria = new CompanyCriteria();
-   companyCriteria.createCriteria().andIdIsNotNull();
-   companyCriteria.setOrderByClause("create_date desc");  //创建时间到序
-   ServiceResult<List<CompanyAO>> companyListRet =  companyService.selectByCriteria(companyCriteria);
-   if(companyListRet.isSucceed() && !CollectionUtils.isEmpty(companyListRet.getData())){
-	   	count = companyListRet.getData().size();
-	     for(CompanyAO company :companyListRet.getData() ){
-	    	 type.add(company.getType());	    	 
-	     		}
+        int count = 0;
+        //有多少客户类型
+        Set<String> type = new HashSet<String>();
+        Map<String, Double> mapData = new HashMap<String, Double>();
+        Map<String, List<Map<String, Integer>>> mapData2 = new HashMap<String, List<Map<String, Integer>>>();
+        String end = DateTimeUtils.formateDateToStr(new Date(), DateTimeUtils.FORMAT_YMD);
+        List<String> months = getMonthList(7, end);
 
+        CompanyCriteria companyCriteria = new CompanyCriteria();
+        companyCriteria.createCriteria().andIdIsNotNull();
+        companyCriteria.setOrderByClause("create_date desc"); //创建时间到序
+        ServiceResult<List<CompanyAO>> companyListRet = companyService.selectByCriteria(companyCriteria);
+        if (companyListRet.isSucceed() && !CollectionUtils.isEmpty(companyListRet.getData())) {
+            count = companyListRet.getData().size();
+            for (CompanyAO company : companyListRet.getData()) {
+                type.add(company.getType());
+            }
 
-	     
-	     for(String s : type){
-	    	 		List<CompanyAO> tmpList = new ArrayList<CompanyAO>();
-	    	 		for(CompanyAO company :companyListRet.getData() ){
-	    	 				if(s.equals(company.getType())){
-	    	 					tmpList.add(company);
-	    	 					}
-		    	 		}    	 
-	    	 		mapData.put(s, tmpList.size()* 100.0/count);
-	    	 		
-	 				//月份段
-	    	 		List<Map<String,Integer>>  listTmp = new ArrayList<Map<String,Integer>> ();
-	 			for(String m :months){
-	    	 		Map<String,Integer> tmpMap = new HashMap<String, Integer>();
-	    	 		 int tmpCount = 0; 
-	    	 		 Date startDate = DateTimeUtils.parseStrToDate(m.concat("-01"), DateTimeUtils.FORMAT_YMD);
-	    	 		 Date endDate = DateTimeUtils.parseStrToDate(m.concat("-31"), DateTimeUtils.FORMAT_YMD);
-	 					for(CompanyAO company :tmpList){
-//	 						int t = DateTimeUtils.compareDate(company.getCreateDate(), startDate);
-//	 						 t = DateTimeUtils.compareDate(company.getCreateDate(), endDate);
-//	 						System.out.println(t);
-	 						if(DateTimeUtils.compareDate(company.getCreateDate(), startDate)>=0 && DateTimeUtils.compareDate(company.getCreateDate(), endDate)<=0 ){
-	 							tmpCount +=1;
-	 						}
-	 					}
-	 					tmpMap.put(m, tmpCount);
-	 					listTmp.add(tmpMap);
-	 				}
-	    	 	mapData2.put(s, listTmp);
-	     		}
+            for (String s : type) {
+                List<CompanyAO> tmpList = new ArrayList<CompanyAO>();
+                for (CompanyAO company : companyListRet.getData()) {
+                    if (s.equals(company.getType())) {
+                        tmpList.add(company);
+                    }
+                }
+                mapData.put(s, tmpList.size() * 100.0 / count);
+
+                //月份段
+                List<Map<String, Integer>> listTmp = new ArrayList<Map<String, Integer>>();
+                for (String m : months) {
+                    Map<String, Integer> tmpMap = new HashMap<String, Integer>();
+                    int tmpCount = 0;
+                    Date startDate = DateTimeUtils.parseStrToDate(m.concat("-01"), DateTimeUtils.FORMAT_YMD);
+                    Date endDate = DateTimeUtils.parseStrToDate(m.concat("-31"), DateTimeUtils.FORMAT_YMD);
+                    for (CompanyAO company : tmpList) {
+                        //	 						int t = DateTimeUtils.compareDate(company.getCreateDate(), startDate);
+                        //	 						 t = DateTimeUtils.compareDate(company.getCreateDate(), endDate);
+                        //	 						System.out.println(t);
+                        if (DateTimeUtils.compareDate(company.getCreateDate(), startDate) >= 0
+                                && DateTimeUtils.compareDate(company.getCreateDate(), endDate) <= 0) {
+                            tmpCount += 1;
+                        }
+                    }
+                    tmpMap.put(m, tmpCount);
+                    listTmp.add(tmpMap);
+                }
+                mapData2.put(s, listTmp);
+            }
         }
-   
-   model.addAttribute("countData", count);
-   model.addAttribute("months", months);
-   model.addAttribute("mapData", mapData);
-   model.addAttribute("mapData2", mapData2);
-        
-        
-        
+
+        model.addAttribute("countData", count);
+        model.addAttribute("months", months);
+        model.addAttribute("mapData", mapData);
+        model.addAttribute("mapData2", mapData2);
+
         //销售精英榜
-   ContractCriteria contractCriteria = new ContractCriteria();
-   //contractCriteria.createCriteria().andSignDateGreaterThanOrEqualTo(new Date(2014, 1, 1));
-   contractCriteria.setPage(page);
-   contractCriteria.setOrderByClause("money desc");
-   ServiceResult<List<ContractAO>> contractListRet= contractService.selectByCriteria(contractCriteria);
-	 if(contractListRet.isSucceed() && !CollectionUtils.isEmpty(contractListRet.getData())){
-		 model.addAttribute("contractList", contractListRet.getData());
-	 }
-        
+        ContractCriteria contractCriteria = new ContractCriteria();
+        //contractCriteria.createCriteria().andSignDateGreaterThanOrEqualTo(new Date(2014, 1, 1));
+        contractCriteria.setPage(page);
+        contractCriteria.setOrderByClause("money desc");
+        ServiceResult<List<ContractAO>> contractListRet = contractService.selectByCriteria(contractCriteria);
+        if (contractListRet.isSucceed() && !CollectionUtils.isEmpty(contractListRet.getData())) {
+            model.addAttribute("contractList", contractListRet.getData());
+        }
 
-   return MVCViewName.APP_CRM_PC_IE9_MAIN_INDEX.toString();
+        return MVCViewName.APP_CRM_PC_IE9_MAIN_INDEX.toString();
     }
-    
-    
-	public List<String> getMonthList(int count, String endTime) {
-//		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-//		SimpleDateFormat monthFormat = new SimpleDateFormat("yyyy-MM");
-		List<String> monthList = new ArrayList<String>();
 
+    public List<String> getMonthList(int count, String endTime) {
+        //		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        //		SimpleDateFormat monthFormat = new SimpleDateFormat("yyyy-MM");
+        List<String> monthList = new ArrayList<String>();
 
-		Date end = DateTimeUtils.parseStrToDate(endTime, DateTimeUtils.FORMAT_YMD);
-		Calendar calendar = Calendar.getInstance();  
-		calendar.setTime(end);  
-		calendar.add(Calendar.MONTH, 0-count);
-		
-		Date begin = calendar.getTime();
-		
-		int months = (end.getYear() - begin.getYear()) * 12+ (end.getMonth() - begin.getMonth());
-		
-		for (int i = 0; i <= months; i++) {
-		  calendar = Calendar.getInstance();  
-			calendar.setTime(begin);  
-			calendar.add(Calendar.MONTH, i);
-			String tmp =DateTimeUtils.formateDateToStr(calendar.getTime(), DateTimeUtils.FORMAT_YMD);
-			tmp = tmp.substring(0,tmp.lastIndexOf("-"));
-			monthList.add(tmp);
-		}
+        Date end = DateTimeUtils.parseStrToDate(endTime, DateTimeUtils.FORMAT_YMD);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(end);
+        calendar.add(Calendar.MONTH, 0 - count);
 
-		return monthList;
-	}
+        Date begin = calendar.getTime();
+
+        int months = (end.getYear() - begin.getYear()) * 12 + (end.getMonth() - begin.getMonth());
+
+        for (int i = 0; i <= months; i++) {
+            calendar = Calendar.getInstance();
+            calendar.setTime(begin);
+            calendar.add(Calendar.MONTH, i);
+            String tmp = DateTimeUtils.formateDateToStr(calendar.getTime(), DateTimeUtils.FORMAT_YMD);
+            tmp = tmp.substring(0, tmp.lastIndexOf("-"));
+            monthList.add(tmp);
+        }
+
+        return monthList;
+    }
 
     /**
      * 应用快速创建某种业务数据如今，例如：快速创建一个请假申请

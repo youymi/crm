@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2012-2014, EpicSaaS Yuan Xin technology Co., Ltd.
+ *
+ * All rights reserved.
+ */
 package com.epicsaas.app.crm.controller.pc;
 
 import javax.annotation.Resource;
@@ -19,22 +24,22 @@ import com.epicsaas.app.crm.service.IActivityService;
 @RequestMapping(value = "/pc/activity")
 public class ActivityController {
 
-	 @Resource
-	 private IActivityService activityService;
-	 
-	  @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
-	    @ResponseBody
-	    public Object delete(String ids, Model model, HttpServletRequest request,
-	            HttpServletResponse response, HttpSession session) {
-	      
-	        ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
-	        String idA[] = ids.split(",");
-	        for (String id : idA) {
-	        	if (StringUtils.isNotBlank(id)) {
-	        		 ret = activityService.deleteById(id);
-	        	}
-	        }
-	       
-	        return ret;
-	    }
+    @Resource
+    private IActivityService activityService;
+
+    @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Object delete(String ids, Model model, HttpServletRequest request, HttpServletResponse response,
+            HttpSession session) {
+
+        ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
+        String idA[] = ids.split(",");
+        for (String id : idA) {
+            if (StringUtils.isNotBlank(id)) {
+                ret = activityService.deleteById(id);
+            }
+        }
+
+        return ret;
+    }
 }

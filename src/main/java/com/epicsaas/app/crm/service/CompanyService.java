@@ -32,21 +32,21 @@ public class CompanyService extends AbstractBaseAOService<CompanyAO, CompanyCrit
         return companyGeneratedMapper;
     }
 
-	@Override
-	public ServiceResult<Boolean> assign(String ids, String destId,String destName) {
-		if(StringUtils.isNotBlank(ids)) {
-			String[] arrayId = ids.split(",");
-			if (arrayId.length > 0) {
-				for (String id : arrayId) {
-					CompanyAO c = new CompanyAO();
-					c.setId(id);
-					c.setUserId(destId);
-					c.setUserName(destName);
-					companyGeneratedMapper.updateByPrimaryKeySelective(c);
-				}
-			}
-		}
-		return new ServiceResult<Boolean>(true);
-	}
+    @Override
+    public ServiceResult<Boolean> assign(String ids, String destId, String destName) {
+        if (StringUtils.isNotBlank(ids)) {
+            String[] arrayId = ids.split(",");
+            if (arrayId.length > 0) {
+                for (String id : arrayId) {
+                    CompanyAO c = new CompanyAO();
+                    c.setId(id);
+                    c.setUserId(destId);
+                    c.setUserName(destName);
+                    companyGeneratedMapper.updateByPrimaryKeySelective(c);
+                }
+            }
+        }
+        return new ServiceResult<Boolean>(true);
+    }
 
 }
