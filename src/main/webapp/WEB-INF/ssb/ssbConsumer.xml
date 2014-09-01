@@ -53,10 +53,10 @@
 	<!-- <ssb:reference id="orgService" interface="com.epicsaas.service.biz.userbase.service.IOrgService" />-->
 	
     <!-- 用户服务 -->
-	<!-- <ssb:reference id="userService" interface="com.epicsaas.service.biz.userbase.service.IUserService" /> -->
+	<ssb:reference id="userService" interface="com.epicsaas.service.biz.userbase.service.IUserService" /> 
 	
     <!-- 角色服务 -->
-	<!-- <ssb:reference id="groupService" interface="com.epicsaas.service.biz.userbase.service.IGroupService" />-->
+	<ssb:reference id="groupService" interface="com.epicsaas.service.biz.userbase.service.IGroupService" /> 
 	
  	<!-- 用户查询服务 -->
 	<!-- <ssb:reference id="userQueryService"  interface="com.epicsaas.service.biz.userbase.service.query.IUserQueryService"/>-->
