@@ -152,3 +152,6 @@ CREATE TABLE `t_crm_tocontactor` (
   `user_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='crm使用人员待联系客户公司信息';
+
+
+-- default data to insert

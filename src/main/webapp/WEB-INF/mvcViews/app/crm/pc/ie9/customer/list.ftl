@@ -18,13 +18,13 @@
 		<div class="customer-form toptree p-relative" id="contact-main">
 
 			<div>
-			<#if group?? && group == "admin">
+			<#if group?? && group == "manager">
 			<span class="btn customer-btn" onclick="window.open('${servePath}/pc/customer')">新增</span>
 			<span class="btn customer-btn j-delete" data-parentid="customer-list" data-url="${servePath}/pc/company/delete" >删除</span>
 			</#if>
-			<#if group?? && (group == "admin" || group == "leader")>
+			<#if group?? && (group == "manager" || group == "leader")>
 			<span class="btn customer-btn j-open-orgtree" data-mainid="customer-list"  data-posturl="${servePath}/pc/company/assign" data-url="${staticServePath}/orgtree">分配</span>
-			/#if>
+			</#if>
 			
 			<span class="btn customer-btn j-atten " data-mainid="customer-list" data-url="${servePath}/pc/attention/atten">关注</span>
 			<span class="btn customer-btn j-clear-customerform">导出</span>

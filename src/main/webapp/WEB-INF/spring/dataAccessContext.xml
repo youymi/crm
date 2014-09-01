@@ -28,7 +28,7 @@
    		</property>
 	</bean>
 	
-    <!-- 数据源配置 
+    
     <bean id="dataSource" class="com.epicpaas.sdk.core.jdbc.EPICXaDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}" />
         <property name="url" value="${jdbc.url}" />
@@ -40,7 +40,7 @@
         <property name="testOnReturn" value="true"/>
         <property name="testWhileIdle" value="true"/>
     </bean>
-    -->
+   <!-- 数据源配置 
 	 <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}" />
         <property name="url" value="${jdbc.url}" />
@@ -52,7 +52,7 @@
         <property name="testOnReturn" value="true"/>
         <property name="testWhileIdle" value="true"/>
     </bean>
-
+ -->
     
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />

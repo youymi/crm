@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.elasticsearch.cache.recycler.CacheRecyclerModule;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -31,6 +32,7 @@ import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 import com.epicsaas.api.userbase.UserBaseAPI;
 import com.epicsaas.app.crm.appobject.CompanyAO;
+import com.epicsaas.app.crm.common.CrmConst;
 import com.epicsaas.app.crm.common.MVCViewName;
 import com.epicsaas.app.crm.entity.gen.CompanyCriteria;
 import com.epicsaas.app.crm.entity.gen.ContactCriteria;
@@ -38,7 +40,9 @@ import com.epicsaas.app.crm.entity.gen.ContractCriteria;
 import com.epicsaas.app.crm.service.ICompanyService;
 import com.epicsaas.app.crm.service.IContactService;
 import com.epicsaas.app.crm.service.IContractService;
+import com.epicsaas.service.biz.session.util.SessionUtil;
 import com.epicsaas.service.biz.userbase.dto.GroupDTO;
+import com.epicsaas.service.biz.userbase.dto.UserDTO;
 
 /**
  * Main控制器。
@@ -48,225 +52,273 @@ import com.epicsaas.service.biz.userbase.dto.GroupDTO;
 @RequestMapping(value = "/pc/company")
 public class CompanyController {
 
-    private static Logger LOG = LoggerFactory.getLogger(HelloController.class);
+	private static Logger LOG = LoggerFactory.getLogger(HelloController.class);
 
-    @Resource
-    private ICompanyService companyService;
+	@Resource
+	private ICompanyService companyService;
 
-    /**
-     * 
-     * 合同
-     */
-    @Resource
-    private IContractService contractService;
+	/**
+	 * 
+	 * 合同
+	 */
+	@Resource
+	private IContractService contractService;
 
-    /**
-     * 联系人
-     */
-    @Resource
-    private IContactService contactService;
-    
-    
-    @InitBinder 
-    public void initBinder(WebDataBinder binder) {   
-    	  binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {  
-    		  public void setAsText(String value) {  
+	@Resource
+	private SessionUtil sessionUtil;
 
-                  try {
+	/**
+	 * 联系人
+	 */
+	@Resource
+	private IContactService contactService;
 
-			            setValue(new SimpleDateFormat("yyyy-MM-dd").parse(value));
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+			public void setAsText(String value) {
+
+				try {
+
+					setValue(new SimpleDateFormat("yyyy-MM-dd").parse(value));
+
+				} catch (java.text.ParseException e) {
+
+					setValue(null);
+				}
+
+			};
+
+		});
+
+	}
+
+	/**
+	 * 应用主入口地址
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
+
+	@RequestMapping(value = "", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String hello(Model model, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+
+		LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(),
+				request.getHeader("user-agent"));
+		LOG.info("SessionId %s", request.getSession().getId());
+		// 将当前运用名称传到前端
+		model.addAttribute("appId", "crm");
+		model.addAttribute("appName", "客户关系管理");
+		return MVCViewName.APP_CRM_PC_IE9_MAIN_INDEX.toString();
+	}
+
+	@RequestMapping(value = "list", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String list(Model model, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+
+		LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(),
+				request.getHeader("user-agent"));
+		LOG.info("SessionId %s", request.getSession().getId());
+
+		UserDTO u = sessionUtil.getUserFromRequest(request);
+		
+		ServiceResult<List<GroupDTO>> gl = UserBaseAPI.getInstance()
+				.getUserQueryService().getGroupListTenant(u.getId(), CrmConst.__APP_ID);
+
+		ServiceResult<Boolean> retIsTenantManager = UserBaseAPI.getInstance()
+				.getGroupQueryService().isTenantManager(u.getId());
+		
+		ServiceResult<Boolean> retIsAppManager = UserBaseAPI.getInstance()
+				.getGroupQueryService().isAppManager(u.getId(), CrmConst.__APP_ID);
+		
+		CompanyCriteria c = new CompanyCriteria();
+		CompanyCriteria.Criteria cc = c.createCriteria();
+		cc.andIdIsNotNull();
+
+		if ( (retIsTenantManager != null && retIsTenantManager.getData()) ||
+				(retIsAppManager != null && retIsAppManager.getData())) {
+			model.addAttribute("group", "manager");
 			
-			          }catch (java.text.ParseException e) {
-			         	 
-			        	  setValue(null);  
-			          }
-                  
-              };
-    		
-    	  });
+		} else if (gl != null && !CollectionUtils.isEmpty(gl.getData())) {
+			List<GroupDTO> gs = gl.getData();
+			for (GroupDTO g : gs) {
+				if (g.getCode().equals(CrmConst.__CRM_LEADER)) {
+					model.addAttribute("group", "leader");
+					break;
+				}
+				LOG.error("group name: $", g.getName());
+			}
+			model.addAttribute("group", "hi");
+		}  
 
-   
-    }
+		ServiceResult<List<CompanyAO>> ret = companyService.selectByCriteria(c);
 
-    /**
-     * 应用主入口地址
-     * @param model
-     * @param request
-     * @param response
-     * @param session
-     * @return
-     */
+		if (ret != null && ret.getData() != null) {
+			model.addAttribute("dataList", ret.getData());
+		}
 
-    @RequestMapping(value = "", method = { RequestMethod.GET, RequestMethod.POST })
-    public String hello(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		// 将当前运用名称传到前端
+		model.addAttribute("appId", "crm");
+		model.addAttribute("appName", "客户关系管理");
+		return MVCViewName.APP_CRM_PC_IE9_CUSTOMER_LIST.toString();
+	}
 
-        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
-        LOG.info("SessionId %s", request.getSession().getId());
-        //将当前运用名称传到前端
-        model.addAttribute("appId", "crm");
-        model.addAttribute("appName", "客户关系管理");
-        return MVCViewName.APP_CRM_PC_IE9_MAIN_INDEX.toString();
-    }
-    
-    @RequestMapping(value = "list", method = { RequestMethod.GET, RequestMethod.POST })
-    public String list(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	/**
+	 * 打开表单页面
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/create", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String create(Model model, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
 
-        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
-        LOG.info("SessionId %s", request.getSession().getId());
-        
-        ServiceResult<List<GroupDTO>> gl =UserBaseAPI.getInstance().getUserQueryService().getGroupList("userId");
-        
-        
-        CompanyCriteria c = new CompanyCriteria();
-        CompanyCriteria.Criteria  cc = c.createCriteria();
-        cc.andIdIsNotNull();
-        if(gl != null && !CollectionUtils.isEmpty(gl.getData())) {
-        	List<GroupDTO> gs = gl.getData();
-        	for(GroupDTO g : gs) {
-        		LOG.error("group name: $", g.getName());
-        	}
-        	model.addAttribute("group", "hi");
-        }
-        
-        ServiceResult<List<CompanyAO>>  ret =  companyService.selectByCriteria(c);
-        
-        if (ret != null && ret.getData() != null) {
-        	model.addAttribute("dataList", ret.getData());
-        }
-        
-        //将当前运用名称传到前端
-        model.addAttribute("appId", "crm");
-        model.addAttribute("appName", "客户关系管理");
-        return MVCViewName.APP_CRM_PC_IE9_CUSTOMER_LIST.toString();
-    }
+		LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(),
+				request.getHeader("user-agent"));
+		LOG.info("SessionId %s", request.getSession().getId());
+		// 将当前运用名称传到前端
+		model.addAttribute("appId", "crm");
+		model.addAttribute("appName", "客户关系管理");
+		return MVCViewName.APP_CRM_PC_IE9_MAIN_FORM.toString();
+	}
 
+	/**
+	 * 保存公司信息
+	 * 
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/saveCustomer", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	@ResponseBody
+	public Object saveOrUpdate(CompanyAO companyAO, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
 
-    /**
-     * 打开表单页面
-     * @param model
-     * @param request
-     * @param response
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/create", method = { RequestMethod.GET, RequestMethod.POST })
-    public String create(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		ServiceResult<CompanyAO> ret = companyService
+				.saveOrUpdateRetAO(companyAO);
 
-        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
-        LOG.info("SessionId %s", request.getSession().getId());
-        //将当前运用名称传到前端
-        model.addAttribute("appId", "crm");
-        model.addAttribute("appName", "客户关系管理");
-        return MVCViewName.APP_CRM_PC_IE9_MAIN_FORM.toString();
-    }
+		return ret;
+	}
 
-    /**
-     * 保存公司信息
-     * @param model
-     * @param request
-     * @param response
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/saveCustomer", method = { RequestMethod.GET, RequestMethod.POST })
-    @ResponseBody
-    public Object saveOrUpdate(CompanyAO companyAO, HttpServletRequest request, HttpServletResponse response,
-            HttpSession session) {
+	/**
+	 * 打开某种业务数据，例如：打开数据ID等于dataId的请假申请
+	 * 
+	 * @param dataId
+	 *            业务数据ID
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/open/{dataId}", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String create(@PathVariable String dataId, Model model,
+			HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
 
-        ServiceResult<CompanyAO> ret = companyService.saveOrUpdateRetAO(companyAO);
+		LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(),
+				request.getHeader("user-agent"));
+		LOG.info("SessionId %s", request.getSession().getId());
+		ServiceResult<CompanyAO> ret = companyService.getById(dataId);
+		if (ret.isSucceed() && null != ret.getData()) {
+			model.addAttribute("company", ret.getData());
+		}
+		return MVCViewName.APP_CRM_PC_IE9_MAIN_FORM.toString();
+	}
 
-        return ret;
-    }
+	/**
+	 * 删除公司信息 （系统管理员才有权限操作）
+	 * 
+	 * @param dataId
+	 *            业务数据ID
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/delete/{dataId}", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	@ResponseBody
+	public Object delete(@PathVariable String dataId, Model model,
+			HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
+		LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(),
+				request.getHeader("user-agent"));
+		LOG.info("SessionId %s", request.getSession().getId());
+		ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
+		// 1 删除该公司的合同信息 （附件信息 删除 ）
+		ContractCriteria criteria = new ContractCriteria();
+		criteria.createCriteria().andCompanyIdEqualTo(dataId);
+		ret = contractService.deleteByCriteria(criteria);
 
-    /**
-     * 打开某种业务数据，例如：打开数据ID等于dataId的请假申请
-     * @param dataId 业务数据ID
-     * @param model
-     * @param request
-     * @param response
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/open/{dataId}", method = { RequestMethod.GET, RequestMethod.POST })
-    public String create(@PathVariable String dataId, Model model, HttpServletRequest request,
-            HttpServletResponse response, HttpSession session) {
+		// 2 删除联系人信息
+		ContactCriteria criteria2 = new ContactCriteria();
+		criteria2.createCriteria().andCompanyIdEqualTo(dataId);
+		ret = contactService.deleteByCriteria(criteria2);
 
-        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
-        LOG.info("SessionId %s", request.getSession().getId());
-        ServiceResult<CompanyAO> ret = companyService.getById(dataId);
-        if (ret.isSucceed() && null != ret.getData()) {
-            model.addAttribute("company", ret.getData());
-        }
-        return MVCViewName.APP_CRM_PC_IE9_MAIN_FORM.toString();
-    }
+		// 删除公司信息
+		ret = companyService.deleteById(dataId);
+		return ret;
+	}
 
-    /**
-     *  删除公司信息 （系统管理员才有权限操作）
-     * @param dataId 业务数据ID
-     * @param model
-     * @param request
-     * @param response
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/delete/{dataId}", method = { RequestMethod.GET, RequestMethod.POST })
-    @ResponseBody
-    public Object delete(@PathVariable String dataId, Model model, HttpServletRequest request,
-            HttpServletResponse response, HttpSession session) {
-        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
-        LOG.info("SessionId %s", request.getSession().getId());
-        ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
-        //1 删除该公司的合同信息 （附件信息 删除 ）
-        ContractCriteria criteria = new ContractCriteria();
-        criteria.createCriteria().andCompanyIdEqualTo(dataId);
-        ret = contractService.deleteByCriteria(criteria);
+	/**
+	 * 删除公司信息 （系统管理员才有权限操作）
+	 * 
+	 * @param dataId
+	 *            业务数据ID
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/delete", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	@ResponseBody
+	public Object delete(String ids, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(),
+				request.getHeader("user-agent"));
+		LOG.info("SessionId %s", request.getSession().getId());
+		ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
+		String idA[] = ids.split(",");
+		for (String id : idA) {
+			if (StringUtils.isNotBlank(id)) {
+				ret = companyService.deleteById(id);
+			}
+		}
 
-        //2 删除联系人信息
-        ContactCriteria criteria2 = new ContactCriteria();
-        criteria2.createCriteria().andCompanyIdEqualTo(dataId);
-        ret = contactService.deleteByCriteria(criteria2);
+		return ret;
+	}
 
-        //删除公司信息
-        ret = companyService.deleteById(dataId);
-        return ret;
-    }
-    
-    /**
-     * 删除公司信息 （系统管理员才有权限操作）
-     * @param dataId 业务数据ID
-     * @param model
-     * @param request
-     * @param response
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
-    @ResponseBody
-    public Object delete(String ids, Model model, HttpServletRequest request,
-            HttpServletResponse response) {
-        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
-        LOG.info("SessionId %s", request.getSession().getId());
-        ServiceResult<Boolean> ret = new ServiceResult<Boolean>();
-        String idA[] = ids.split(",");
-        for (String id : idA) {
-        	if (StringUtils.isNotBlank(id)) {
-        		 ret = companyService.deleteById(id);
-        	}
-        }
-       
-        return ret;
-    }
-    
-    
-    @RequestMapping(value = "/assign", method = { RequestMethod.GET, RequestMethod.POST })
-    @ResponseBody
-    public Object assign(String ids, String destName, String destId,Model model, HttpServletRequest request,
-            HttpServletResponse response) {
-        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
-        LOG.info("SessionId %s", request.getSession().getId());
-        ServiceResult<Boolean> ret =  companyService.assign(ids, destId, destName);
-       
-        return ret;
-    }
+	@RequestMapping(value = "/assign", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	@ResponseBody
+	public Object assign(String ids, String destName, String destId,
+			Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(),
+				request.getHeader("user-agent"));
+		LOG.info("SessionId %s", request.getSession().getId());
+		ServiceResult<Boolean> ret = companyService.assign(ids, destId,
+				destName);
+
+		return ret;
+	}
 
 }

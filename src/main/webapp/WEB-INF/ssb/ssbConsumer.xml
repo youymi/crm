@@ -59,10 +59,10 @@
 	<ssb:reference id="groupService" interface="com.epicsaas.service.biz.userbase.service.IGroupService" /> 
 	
  	<!-- 用户查询服务 -->
-	<!-- <ssb:reference id="userQueryService"  interface="com.epicsaas.service.biz.userbase.service.query.IUserQueryService"/>-->
+	 <ssb:reference id="userQueryService"  interface="com.epicsaas.service.biz.userbase.service.query.IUserQueryService"/>
 	
 	<!-- 角色查询服务 -->
-	<!-- <ssb:reference id="groupQueryService" interface="com.epicsaas.service.biz.userbase.service.query.IGroupQueryService"/>-->
+	 <ssb:reference id="groupQueryService" interface="com.epicsaas.service.biz.userbase.service.query.IGroupQueryService"/>
 	
 	<!-- 组织机构树查询服务 -->
 	<!-- <ssb:reference id="orgQueryService"   interface="com.epicsaas.service.biz.userbase.service.query.IOrgQueryService"/>-->
