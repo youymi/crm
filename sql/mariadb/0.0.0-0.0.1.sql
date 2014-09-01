@@ -155,3 +155,10 @@ CREATE TABLE `t_crm_tocontactor` (
 
 
 -- default data to insert
+INSERT INTO `t_crm_datadictionary` (`id`, `type`, `name`, `value`) VALUES (1, 'customer_type', '潜在客户', '属于公司客户的范畴，对于公司产品有需求的可能性');
+INSERT INTO `t_crm_datadictionary` (`id`, `type`, `name`, `value`) VALUES (2, 'customer_type', '联系客户', '属于公司要开发客户的范畴，业务人员和他们保持联系，但三个月内对方没有购买我公司产品的意向。');
+INSERT INTO `t_crm_datadictionary` (`id`, `type`, `name`, `value`) VALUES (3, 'customer_type', '跟进客户', '客户方公司在最近三个月内对于我公司生产的产品有实质性的需求，需要相关业务人员对其进行密切关注，做到知己知彼，尽全力争取其合作的成功率。');
+INSERT INTO `t_crm_datadictionary` (`id`, `type`, `name`, `value`) VALUES (4, 'customer_type', '合作客户\r\n', '客户已经和我们合作，但是合作的次数较少，成交的总金额较小的客户。');
+INSERT INTO `t_crm_datadictionary` (`id`, `type`, `name`, `value`) VALUES (5, 'customer_type', 'VIP客户\r\n', '客户已经和我们合作，并且合作的次数≥3次并且成交的总金额大于200万元');
+INSERT INTO `t_crm_datadictionary` (`id`, `type`, `name`, `value`) VALUES (6, 'customer_type', '暂停客户\r\n', '有过联系或者有过合作，由于其它原因不能有进一步业务发展的客户。');
+

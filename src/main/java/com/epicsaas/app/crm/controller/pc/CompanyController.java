@@ -123,7 +123,7 @@ public class CompanyController {
 
         UserDTO u = sessionUtil.getUserFromRequest(request);
 
-        ServiceResult<List<GroupDTO>> gl = UserBaseAPI.getInstance().getUserQueryService().getGroupListTenant(
+        ServiceResult<List<GroupDTO>> gl = UserBaseAPI.getInstance().getUserQueryService().getGroupList(
                 u.getId(), CrmConst.__APP_ID);
 
         ServiceResult<Boolean> retIsTenantManager = UserBaseAPI.getInstance().getGroupQueryService().isTenantManager(
@@ -149,7 +149,7 @@ public class CompanyController {
                 }
                 LOG.error("group name: $", g.getName());
             }
-            model.addAttribute("group", "hi");
+             
         }
 
         ServiceResult<List<CompanyAO>> ret = companyService.selectByCriteria(c);
