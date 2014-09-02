@@ -3,7 +3,7 @@
 <@addJS ["/app/crm/js/jquery-1.8.3","/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/customer"] />
 <@common title="客户管理">		 
 
-
+<script type="text/javascript" src="/saasportal/pc/component/header/customizedjs"></script>
 <div class="saaswrapper">
 	<DIV class="content" >
 	

@@ -3,6 +3,7 @@
 <@addJS ["/plugins/jquery-ui","/app/crm/js/jquery-validate","/app/crm/js/validate-meta","/app/crm/js/customer"] />
 <@common title="客户管理">		 
  
+ <script type="text/javascript" src="/saasportal/pc/component/header/customizedjs"></script>
 <div class="saaswrapper">
 	<DIV class="content" >
 	

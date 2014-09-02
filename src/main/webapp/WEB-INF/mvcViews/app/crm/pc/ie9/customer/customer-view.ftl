@@ -1,7 +1,20 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/plugins/jquery-ui"] />
-<@addJS ["/plugins/jquery-ui","/app/crm/js/customer"] />
-<@common title="客户管理">		 
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/plugins/jquery-ui","/app/crm/css/index","/app/crm/css/style","/app/crm/css/cmxform"] />
+<@addJS ["/plugins/jquery-ui","/app/crm/js/jquery-validate","/app/crm/js/validate-meta","/app/crm/js/customer"] />
+<@common title="客户管理">
+<script type="text/javascript" src="/saasportal/pc/component/header/customizedjs"></script>
+<div class="saaswrapper">
+	<DIV class="content" >
+	
+<#include "../common/header.ftl">
+	<DIV class="container-fluid" style="margin-top: 12px">
+	
+	         <!-- 底部蓝色线条 -->
+			<DIV style="padding-top: 5px; margin-top: 2px; margin-bottom: 5px; border-top-color: rgb(0, 136, 204); border-top-width: 2px; border-top-style: solid;">
+			</DIV>
+ 
+<div class="content-body">
+		 
 	<div class="customer-info">客户： ${(data.name)!}</div>
 	<div class="customer-main">
 	
@@ -37,15 +50,11 @@
 				<div class="p-relative formcell">
 					<div class="formcell-title left"><span class="required">*</span>区域</div>
 					<div class="formcell-cell left">
-						<select type="text" name="regin">
-							<option value="北京">北京</option>
-						</select>
+						<input type="text" name="regin" class="readonly" readonly required />
 					</div>
 					<div class="formcell-title left"><span class="required">*</span>行业</div>
 					<div class="formcell-cell left">
-						<select type="text" name="customerNO">
-							<option value="dd">潜在客户</option>
-						</select>
+					 <input type="text" name="trade" class="readonly" readonly  required/>
 					</div>
 					<div class="clear-both"></div>
 				</div>
@@ -93,6 +102,11 @@
 		<#include "contract.ftl">
 		<#include "acvitity-form.ftl">
 		
+	</div>
+	
+	</div>
+	</div>
+	</div>
 	</div>
 	
 </@common>
