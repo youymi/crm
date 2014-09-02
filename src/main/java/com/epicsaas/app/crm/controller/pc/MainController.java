@@ -30,8 +30,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.epicpaas.sdk.core.api.ServiceResult;
 import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
-import com.epicsaas.api.session.SessionAPI;
-// import com.epicsaas.api.session.SessionAPI;
+import com.epicsaas.api.session.SessionAPI; // import
+                                            // com.epicsaas.api.session.SessionAPI;
 import com.epicsaas.app.crm.appobject.AttentionAO;
 import com.epicsaas.app.crm.appobject.CompanyAO;
 import com.epicsaas.app.crm.appobject.ContractAO;
@@ -91,9 +91,9 @@ public class MainController {
         model.addAttribute("appId", CrmConst.__APP_ID);
         model.addAttribute("appName", CrmConst.__APP_NAME);
 
-        UserDTO  user =SessionAPI.getInstance().getSessionUtil().getUserFromRequest(request);
-//        UserDTO user = new UserDTO();
-//        user.setId("1");
+        UserDTO user = SessionAPI.getInstance().getSessionUtil().getUserFromRequest(request);
+        //        UserDTO user = new UserDTO();
+        //        user.setId("1");
 
         Page page = new Page();
         page.setBegin(0);

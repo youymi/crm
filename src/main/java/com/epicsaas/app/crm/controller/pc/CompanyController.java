@@ -202,7 +202,10 @@ public class CompanyController {
     @ResponseBody
     public Object saveOrUpdate(CompanyAO companyAO, HttpServletRequest request, HttpServletResponse response,
             HttpSession session) {
-
+    	  if (companyAO.getCreateDate() == null) {
+    		  companyAO.setCreateDate( new Date());
+    	  }
+    	  
         ServiceResult<CompanyAO> ret = companyService.saveOrUpdateRetAO(companyAO);
 
         return ret;
