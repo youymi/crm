@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
-import org.elasticsearch.cache.recycler.CacheRecyclerModule;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -142,20 +141,20 @@ public class CompanyController {
 
         } else if (gl != null && !CollectionUtils.isEmpty(gl.getData())) {
             List<GroupDTO> gs = gl.getData();
-            	int count = 0;
+            int count = 0;
             for (GroupDTO g : gs) {
                 if (g.getCode().equals(CrmConst.__CRM_LEADER)) {
-                		count++;
+                    count++;
                     model.addAttribute("group", "leader");
                     break;
-                	}                               
-            	}
+                }
+            }
             if (count == 0) {
-            	cc.andUserIdEqualTo(u.getId());
-            	}
+                cc.andUserIdEqualTo(u.getId());
+            }
 
         } else {
-        	cc.andUserIdEqualTo(u.getId());
+            cc.andUserIdEqualTo(u.getId());
         }
 
         ServiceResult<List<CompanyAO>> ret = companyService.selectByCriteria(c);

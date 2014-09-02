@@ -5,18 +5,32 @@
  */
 package com.epicsaas.app.crm.controller.pc;
 
-import java.beans.IntrospectionException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.epicpaas.sdk.core.api.ServiceResult;
+import com.epicpaas.sdk.core.api.logging.Logger;
+import com.epicpaas.sdk.core.api.logging.LoggerFactory;
+import com.epicsaas.api.session.SessionAPI;
 // import com.epicsaas.api.session.SessionAPI;
 import com.epicsaas.app.crm.appobject.AttentionAO;
 import com.epicsaas.app.crm.appobject.CompanyAO;
@@ -36,22 +50,6 @@ import com.epicsaas.framework.mybatis.Page;
 import com.epicsaas.framework.util.BeanConvertUtils;
 import com.epicsaas.framework.util.DateTimeUtils;
 import com.epicsaas.service.biz.userbase.dto.UserDTO;
-import com.epicpaas.sdk.core.api.ServiceResult;
-import com.epicpaas.sdk.core.api.logging.Logger;
-import com.epicpaas.sdk.core.api.logging.LoggerFactory;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Main控制器。
@@ -93,9 +91,9 @@ public class MainController {
         model.addAttribute("appId", CrmConst.__APP_ID);
         model.addAttribute("appName", CrmConst.__APP_NAME);
 
-        //UserDTO  user =SessionAPI.getInstance().getSessionUtil().getUserFromRequest(request);
-        UserDTO user = new UserDTO();
-        user.setId("1");
+        UserDTO  user =SessionAPI.getInstance().getSessionUtil().getUserFromRequest(request);
+//        UserDTO user = new UserDTO();
+//        user.setId("1");
 
         Page page = new Page();
         page.setBegin(0);
