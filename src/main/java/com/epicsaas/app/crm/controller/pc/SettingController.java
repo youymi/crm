@@ -53,7 +53,7 @@ public class SettingController {
 
     @Resource
     private IDataDictionaryService dataDictionaryService;
-    
+
     @Resource
     private SessionUtil sessionUtil;
 
@@ -92,8 +92,9 @@ public class SettingController {
 	        				}
 	        			}
 	        			ga.setNames(names);
-	        			groups.add(ga);
+	        			
         			}
+        			groups.add(ga);
         		}
         		model.addAttribute("groups", groups);
         	}
@@ -137,17 +138,16 @@ public class SettingController {
         UserDTO u = sessionUtil.getUserFromRequest(request);
         IGroupService groupService = UserBaseAPI.getInstance().getGroupService();
         //ServiceResult<Boolean> ret =  companyService.assign(ids, destId, destName);
-			ServiceResult<List<UserDTO>> users = UserBaseAPI.getInstance().getUserQueryService().getUserListByOrgIdAndGroupIds(u.getOrgId(), ids);
-			if (users != null && !CollectionUtils.isEmpty(users.getData())) {
-				List<String> userIds = new ArrayList<String>();
-				for (UserDTO user : users.getData()) {
-					userIds.add(user.getId());
-				}
-				groupService.removeUserFromGroup(ids, userIds.toArray(new String[0]));
-			}
-       
-        	
-        
+        ServiceResult<List<UserDTO>> users = UserBaseAPI.getInstance().getUserQueryService()
+                .getUserListByOrgIdAndGroupIds(u.getOrgId(), ids);
+        if (users != null && !CollectionUtils.isEmpty(users.getData())) {
+            List<String> userIds = new ArrayList<String>();
+            for (UserDTO user : users.getData()) {
+                userIds.add(user.getId());
+            }
+            groupService.removeUserFromGroup(ids, userIds.toArray(new String[0]));
+        }
+
         ServiceResult<Boolean> ret = groupService.addUser2Group(ids, destId.split(","));
 
         return ret;

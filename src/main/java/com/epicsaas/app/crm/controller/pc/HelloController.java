@@ -48,16 +48,14 @@ public class HelloController {
         model.addAttribute("appName", "客户关系管理");
         return MVCViewName.APP_CRM_PC_IE9_HELLO_INDEX.toString();
     }
-    
+
     @RequestMapping(value = "test", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
     public Object test(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-    	  GroupCriteria gc = new GroupCriteria();
-          gc.createCriteria().andAppIdEqualTo(CrmConst.__APP_ID);
-          ServiceResult<List<GroupDTO>> gl = UserBaseAPI.getInstance().getGroupQueryService().selectByCriteria(gc);
-          return gl;
+        GroupCriteria gc = new GroupCriteria();
+        gc.createCriteria().andAppIdEqualTo(CrmConst.__APP_ID);
+        ServiceResult<List<GroupDTO>> gl = UserBaseAPI.getInstance().getGroupQueryService().selectByCriteria(gc);
+        return gl;
     }
-    
-    
-    
+
 }

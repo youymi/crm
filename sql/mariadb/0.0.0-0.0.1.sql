@@ -154,7 +154,7 @@ CREATE TABLE `t_crm_tocontactor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='crm使用人员待联系客户公司信息';
 
 
--- default data to insert
+-- default data to insert  
 INSERT INTO `t_crm_datadictionary` (`id`, `type`, `name`, `value`) VALUES (1, 'customer_type', '潜在客户', '属于公司客户的范畴，对于公司产品有需求的可能性');
 INSERT INTO `t_crm_datadictionary` (`id`, `type`, `name`, `value`) VALUES (2, 'customer_type', '联系客户', '属于公司要开发客户的范畴，业务人员和他们保持联系，但三个月内对方没有购买我公司产品的意向。');
 INSERT INTO `t_crm_datadictionary` (`id`, `type`, `name`, `value`) VALUES (3, 'customer_type', '跟进客户', '客户方公司在最近三个月内对于我公司生产的产品有实质性的需求，需要相关业务人员对其进行密切关注，做到知己知彼，尽全力争取其合作的成功率。');
