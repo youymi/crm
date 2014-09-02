@@ -66,7 +66,7 @@ public class CustomerController {
 
     @Resource
     private ICompanyService companyService;
-    
+
     @Resource
     private IDataDictionaryService dataDictionaryService;
 
@@ -98,14 +98,14 @@ public class CustomerController {
 
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
-        
+
         DataDictionaryCriteria dataDictionaryCriteria = new DataDictionaryCriteria();
         dataDictionaryCriteria.createCriteria().andIdIsNotNull().andTypeEqualTo(CrmConst.DD_TYPE_CUSTOMER_TYPE);
         ServiceResult<List<DataDictionaryAO>> ret = dataDictionaryService.selectByCriteria(dataDictionaryCriteria);
         if (ret.isSucceed() && !CollectionUtils.isEmpty(ret.getData())) {
             model.addAttribute("customerTypeList", ret.getData());
         }
-        
+
         //将当前运用名称传到前端
         model.addAttribute("appId", "crm");
         model.addAttribute("appName", "客户关系管理");
@@ -128,7 +128,7 @@ public class CustomerController {
         if (retCt.isSucceed() && !CollectionUtils.isEmpty(retCt.getData())) {
             model.addAttribute("customerTypeList", retCt.getData());
         }
-        
+
         ServiceResult<CompanyAO> ret = companyService.getById(id);
         if (ret != null && ret.getData() != null) {
 

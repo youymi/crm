@@ -142,14 +142,20 @@ public class CompanyController {
 
         } else if (gl != null && !CollectionUtils.isEmpty(gl.getData())) {
             List<GroupDTO> gs = gl.getData();
+            	int count = 0;
             for (GroupDTO g : gs) {
                 if (g.getCode().equals(CrmConst.__CRM_LEADER)) {
+                		count++;
                     model.addAttribute("group", "leader");
                     break;
-                }
-                LOG.error("group name: $", g.getName());
-            }
+                	}                               
+            	}
+            if (count == 0) {
+            	cc.andUserIdEqualTo(u.getId());
+            	}
 
+        } else {
+        	cc.andUserIdEqualTo(u.getId());
         }
 
         ServiceResult<List<CompanyAO>> ret = companyService.selectByCriteria(c);
