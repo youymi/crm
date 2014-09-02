@@ -505,16 +505,22 @@
 	
 	//关注
 	$(document).on('click', '.j-atten', function() {
-		
+		$that = $(this);
+		var ids = "";
+		var id = $(this).data("id");
+		if (id != null && id != "") {
+			ids = id;
+		} else {
+			
 		var checkedEle = $("#"+$(this).data("mainid")).find(".checkbox:checked");
 		if (checkedEle.size() == 0) {
 			alert("没有选中记录");
 			return;
 		}
-		$that = $(this);
-		if (confirm("确定关注选中的记录？")) {
+	
 		
-		var ids = "";
+		
+		
 		checkedEle.each(function(index, domEle){
 			var $el  = $(domEle);
 			if ($el.hasClass("j-checkbox")) {
@@ -541,7 +547,10 @@
 			}
 		});
 		
-		alert(ids);
+		 
+		}// end if data-id;
+		if (confirm("确定关注？")) {
+		//alert(ids);
 		 $.ajax({
 				url : $that.data("url"),
 				type : 'POST',
@@ -567,8 +576,8 @@
 
 			});
 		 
-		
 		}
+		
 		 
 	});
 	

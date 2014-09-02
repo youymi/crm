@@ -10,6 +10,7 @@ import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 import com.epicpaas.sdk.core.api.ServiceResult;
 import com.epicsaas.framework.mybatis.Page;
 import com.epicsaas.framework.util.DateTimeUtils;
+import com.epicsaas.service.biz.session.util.SessionUtil;
 import com.epicsaas.service.biz.userbase.dto.UserDTO;
 import com.epicsaas.app.crm.common.MVCViewName;
 import com.epicsaas.app.crm.entity.gen.AttentionCriteria;
@@ -48,6 +49,9 @@ public class AttentionController {
 
     @Resource
     private IAttentionService attentionService;
+    
+    @Resource
+    private SessionUtil sessionUtil;
 
     @Resource
     private ICompanyService companyService;
@@ -186,7 +190,22 @@ public class AttentionController {
             HttpServletResponse response) {
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
-        ServiceResult<Boolean> ret = attentionService.attens("1", ids);
+        UserDTO user = sessionUtil.getUserFromRequest(request);
+        ServiceResult<Boolean> ret = attentionService.attens(user.getId(), ids);
+
+        return ret;
+    }
+    
+    @RequestMapping(value = "/removeAtten", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public Object removeAtten(String ids, String destName, String destId, Model model, HttpServletRequest request,
+            HttpServletResponse response) {
+        LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
+        LOG.info("SessionId %s", request.getSession().getId());
+        UserDTO user = sessionUtil.getUserFromRequest(request);
+        AttentionCriteria ac = new AttentionCriteria();
+        ac.createCriteria().andUserIdEqualTo(user.getId()).andCompanyIdIn(CollectionUtils.arrayToList(ids.split(",")));
+        ServiceResult<Boolean> ret = attentionService.deleteByCriteria(ac);
 
         return ret;
     }
