@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,14 +33,18 @@ import com.epicsaas.app.crm.appobject.ActivityAO;
 import com.epicsaas.app.crm.appobject.CompanyAO;
 import com.epicsaas.app.crm.appobject.ContactAO;
 import com.epicsaas.app.crm.appobject.ContractAO;
+import com.epicsaas.app.crm.appobject.DataDictionaryAO;
+import com.epicsaas.app.crm.common.CrmConst;
 import com.epicsaas.app.crm.common.MVCViewName;
 import com.epicsaas.app.crm.entity.gen.ActivityCriteria;
 import com.epicsaas.app.crm.entity.gen.ContactCriteria;
 import com.epicsaas.app.crm.entity.gen.ContractCriteria;
+import com.epicsaas.app.crm.entity.gen.DataDictionaryCriteria;
 import com.epicsaas.app.crm.service.IActivityService;
 import com.epicsaas.app.crm.service.ICompanyService;
 import com.epicsaas.app.crm.service.IContactService;
 import com.epicsaas.app.crm.service.IContractService;
+import com.epicsaas.app.crm.service.IDataDictionaryService;
 
 @Controller
 @RequestMapping("/pc/customer")
@@ -61,6 +66,9 @@ public class CustomerController {
 
     @Resource
     private ICompanyService companyService;
+    
+    @Resource
+    private IDataDictionaryService dataDictionaryService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -90,6 +98,14 @@ public class CustomerController {
 
         LOG.info("有访问来自，IP: %s USER-AGENT: %s", request.getRemoteAddr(), request.getHeader("user-agent"));
         LOG.info("SessionId %s", request.getSession().getId());
+        
+        DataDictionaryCriteria dataDictionaryCriteria = new DataDictionaryCriteria();
+        dataDictionaryCriteria.createCriteria().andIdIsNotNull().andTypeEqualTo(CrmConst.DD_TYPE_CUSTOMER_TYPE);
+        ServiceResult<List<DataDictionaryAO>> ret = dataDictionaryService.selectByCriteria(dataDictionaryCriteria);
+        if (ret.isSucceed() && !CollectionUtils.isEmpty(ret.getData())) {
+            model.addAttribute("customerTypeList", ret.getData());
+        }
+        
         //将当前运用名称传到前端
         model.addAttribute("appId", "crm");
         model.addAttribute("appName", "客户关系管理");
@@ -106,6 +122,13 @@ public class CustomerController {
         LOG.info("SessionId %s", request.getSession().getId());
         //将当前运用名称传到前端
 
+        DataDictionaryCriteria dataDictionaryCriteria = new DataDictionaryCriteria();
+        dataDictionaryCriteria.createCriteria().andIdIsNotNull().andTypeEqualTo(CrmConst.DD_TYPE_CUSTOMER_TYPE);
+        ServiceResult<List<DataDictionaryAO>> retCt = dataDictionaryService.selectByCriteria(dataDictionaryCriteria);
+        if (retCt.isSucceed() && !CollectionUtils.isEmpty(retCt.getData())) {
+            model.addAttribute("customerTypeList", retCt.getData());
+        }
+        
         ServiceResult<CompanyAO> ret = companyService.getById(id);
         if (ret != null && ret.getData() != null) {
 

@@ -33,7 +33,11 @@
 					<div class="formcell-title left"><span class="required-lab">*</span>客户类型</div>
 					<div class="formcell-cell left">
 						<select type="text" name="type">
-							<option value="潜在客户">潜在客户</option>
+							<#if customerTypeList?? && (customerTypeList?size > 0) >
+							<#list customerTypeList as type>
+							<option value="${(type.value)!}">${(type.name)!}</option>
+							</#list>
+							</#if>
 						</select>
 					</div>
 					<div class="clear-both"></div>
@@ -61,7 +65,11 @@
 						<input type="text" name="trade" required/>
 						<#--
 						<select type="text" name="customerNO">
+							<#if customerTypeList?? && (customerTypeList?size > 0) >
+							<list customerTypeList as type>
 							<option value="dd">潜在客户</option>
+							</#list>
+							</#if>
 						</select>
 						-->
 					</div>

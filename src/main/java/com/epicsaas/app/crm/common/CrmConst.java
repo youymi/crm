@@ -27,6 +27,6 @@ public class CrmConst {
 
     public static final String __CRM_GROUP = "crmGroup";
 
-    public static final String DD_TYPE_CUSTOMER_TYPE = "__customer_type";
+    public static final String DD_TYPE_CUSTOMER_TYPE = "customer_type";
 
 }

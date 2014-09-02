@@ -34,7 +34,11 @@
 					<div class="formcell-title left"><span class="required">*</span>客户类型</div>
 					<div class="formcell-cell left">
 						<select type="text" name="type" readonly>
-							<option value="潜在客户">潜在客户</option>
+							<#if customerTypeList?? && (customerTypeList?size > 0) >
+							<#list customerTypeList as type>
+							<option value="${(type.value)!}">${(type.name)!}</option>
+							</#list>
+							</#if>
 						</select>
 					</div>
 					<div class="clear-both"></div>
