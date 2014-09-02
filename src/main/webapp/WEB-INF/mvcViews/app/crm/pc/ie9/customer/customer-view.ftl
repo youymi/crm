@@ -36,7 +36,7 @@
 						<select type="text" name="type" readonly>
 							<#if customerTypeList?? && (customerTypeList?size > 0) >
 							<#list customerTypeList as type>
-							<option value="${(type.value)!}">${(type.name)!}</option>
+							<option value="${(type.name)!}">${(type.name)!}</option>
 							</#list>
 							</#if>
 						</select>
