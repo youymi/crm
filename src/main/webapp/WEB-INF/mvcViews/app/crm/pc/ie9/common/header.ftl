@@ -3,12 +3,18 @@
       		<div class="row-fluid col-sm-7">
 	              <div class="span2 pull-left" style="margin-left: 5%; ">
 					<a href="${servePath}/pc/main" target="_blank">
-	                <img src="${staticServePath}/app/crm/images/yingyong_logo.png">
+					<#--
+					<img src="${staticServePath}/app/crm/images/yingyong_logo.png"> 
+					-->
+	                <img src="${staticServePath}/app/crm/images/headerlogo.png">
+	               
 					</a>
 	              </div>
 	             <div class="span2 pull-left" >
 					<i>
+						<#--
 	                <img src="${staticServePath}/app/crm/images/biaoyu.png">
+	                -->
 					</i>
 	              </div>
              </div>

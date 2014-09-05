@@ -5,6 +5,7 @@
  */
 package com.epicsaas.app.crm.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -52,6 +53,7 @@ public class AttentionService extends AbstractBaseAOService<AttentionAO, Attenti
                     AttentionAO ao = new AttentionAO();
                     ao.setCompanyId(id);
                     ao.setUserId(userId);
+                    ao.setContactDate(new Date());
                     attentionGeneratedMapper.insert(ao);
 
                 }
