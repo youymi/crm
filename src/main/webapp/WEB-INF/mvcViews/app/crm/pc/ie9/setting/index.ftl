@@ -1,7 +1,7 @@
 <#include "../common/basePage.ftl">
 <@addCSS ["/app/crm/css/index","/app/crm/css/style"] />
 <@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/demo","/app/crm/css/zTreeStyle/zTreeStyle"] />
-<@addJS ["/app/crm/js/jquery-1.8.3","/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/customer"] />
+<@addJS ["/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/customer"] />
 
 
 <@addScript>
@@ -66,14 +66,14 @@ function delDictionary(){
 			
 			
 		<div id="customer-type-main" class="contract-main">
-				<div class="contract-info">
+				<div class="customer-type-setting">
 					<span>客户类型设置</span>
 					<span><A  data-toggle="modal" href="#example"><IMG	title="添加" src="${staticServePath}/app/crm/images/add.png"		border="0"></A> </span>
 					<span><A href="" class="j-delete"  data-parentid="customer-type-main" data-url="${servePath}/pc/setting/deleteCustomerType" ><IMG	title="删除" src="${staticServePath}/app/crm/images/del.png"	 	border="0"> </A> </span>
 				</div>
 				
 						<TABLE 	class="table  table-hover">
-							<THEAD>
+							<THEAD style="background-color: #e2efda;">
 								<TR>
 								 	<th><INPUT name="selectedAll"	id="selectedAll" type="checkbox" class="j-checkbox"></th>
 									<TH>类型名称</TH>
@@ -90,7 +90,7 @@ function delDictionary(){
 											<TD>${data.name!}</TD>
 											<TD>${data.value!}</TD>
 											<TD>
-												<a href="#" class="j-edit-customertype" data-id="${data.id!}" data-modal="edit-customer-type" data-name="${data.name!}" data-desc="${data.value!}"><I class="cus-pencil"><IMG	title="分配" src="${staticServePath}/app/crm/images/pencil.png"		border="0"> </I></a> 
+												<a href="javascript:void()" class="j-edit-customertype" data-id="${data.id!}" data-modal="edit-customer-type" data-name="${data.name!}" data-desc="${data.value!}"><I class="cus-pencil"><IMG	title="分配" src="${staticServePath}/app/crm/images/pencil.png"		border="0"> </I></a> 
 											</TD>
 										</TR>
 									 </#list>
@@ -161,12 +161,12 @@ function delDictionary(){
 
 
 				<div  class=" contract-main  toptree p-relative " >
-					<div class="contract-info">
+					<div class="customer-type-setting">
 						<span>人员权限设置</span>
 					</div>
 
 					<TABLE class="table  table-hover">
-						<THEAD>
+						<THEAD style="background-color: #e2efda;">
 							<TR>
 								<th><INPUT name="selectedAll2" id="selectedAll2"
 									type="checkbox"></th>

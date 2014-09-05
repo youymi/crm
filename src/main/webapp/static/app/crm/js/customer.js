@@ -217,7 +217,7 @@
 		$modal = $('#'+$that.data("modal"));
 		$modal.find("input[name='id']").val($that.data("id"));
 		$modal.find("input[name='name']").val($that.data("name"));
-		console.log($that.data("desc"));
+		//console.log($that.data("desc"));
 		$modal.find("textarea[name='value']").val($that.data("desc"));
 		$modal.modal();
 		 

@@ -49,7 +49,7 @@ public class AttentionController {
 
     @Resource
     private IAttentionService attentionService;
-    
+
     @Resource
     private SessionUtil sessionUtil;
 
@@ -195,7 +195,7 @@ public class AttentionController {
 
         return ret;
     }
-    
+
     @RequestMapping(value = "/removeAtten", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
     public Object removeAtten(String ids, String destName, String destId, Model model, HttpServletRequest request,
