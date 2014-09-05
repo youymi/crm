@@ -61,7 +61,7 @@ function delDictionary(){
 	<DIV class="container-fluid" style="margin-top: 12px">
 	
 	         <!-- 底部蓝色线条 -->
-			<DIV style="padding-top: 5px; margin-top: 2px; margin-bottom: 5px; border-top-color: rgb(0, 136, 204); border-top-width: 2px; border-top-style: solid;">
+			<DIV style="padding-top: 5px; margin-top: 2px; margin-bottom: 5px; border-top-color: rgb(0, 136, 204); border-top-width: 0px; border-top-style: solid;">
 			</DIV>
 			
 			
