@@ -1,7 +1,8 @@
 <#include "../common/basePage.ftl">
 <@addCSS ["/app/crm/css/index","/app/crm/css/style"] />
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/demo","/app/crm/css/zTreeStyle/zTreeStyle"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/zTreeStyle/zTreeStyle"] />
 <@addJS ["/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/customer"] />
+
 
 
 <@addScript>

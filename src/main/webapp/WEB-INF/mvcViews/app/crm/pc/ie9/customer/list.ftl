@@ -1,5 +1,5 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/demo","/app/crm/css/zTreeStyle/zTreeStyle","/app/crm/css/index","/app/crm/css/style"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/zTreeStyle/zTreeStyle","/app/crm/css/index","/app/crm/css/style"] />
 <@addJS ["/app/crm/js/jquery-1.8.3","/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/customer"] />
 <@common title="客户管理">		 
 
