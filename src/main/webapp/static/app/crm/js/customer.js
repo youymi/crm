@@ -581,8 +581,32 @@
 		 
 	});
 	
+	
+	//搜索框
+	$(function(){ 
+			if (webCfg && webCfg.servePath) {
+				// do nothing
+			} else {
+				webCfg.servePath ="/crm";
+			}
+			var openURL = webCfg.servePath + "/pc/customer/view?id=";
+			var url = webCfg.servePath + "/pc/main/search";
+			$(".j-customer-search-input").autopoint({
+			url: url,
+			openurl:openURL
+			}); 
+		}); 
+	
+	
 	function initDatepicker(){
 		jQuery(function(){  
+			
+			if ($.datepicker.regional) {
+				// do nothing..
+			} else {
+				return false;
+			}
+			
 		    $.datepicker.regional['zh-CN'] = {  
 		      clearText: '清除',  
 		      clearStatus: '清除已选日期',  

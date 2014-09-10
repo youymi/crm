@@ -1,0 +1,25 @@
+.dropDiv { 
+position: absolute; 
+z-index: 10; 
+display: none; 
+cursor: hand; 
+} 
+.dropDiv .jhover { 
+background-color: #F3F3F3; 
+} 
+.dropDiv .list { 
+float:left; 
+width:100%; 
+} 
+.dropDiv .word { 
+float:left; 
+} 
+.dropDiv .view { 
+float:right; 
+color: gray; 
+text-align: right; 
+font-size: 10pt; 
+} 
+td{
+cursor:pointer
+}

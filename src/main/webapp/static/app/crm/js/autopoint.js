@@ -19,7 +19,7 @@
 			listHoverCSS : 'jhover',// 提示框列表鼠标悬浮的样式
 			//tpl : '<div class="list"><div class="word">{word}</div><div class="view">约{view}条记录</div></div>',
 			tpl : '<div class="list"><div class="word">{name}</div><div class="hidden">{id}</div></div>',
-			topoffset : options.topoffset || 5
+			topoffset : options.topoffset || 0
 		};
 		var options = $.extend(defaults, options);
 		var dropDiv = $('<div></div>').addClass('dropDiv').appendTo('body');
@@ -203,7 +203,7 @@
 							'border' : '1px solid #3c763d',
 							'background-color':'#FFF',
 							'left' : left,
-							'top' : top+10,
+							'top' : top  + 5,
 							'width' : width+ 'px'
 						});
 						render(parent, json);

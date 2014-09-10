@@ -1,6 +1,6 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/zTreeStyle/zTreeStyle","/app/crm/css/index","/app/crm/css/style"] />
-<@addJS ["/app/crm/js/jquery-1.8.3","/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/customer"] />
+<@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/zTreeStyle/zTreeStyle","/app/crm/css/index","/app/crm/css/style","/app/crm/css/autopoint"] />
+<@addJS ["/app/crm/js/jquery-1.8.3","/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/autopoint","/app/crm/js/customer"] />
 <@common title="客户管理">		 
 
 <script type="text/javascript" src="/saasportal/pc/component/header/customizedjs"></script>
@@ -14,6 +14,11 @@
 			<DIV style="padding-top: 5px; margin-top: 2px; margin-bottom: 5px; border-top-color: rgb(0, 136, 204); border-top-width: 0px; border-top-style: solid;">
 			</DIV>
 
+
+		<div id="customer-search-bar" style="text-align:center">
+				<input class="j-customer-search-input"  name=""   style="width: 50%; height: 33px"/>
+				<img  src="${staticServePath}/app/crm/images/seek.png" class="customer-search-img"/>
+		 </div>
 		
 		<div class="customer-form toptree p-relative" id="contact-main">
 

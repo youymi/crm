@@ -116,3 +116,8 @@ background-color: #bdca85;
 	position: relative;
 top: 20px;
 }
+
+.customer-search-img {
+	position: relative;
+	left: -33px
+}
