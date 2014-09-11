@@ -68,8 +68,7 @@ public class CompanyController {
 
     @Resource
     private SessionUtil sessionUtil;
-    
-    
+
     @Resource
     private IDataDictionaryService dataDictionaryService;
 
@@ -172,13 +171,12 @@ public class CompanyController {
 
         DataDictionaryCriteria dataDictionaryCriteria = new DataDictionaryCriteria();
         dataDictionaryCriteria.createCriteria().andIdIsNotNull().andTypeEqualTo(CrmConst.DD_TYPE_CUSTOMER_TYPE);
-        ServiceResult<List<DataDictionaryAO>> retCustomerType = dataDictionaryService.selectByCriteria(dataDictionaryCriteria);
+        ServiceResult<List<DataDictionaryAO>> retCustomerType = dataDictionaryService
+                .selectByCriteria(dataDictionaryCriteria);
         if (ret.isSucceed() && !CollectionUtils.isEmpty(retCustomerType.getData())) {
             model.addAttribute("customerTypeList", retCustomerType.getData());
         }
 
-        
-        
         // 将当前运用名称传到前端
         model.addAttribute("appId", "crm");
         model.addAttribute("appName", "客户关系管理");
