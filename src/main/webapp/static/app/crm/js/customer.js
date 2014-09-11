@@ -598,10 +598,40 @@
 		}); 
 	
 	
+	//去除筛选条件
+	$(document).on("click",".j-del-condition", function(){
+		$(this).parent().remove();
+	});
+	$(document).on("click",".j-sle-condition", function(){
+		$that = $(this);
+		var type = $that.data("type");
+		var value = $that.data("value");
+		switch (type) {
+		case "type" :
+			var canDo = true;
+			 $("#hadselcondition").find("form input[name='type']").each(function(){
+				// alert($(this).val());
+				 if (value == $(this).val()) {
+					 canDo = false;
+					 return true;
+				 }
+			 });
+			 if (!canDo) {
+				 return false;
+			 }
+			$condition = $("<span class=\"condition\"><span>潜在客户</span> <input type=\"hidden\" name=\"type\" /><i class=\"del j-del-condition\"></i></span>");
+			$condition.find("span").html( $that.data("value"));
+			$condition.find("input").val( $that.data("value"));
+			 $("#hadselcondition").find("form").append($condition);
+		}
+	});
+	
+	 
+	
 	function initDatepicker(){
 		jQuery(function(){  
 			
-			if ($.datepicker.regional) {
+			if ($.datepicker && $.datepicker.regional) {
 				// do nothing..
 			} else {
 				return false;

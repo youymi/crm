@@ -1,6 +1,6 @@
 <#include "../common/basePage.ftl">
 <@addCSS ["/app/crm/css/customer","/app/crm/css/common","/app/crm/css/zTreeStyle/zTreeStyle","/app/crm/css/index","/app/crm/css/style","/app/crm/css/autopoint"] />
-<@addJS ["/app/crm/js/jquery-1.8.3","/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/autopoint","/app/crm/js/customer"] />
+<@addJS ["/app/crm/js/jquery.ztree.all-3.5","/app/crm/js/autopoint","/app/crm/js/customer"] />
 <@common title="客户管理">		 
 
 <script type="text/javascript" src="/saasportal/pc/component/header/customizedjs"></script>
@@ -19,6 +19,29 @@
 				<input class="j-customer-search-input"  name=""   style="width: 50%; height: 33px"/>
 				<img  src="${staticServePath}/app/crm/images/seek.png" class="customer-search-img"/>
 		 </div>
+		 
+		 
+		 <div id="customer-list-filter" style="padding-left:70px">
+		 		 
+		 		
+		 			<div >客户类型：  	
+		 				<#if customerTypeList?? && (customerTypeList?size > 0) >
+							<#list customerTypeList as type>
+								<a href="javascript:void()"><span class="j-sle-condition" data-type="type" data-value="${(type.name)!}">${(type.name)!}</span></a>
+							 
+							</#list>
+							</#if>
+					</div> 
+					
+					<div id="hadselcondition">
+						已选条件：
+							<form>
+								<#--
+								<span class="condition"><span>潜在客户</span> <input type="hidden" name="condition" /><i class="del j-del-condition "></i></span>
+								-->
+							</form>
+					</div>
+		 </div>
 		
 		<div class="customer-form toptree p-relative" id="contact-main">
 
@@ -36,7 +59,7 @@
 		</div>
 
 		<div style="margin-top:10px;" id="customer-list">
-			<table style="width:100%" class="table table-bordered table-striped">
+			<table style="width:100%" class="table">
 				<thead>
 				<tr class="p-relative formcell">
 					 
@@ -80,9 +103,19 @@
 					<td class="w15  ">${(data.type)!}</td>
 					<td class="w15  "> </td>
 					<td class="w15  ">${(data.userName)!}</td>
-					<td class="w15  "> <span class="j-open-orgtree" data-id="${(data.id)!}" data-posturl="${servePath}/pc/company/assign" data-url="${staticServePath}/orgtree">分配</span> | 
-					<span class="j-atten" data-id="${(data.id)!}" data-url="${servePath}/pc/attention/atten">关注</span></td>
-				 
+					<td class="w15  " style="font-size: 18px;">
+						<#if group?? && (group == "manager" || group == "leader")>
+					 <span class="j-open-orgtree assign-pic " data-id="${(data.id)!}" data-posturl="${servePath}/pc/company/assign" data-url="${staticServePath}/orgtree" title="分配">
+					 <img  src="${staticServePath}/app/crm/images/distribution.png"/></span> | 
+					 </#if>
+					<span class="j-atten" data-id="${(data.id)!}" data-url="${servePath}/pc/attention/atten" title="关注">
+					<img  src="${staticServePath}/app/crm/images/star_1.png "/></span> | 
+					</span>
+					<span class="j-tocontact" data-id="${(data.id)!}" data-url="${servePath}/pc/attention/atten" title="联系">
+					<img  src="${staticServePath}/app/crm/images/ touch_small.png "/></span> 
+					</span>
+					</td>
+				
 					</form>
 				</div>	
 		</tr>

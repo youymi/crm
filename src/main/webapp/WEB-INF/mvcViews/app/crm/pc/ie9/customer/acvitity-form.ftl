@@ -1,5 +1,5 @@
 <div class="contract-main">
-		<div class="contract-info">
+		<div class="activity-info">
 			<span>活动信息</span>
 			<span class="btn   customer-btn j-customer-new" data-maineleid="activity-main" data-url="${servePath}/pc/customer/activityCellform">新增</span>
 			<span class="btn   customer-btn j-delete"  data-parentid="activity-main" data-url="${servePath}/pc/activity/delete">删除</span>

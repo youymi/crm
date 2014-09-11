@@ -29,6 +29,13 @@
 	background-color: #e2efda;
 }
 
+.activity-info {
+		background-image: url(../images/custom_message_04.png);
+	background-repeat: no-repeat;
+	line-height: 30px;
+	padding-left: 32px;
+	background-color: #e2efda;
+}
 .customer-main {
 	margin: 10px 10px;
 }
@@ -41,7 +48,7 @@ margin-bottom: 15px;
 
 .customer-btn {
  	cursor: pointer;
-	margin: 0 10px;
+	margin: 0 5px;
 	background-color: #bdca85;
 	
 }
@@ -120,4 +127,40 @@ top: 20px;
 .customer-search-img {
 	position: relative;
 	left: -33px
+}
+
+#customer-list{
+	border:  solid 1px #ddd;
+}
+
+.assign-pic {
+	background-image:  url(../images/distribution.png);
+	 
+	color: #fff;
+}
+
+/* 客户列表*/
+
+#customer-list-filter {
+	margin-top:  20px;
+	font-size:  15px;
+}
+#hadselcondition {
+	margin-top: 10px;
+}
+#customer-list-filter  .condition {
+	position: relative;
+	padding-right: 10px;
+	margin-right: 5px;
+}
+#customer-list-filter  .del {
+	display: block;
+	position: absolute;
+	right: 0px;
+	top:4px;
+	overflow: hidden;
+	width: 7px;
+	height: 7px;
+	background: url('../images/20130606B.png') no-repeat scroll -37px -62px transparent;
+	cursor: pointer;
 }

@@ -37,8 +37,9 @@ body{
  * 搜索
  */
 .content .search{
-	margin: 0px auto; 
+	margin: 20px auto; 
 	margin-bottom: 40px;
+
 }
 
 .content .search .summary{

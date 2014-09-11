@@ -31,14 +31,17 @@ import com.epicpaas.sdk.core.api.logging.Logger;
 import com.epicpaas.sdk.core.api.logging.LoggerFactory;
 import com.epicsaas.api.userbase.UserBaseAPI;
 import com.epicsaas.app.crm.appobject.CompanyAO;
+import com.epicsaas.app.crm.appobject.DataDictionaryAO;
 import com.epicsaas.app.crm.common.CrmConst;
 import com.epicsaas.app.crm.common.MVCViewName;
 import com.epicsaas.app.crm.entity.gen.CompanyCriteria;
 import com.epicsaas.app.crm.entity.gen.ContactCriteria;
 import com.epicsaas.app.crm.entity.gen.ContractCriteria;
+import com.epicsaas.app.crm.entity.gen.DataDictionaryCriteria;
 import com.epicsaas.app.crm.service.ICompanyService;
 import com.epicsaas.app.crm.service.IContactService;
 import com.epicsaas.app.crm.service.IContractService;
+import com.epicsaas.app.crm.service.IDataDictionaryService;
 import com.epicsaas.service.biz.session.util.SessionUtil;
 import com.epicsaas.service.biz.userbase.dto.GroupDTO;
 import com.epicsaas.service.biz.userbase.dto.UserDTO;
@@ -65,6 +68,10 @@ public class CompanyController {
 
     @Resource
     private SessionUtil sessionUtil;
+    
+    
+    @Resource
+    private IDataDictionaryService dataDictionaryService;
 
     /**
      * 联系人
@@ -163,6 +170,15 @@ public class CompanyController {
             model.addAttribute("dataList", ret.getData());
         }
 
+        DataDictionaryCriteria dataDictionaryCriteria = new DataDictionaryCriteria();
+        dataDictionaryCriteria.createCriteria().andIdIsNotNull().andTypeEqualTo(CrmConst.DD_TYPE_CUSTOMER_TYPE);
+        ServiceResult<List<DataDictionaryAO>> retCustomerType = dataDictionaryService.selectByCriteria(dataDictionaryCriteria);
+        if (ret.isSucceed() && !CollectionUtils.isEmpty(retCustomerType.getData())) {
+            model.addAttribute("customerTypeList", retCustomerType.getData());
+        }
+
+        
+        
         // 将当前运用名称传到前端
         model.addAttribute("appId", "crm");
         model.addAttribute("appName", "客户关系管理");

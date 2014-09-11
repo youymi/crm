@@ -1,5 +1,5 @@
 <#include "../common/basePage.ftl">
-<@addCSS ["/app/crm/css/index","/app/crm/css/autopoint"] />
+<@addCSS ["/app/crm/css/index","/app/crm/css/autopoint","/app/crm/css/customer","/app/crm/css/style"] />
 <@addJS ["/app/crm/js/autopoint"] />
 
 
@@ -176,7 +176,7 @@ window.open(openURL+id,"_self")
 				  <div class="form-group has-success has-feedback">
 				    <div class="col-sm-6" style="margin-left:28%">
 				      <input type="text" class="" id="searchinput" style="float: left;width: 80%;height: 33px">
-				      <button class="btn" onclick="callSearch('Basic');" type="button" style="float: left;border: 0px;height: 36px;margin:-1px 0 0 -3px;"><i class="icon-search"></i>&nbsp;搜索</button>
+				     <img  src="${staticServePath}/app/crm/images/seek.png" class="customer-search-img"/>
 				    </div>
 				  </div>
 				</form>
