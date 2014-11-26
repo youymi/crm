@@ -418,9 +418,7 @@
 									$(".j-cancel-orgtree").trigger("click");
 									location.reload();
 								}
-							});
-						
-						
+							});	
 						
 					});
 					
